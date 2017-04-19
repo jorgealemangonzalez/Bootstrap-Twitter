@@ -4,6 +4,7 @@ package defaultPackage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -46,11 +47,47 @@ public class myServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		System.out.print(resultDB);
+	
+		ResultSetMetaData rsmd = null ;
+		try {
+			rsmd = resultDB.getMetaData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int columnsNumber = 0;
+		try {
+			columnsNumber = rsmd.getColumnCount();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String resultToPrint = "";
+		try {
+			while (resultDB.next()) {
+				resultToPrint += "<tr>";
+			    for (int i = 1; i <= columnsNumber; i++) {
+			        String columnValue = resultDB.getString(i);
+			        resultToPrint += "<td>" + columnValue + "</td>";
+			    }
+			    resultToPrint += "</tr>";//\n";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		PrintWriter out = response.getWriter();
-		String title = "Helloadsfww world!";
+		String title = "Our SQL Database";
 		out.println
 			("<body>\n" +
 			"<h1>" + title + "</h1>\n" +
+			"<table style=\"width:80%\">" +
+			"<tr> <th>Nom</th> <th>Descripcio</th> <th>Id</th> <th>Telefon</th> </tr>" +
+			 resultToPrint + 
+			"</table>"+
 			"<table style='border: 1px solid black;'>" );
 	}
 
