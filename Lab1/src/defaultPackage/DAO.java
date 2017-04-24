@@ -1,6 +1,5 @@
 package defaultPackage;
 import java.sql.*;
-import com.mysql.jdbc.Driver;
 
 public class DAO {
 	private Connection connection;
@@ -16,6 +15,7 @@ public class DAO {
 
 	// execute queries
 	public ResultSet executeSQL(String query) throws SQLException {
+		System.out.println("Catching data of query \""+query+"\" from database");
 		return statement.executeQuery(query);
 	}
 

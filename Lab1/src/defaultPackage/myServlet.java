@@ -4,7 +4,6 @@ package defaultPackage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -26,59 +25,42 @@ public class myServlet extends HttpServlet {
     public myServlet() {
         super();
         try {
-			dao = new DAO();
+			dao = new DAO();	//Our interface to retrieve data fron DB
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("GET on URL: /myServlet");
 		//Get the database info
-		ResultSet resultDB = null;
+		String dataTable = "";
 		try {
-			resultDB = dao.executeSQL("SELECT * FROM ts1.taula;");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.print(resultDB);
-	
-		ResultSetMetaData rsmd = null ;
-		try {
-			rsmd = resultDB.getMetaData();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int columnsNumber = 0;
-		try {
-			columnsNumber = rsmd.getColumnCount();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		String resultToPrint = "";
-		try {
+			ResultSet resultDB = dao.executeSQL("SELECT * FROM ts1.taula;");	//Select all rows from our table
+			
 			while (resultDB.next()) {
-				resultToPrint += "<tr>";
-			    for (int i = 1; i <= columnsNumber; i++) {
-			        String columnValue = resultDB.getString(i);
-			        resultToPrint += "<td>" + columnValue + "</td>";
-			    }
-			    resultToPrint += "</tr>";//\n";
+				dataTable += "<tr>";
+				
+				//Retrieve all columns
+		        String nom = (String) resultDB.getObject("nom");
+		        String descripcio = (String) resultDB.getObject("descripcio");
+		        String id = ((Integer) resultDB.getObject("id")).toString();
+		        String telefon = ((Integer) resultDB.getObject("telefon")).toString();
+		        
+		        dataTable += "<td>" + nom + "</td>"+ "<td>" + descripcio + "</td>" + "<td>" 
+		        					+ id + "</td>" + "<td>" + telefon + "</td>";
+			    dataTable += "</tr>";
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+
+		//Print the HTML page
 		PrintWriter out = response.getWriter();
 		String title = "Our SQL Database";
 		out.println
@@ -86,7 +68,7 @@ public class myServlet extends HttpServlet {
 			"<h1>" + title + "</h1>\n" +
 			"<table style=\"width:80%\">" +
 			"<tr> <th>Nom</th> <th>Descripcio</th> <th>Id</th> <th>Telefon</th> </tr>" +
-			 resultToPrint + 
+			 dataTable + 
 			"</table>"+
 			"<table style='border: 1px solid black;'>" );
 	}
@@ -95,7 +77,6 @@ public class myServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
