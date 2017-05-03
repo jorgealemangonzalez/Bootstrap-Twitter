@@ -39,7 +39,7 @@ else {
 	<fieldset>
 	
 		<label> Name (Required, only letters)</label>
-		<input type="text" name="name" id="name" value="<%=user.getUser() %>" required pattern="[A-Za-z]"/>
+		<input type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]"/>
 		<br>
 		
 		<label> Surname (Required, only letters)</label>
@@ -56,14 +56,14 @@ else {
 		<br>
 		
 		<label> Nickname </label>
-		<input type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required/>
+		<input type="text" name="nickname" id="nickname" value="<%=user.getNickName() %>" required/>
 		<br>
 		
 		<label> Gender (Required)</label>
 		<input type="radio" name="gender" value="Male" checked>
 		<input type="radio" name="gender" value="Female">
 		<input type="radio" name="gender" value="Other">
-		<input type="text" name="gender" id="gender" value="<%=user.getGender() %>" required/>
+		<input type="text" name="gender" id="gender" value="<%=user.getgender() %>" required/>
 		<br>
 		
 		<label> Date of birth </label>
@@ -72,7 +72,7 @@ else {
 		
 		<label> Email</label>
 		<label> E-mail (Required, valid e-mail adress and unique) </label>
-		<input type="email" name="mail" id="mail" value="<%=user.getMail() %>" required email/>
+		<input type="email" name="mail" id="mail" value="<%=user.getEmail() %>" required email/>
 		<br>
 		
 		<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
