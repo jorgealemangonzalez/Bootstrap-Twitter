@@ -64,7 +64,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setgender(String gender) {
-		gender = gender;
+		this.gender = gender;
 	}
 
 	public String getEmail() {

@@ -27,21 +27,61 @@ else {
 
 <form action="/Lab_2/FormController" method="post" id="registerForm">
 <fieldset>
-<p>
-<label> User id (Required, minimum 5 characters) </label>
-<input type="text" name="user" id="user" value="<%=user.getUser() %>" required minlength="5"/>
-<% 	
-	if ( user.getError()[0] == 1) {
-		out.println("The username already exists in our DB!");
-	}
-%>
-</p>
-<p>
-<label> E-mail (Required, valid e-mail adress) </label>
-<input type="email" name="mail" id="mail" value="<%=user.getMail() %>" required email/>
-</p>
-<input type="submit" value="Enviar"> 
-</fieldset>
+	
+		<label> Name (Required, only letters)</label>
+		<input type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]"/>
+		<br>
+		
+		<label> Surname (Required, only letters)</label>
+		<input type="text" name="surname" id="surname" value="<%=user.getSurname() %>" required pattern="[A-Za-z]"/>
+		<br>
+		
+		<label> Username (Required, only letters and unique) </label>
+		<input type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]"/>
+		<% 	
+			if ( user.getError()[0] == 1) {
+				out.println("The username already exists in our DB!");
+			}
+		%>
+		<br>
+		
+		<label> Nickname </label>
+		<input type="text" name="nickname" id="nickname" value="<%=user.getNickName() %>" required/>
+		<br>
+		
+		<label> Gender (Required)</label>
+		<input type="radio" name="gender" value="Male" checked>
+		<input type="radio" name="gender" value="Female">
+		<input type="radio" name="gender" value="Other">
+		<input type="text" name="gender" id="gender" value="<%=user.getgender() %>" required/>
+		<br>
+		
+		<label> Date of birth </label>
+		<input id="meeting" type="date"/>
+		<br>
+		
+		<label> Email</label>
+		<label> E-mail (Required, valid e-mail adress and unique) </label>
+		<input type="email" name="mail" id="mail" value="<%=user.getEmail() %>" required email/>
+		<br>
+		
+		<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
+		<input type="password" name="password" id="password" value="<%=user.getPassword() %>" required pattern="\d\D[\.\,¡!?¿\$\-@]+{6}" />
+		<label> Confirm password (Required) </label>
+		<input type="password" name="confirm_password" id="confirm_password" required  />
+		<br>
+		
+		<label> Address </label>
+		<input type="text" name="address" id="address" value="<%=user.getAddress() %>" />
+		<br>
+		
+		
+		<label> Phone number </label>
+		<input type="text" name="PhoneNumber" id="PhoneNumber" value="<%=user.getPhoneNumber() %>" />
+		<br>
+		
+		<input type="submit" value="Enviar"> 
+	</fieldset>
 </form>
 </body>
 </html>
