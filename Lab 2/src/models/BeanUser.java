@@ -1,7 +1,6 @@
 package models;
 
 import java.io.Serializable;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -13,6 +12,7 @@ public class BeanUser implements Serializable  {
 	public BeanUser(){
 		try {
 			dao = new DAO();	//Our interface to retrieve data fron DB
+			System.out.println("Mysql connected");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -26,10 +26,10 @@ public class BeanUser implements Serializable  {
 	private String gender = "";
 	private String email = "";
 	private String password = "";
-	private String nickName = "";
-	private Date dateOfBirth = null;
+	private String nickname = "";
+	private Date dateOfBirth = new Date(0);
 	private String address = "";
-	private Long phoneNumber = null;
+	private Long phonenumber = (long) 0000000;
 	
 	/*getters and setters*/
 	public String getName() {
@@ -53,17 +53,24 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setUsername(String username) throws SQLException {
-		String query = "SELECT name FROM login.table where username='"+username+"'";
+		String query = "SELECT name FROM login.taula where username='"+username+"'";
+		System.out.println(query);
 		ResultSet rs = dao.executeSQL(query);
-		//TODO check the content if it's empty or not
-		this.username = username;
+		if (rs.next()) {//get first result
+			System.out.println("el username existe");
+			this.error[1]=1;
+        }else{
+        	this.error[1]=0;
+    		this.username = username;
+        }
+
 	}
 
-	public String getgender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setgender(String gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -72,10 +79,17 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setEmail(String email) throws SQLException {
-		String query = "SELECT email FROM login.table where username='"+getUsername()+"'";
+		String query = "SELECT email FROM login.taula where email='"+email+"'";
 		ResultSet rs = dao.executeSQL(query);
+		System.out.println(query);
+		if (rs.next()) {//get first result
+			System.out.println("el email existe");
+			this.error[0]=1;
+        }else{
+        	this.error[0]=0;
+    		this.email = email;
+        }
 		//TODO check the content if it's empty or not
-		this.email = email;
 	}
 
 	public String getPassword() {
@@ -86,12 +100,12 @@ public class BeanUser implements Serializable  {
 		this.password = password;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickName) {
+		this.nickname = nickName;
 	}
 
 	public Date getDateOfBirth() {
@@ -111,11 +125,11 @@ public class BeanUser implements Serializable  {
 	}
 
 	public Long getPhoneNumber() {
-		return phoneNumber;
+		return phonenumber;
 	}
 
 	public void setPhoneNumber(Long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.phonenumber = phoneNumber;
 	}
 
 	
@@ -126,8 +140,10 @@ public class BeanUser implements Serializable  {
 	
 	/*Check if all the fields are filled correctly */
 	public boolean isComplete() {
+		System.out.println("check if complete" + getName() +" - " + getEmail());
+		
 	    return(hasValue(getName()) &&
-	           hasValue(getEmail()));
+	           hasValue(getEmail()) && this.error[0]==0 && this.error[1]==0);
 	}
 	
 

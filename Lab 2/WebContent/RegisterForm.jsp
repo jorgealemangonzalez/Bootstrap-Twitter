@@ -26,7 +26,7 @@ else {
 %>
 
 <form action="/Lab_2/FormController" method="post" id="registerForm">
-<fieldset>
+	<fieldset>
 	
 		<label> Name (Required, only letters)</label>
 		<input type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]"/>
@@ -40,20 +40,20 @@ else {
 		<input type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]"/>
 		<% 	
 			if ( user.getError()[0] == 1) {
-				out.println("The username already exists in our DB!");
+				System.out.println("The username already exists in our DB!");
 			}
 		%>
 		<br>
 		
 		<label> Nickname </label>
-		<input type="text" name="nickname" id="nickname" value="<%=user.getNickName() %>" required/>
+		<input type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required/>
 		<br>
 		
 		<label> Gender (Required)</label>
 		<input type="radio" name="gender" value="Male" checked>
 		<input type="radio" name="gender" value="Female">
 		<input type="radio" name="gender" value="Other">
-		<input type="text" name="gender" id="gender" value="<%=user.getgender() %>" required/>
+		<input type="text" name="gender" id="gender" value="<%=user.getGender() %>" required/>
 		<br>
 		
 		<label> Date of birth </label>
@@ -61,8 +61,13 @@ else {
 		<br>
 		
 		<label> Email</label>
-		<label> E-mail (Required, valid e-mail adress and unique) </label>
-		<input type="email" name="mail" id="mail" value="<%=user.getEmail() %>" required email/>
+		<label> E-mail (Required, valid e-mail address and unique) </label>
+		<input type="email" name="email" id="email" value="<%=user.getEmail() %>" required />
+		<% 	
+			if ( user.getError()[1] == 1) {
+				System.out.println("The email already exists in our DB!");
+			}
+		%>
 		<br>
 		
 		<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
@@ -77,7 +82,7 @@ else {
 		
 		
 		<label> Phone number </label>
-		<input type="text" name="PhoneNumber" id="PhoneNumber" value="<%=user.getPhoneNumber() %>" />
+		<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhoneNumber() %>" />
 		<br>
 		
 		<input type="submit" value="Enviar"> 

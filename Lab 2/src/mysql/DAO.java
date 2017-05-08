@@ -19,6 +19,11 @@ public class DAO {
 		System.out.println("Catching data of query \""+query+"\" from database");
 		return statement.executeQuery(query);
 	}
+	public int insertSQL(String query) throws SQLException{
+		System.out.println("Inserting data");
+		return statement.executeUpdate(query);
+		
+	}
 
 	// TODO: code for updates for Assignments 2, 3 and 4.
 	public void disconnectBD() throws SQLException {

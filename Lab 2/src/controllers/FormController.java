@@ -2,15 +2,20 @@ package controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanUser;
+import mysql.DAO;
+
 
 /**
  * Servlet implementation class FormController
@@ -18,12 +23,15 @@ import models.BeanUser;
 @WebServlet("/FormController")
 public class FormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static DAO dao;
        
     /**
+     * @throws Exception 
      * @see HttpServlet#HttpServlet()
      */
-    public FormController() {
+    public FormController() throws Exception {
         super();
+        dao = new DAO();	//Our interface to retrieve data fron DB
     }
 
 	/**
@@ -40,9 +48,19 @@ public class FormController extends HttpServlet {
 		   
 		   if (user.isComplete()) {
 			   System.out.println("TODO: INSERT into DB");
+			   java.sql.Date sqlDate = new java.sql.Date(user.getDateOfBirth().getTime());
+			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+sqlDate+"','"+user.getAddress()+"','"+user.getPhoneNumber()+"')";
+			   System.out.println(query);
+			   dao.insertSQL(query);
+			   System.out.println("añadido");
+			   /*
+				INSERT INTO taula(name,surname,username,gender,email,password) VALUES
+				('Arnau','Guinart','guini','Male','guinartarnau@gmail.com','pass1')
+			    */
 		   } 
 		   else {
 			   // Put the bean into the request as an attribute
+			   System.out.println("new user");
 			   request.setAttribute("user",user);
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("/RegisterForm.jsp");
 			   dispatcher.forward(request, response);
@@ -50,7 +68,10 @@ public class FormController extends HttpServlet {
 	    } 
 		catch (IllegalAccessException | InvocationTargetException e) {
 				e.printStackTrace();
-	    }
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		    
     }
 
