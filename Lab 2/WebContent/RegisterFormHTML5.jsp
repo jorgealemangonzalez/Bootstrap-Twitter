@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title> Template Register Form (Validation HTML5) </title>
 </head>
@@ -34,69 +42,99 @@ else {
 	user = new BeanUser();
 }
 %>
-
-<form action="/Lab_2/FormController" method="post" id="registerForm">
-	<fieldset>
-	
-		<label> Name (Required, only letters)</label>
-		<input type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]"/>
-		<br>
+<div class="container">
+	<h2>Register form</h2>
+	<form action="/Lab_2/FormController" method="post" id="registerForm">
+		<fieldset>
+			<div class="form-group">
+				
+				<label> Name</label>
+				<input class="form-control" type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]{}"
+       					title="Name should only contain letters contain"/>
+				<p class="help-block">(Required, only letters)</p>
+			</div>
+			
+			<div class="form-group">
+				<label> Surname</label>
+				<input class="form-control" type="text" name="surname" id="surname" value="<%=user.getSurname() %>" required pattern="[A-Za-z]{}"/>
+				<p class="help-block">(Required, only letters)</p>
+			</div>
+			
+			<div class="form-group">
+				<label> Username</label>
+				<input class="form-control" type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]{}"/>
+				<p class="help-block"> (Required, only letters and unique) </p>
+				<% 	
+					if ( user.getError()[1] == 1) {
+						System.out.println("The username already exists in our DB!");
+					}
+				%>
+				
+			</div>
+			
+			<div class="form-group">
+				<label> Nickname </label>
+				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required pattern="{1,20}"/>
+				<p class="help-block"> Some funny nick </p>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label" for="gender">Gender(Required)</label>
+				<div class="controls">
+					<div class="radio">
+						<label><input type="radio" name="gender" checked> Male</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="gender" value="Female">Female</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="gender" value="Other">Other</label>
+					</div>
+					<input class="form-control" type="text" name="gender" id="gender" value="<%=user.getGender() %>"/>
+					<br>
+					</div>
+			</div>
+			
+			<div class="form-group">
+				<label> Date of birth </label>
+				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
+				<p class="help-block">¿When did you born?</p>
+			</div>
+			
+			<div class="form-group">
+				<label> E-mail </label>
+				<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" required />
+				<p class="help-block">(Required, valid e-mail address and unique) We will send you a login page</p>
+				<% 	
+					if ( user.getError()[0] == 1) {
+						System.out.println("The email already exists in our DB!");
+					}
+				%>
+			</div>
+			
+			<div class="form-group">
+				<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
+				<input class="form-control" type="password" name="password" id="password" value="<%=user.getPassword() %>" required pattern="\d\D[\.\,¡!?¿\$\-@]+{6}" />
+				<p class="help-block"> (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</p>
+				<label> Confirm password (Required) </label>
+				<input class="form-control" type="password" name="confirm_password" id="confirm_password" required  />
+			</div>
 		
-		<label> Surname (Required, only letters)</label>
-		<input type="text" name="surname" id="surname" value="<%=user.getSurname() %>" required pattern="[A-Za-z]"/>
-		<br>
-		
-		<label> Username (Required, only letters and unique) </label>
-		<input type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]"/>
-		<% 	
-			if ( user.getError()[1] == 1) {
-				System.out.println("The username already exists in our DB!");
-			}
-		%>
-		<br>
-		
-		<label> Nickname </label>
-		<input type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required/>
-		<br>
-		
-		<label> Gender (Required)</label>
-		<input type="radio" name="gender" value="Male" checked>
-		<input type="radio" name="gender" value="Female">
-		<input type="radio" name="gender" value="Other">
-		<input type="text" name="gender" id="gender" value="<%=user.getGender() %>" required/>
-		<br>
-		
-		<label> Date of birth </label>
-		<input id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
-		<br>
-		
-		<label> Email</label>
-		<label> E-mail (Required, valid e-mail address and unique) </label>
-		<input type="email" name="email" id="email" value="<%=user.getEmail() %>" required />
-		<% 	
-			if ( user.getError()[0] == 1) {
-				System.out.println("The email already exists in our DB!");
-			}
-		%>
-		<br>
-		
-		<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
-		<input type="password" name="password" id="password" value="<%=user.getPassword() %>" required pattern="\d\D[\.\,¡!?¿\$\-@]+{6}" />
-		<label> Confirm password (Required) </label>
-		<input type="password" name="confirm_password" id="confirm_password" required  />
-		<br>
-		
-		<label> Address </label>
-		<input type="text" name="address" id="address" value="<%=user.getAddress() %>" />
-		<br>
-		
-		
-		<label> Phone number </label>
-		<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" />
-		<br>
-		
-		<input type="submit" value="Enviar"> 
-	</fieldset>
-</form>
+			
+			<label> Address </label>
+				<input class="form-control" type="text" name="address" id="address" value="<%=user.getAddress() %>" />
+				<p class="help-block">(Optional) ¿Where do you live?</p>
+			<br>
+			
+			
+			<label> Phone number </label>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="[0-9]{9}"/>
+				<p class="help-block">(Optional) Your 9 digit phone number</p>
+			<br>
+			
+			<input class="form-control" type="submit" value="Enviar"> 
+		</fieldset>
+	</form>
+</div>
 </body>
 </html>
