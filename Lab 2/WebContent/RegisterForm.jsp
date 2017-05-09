@@ -39,7 +39,7 @@ else {
 		<label> Username (Required, only letters and unique) </label>
 		<input type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]"/>
 		<% 	
-			if ( user.getError()[0] == 1) {
+			if ( user.getError()[1] == 1) {
 				System.out.println("The username already exists in our DB!");
 			}
 		%>
@@ -57,14 +57,14 @@ else {
 		<br>
 		
 		<label> Date of birth </label>
-		<input id="meeting" type="date"/>
+		<input id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
 		<br>
 		
 		<label> Email</label>
 		<label> E-mail (Required, valid e-mail address and unique) </label>
 		<input type="email" name="email" id="email" value="<%=user.getEmail() %>" required />
 		<% 	
-			if ( user.getError()[1] == 1) {
+			if ( user.getError()[0] == 1) {
 				System.out.println("The email already exists in our DB!");
 			}
 		%>
@@ -82,7 +82,7 @@ else {
 		
 		
 		<label> Phone number </label>
-		<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhoneNumber() %>" />
+		<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" />
 		<br>
 		
 		<input type="submit" value="Enviar"> 

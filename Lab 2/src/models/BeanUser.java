@@ -1,9 +1,14 @@
 package models;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.DateConverter;
 
 import mysql.DAO;
 
@@ -27,7 +32,7 @@ public class BeanUser implements Serializable  {
 	private String email = "";
 	private String password = "";
 	private String nickname = "";
-	private Date dateOfBirth = new Date(0);
+	private Date dateofbirth = new Date(0);
 	private String address = "";
 	private Long phonenumber = (long) 0000000;
 	
@@ -61,9 +66,8 @@ public class BeanUser implements Serializable  {
 			this.error[1]=1;
         }else{
         	this.error[1]=0;
-    		this.username = username;
         }
-
+		this.username = username;
 	}
 
 	public String getGender() {
@@ -87,8 +91,8 @@ public class BeanUser implements Serializable  {
 			this.error[0]=1;
         }else{
         	this.error[0]=0;
-    		this.email = email;
         }
+		this.email = email;
 		//TODO check the content if it's empty or not
 	}
 
@@ -108,12 +112,17 @@ public class BeanUser implements Serializable  {
 		this.nickname = nickName;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public Date getDateofbirth() {
+		return dateofbirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateofbirth(String dateofbirth) throws IllegalAccessException, InvocationTargetException {
+		DateConverter converter = new DateConverter();
+		converter.setPattern("dd/mm/yyyy");
+		ConvertUtils.register(converter,Date.class);
+		BeanUtils.setProperty(this.getClass(), "dateofbirth", dateofbirth);
+		System.out.println("date - " + this.getDateofbirth());
+		//this.dateofbirth = dateofbirth; TODO: solve this problem
 	}
 
 	public String getAddress() {
@@ -124,11 +133,11 @@ public class BeanUser implements Serializable  {
 		this.address = address;
 	}
 
-	public Long getPhoneNumber() {
+	public Long getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhoneNumber(Long phoneNumber) {
+	public void setPhonenumber(Long phoneNumber) {
 		this.phonenumber = phoneNumber;
 	}
 
@@ -140,7 +149,7 @@ public class BeanUser implements Serializable  {
 	
 	/*Check if all the fields are filled correctly */
 	public boolean isComplete() {
-		System.out.println("check if complete" + getName() +" - " + getEmail());
+		System.out.println("check if complete" + getUsername() +" - " + getEmail());
 		
 	    return(hasValue(getName()) &&
 	           hasValue(getEmail()) && this.error[0]==0 && this.error[1]==0);

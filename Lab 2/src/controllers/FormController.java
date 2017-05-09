@@ -47,20 +47,15 @@ public class FormController extends HttpServlet {
 		   BeanUtils.populate(user, request.getParameterMap());
 		   
 		   if (user.isComplete()) {
-			   System.out.println("TODO: INSERT into DB");
-			   java.sql.Date sqlDate = new java.sql.Date(user.getDateOfBirth().getTime());
-			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+sqlDate+"','"+user.getAddress()+"','"+user.getPhoneNumber()+"')";
-			   System.out.println(query);
+			   //System.out.println("TODO: INSERT into DB");
+			   java.sql.Date sqlDate = new java.sql.Date(user.getDateofbirth().getTime());
+			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+sqlDate+"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+			   //System.out.println(query);
 			   dao.insertSQL(query);
-			   System.out.println("añadido");
-			   /*
-				INSERT INTO taula(name,surname,username,gender,email,password) VALUES
-				('Arnau','Guinart','guini','Male','guinartarnau@gmail.com','pass1')
-			    */
+			   System.out.println("añadido a DB");
 		   } 
 		   else {
 			   // Put the bean into the request as an attribute
-			   System.out.println("new user");
 			   request.setAttribute("user",user);
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("/RegisterForm.jsp");
 			   dispatcher.forward(request, response);
