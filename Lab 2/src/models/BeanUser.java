@@ -149,7 +149,6 @@ public class BeanUser implements Serializable  {
 	
 	/*Check if all the fields are filled correctly */
 	public boolean isComplete() {
-		System.out.println("check if complete" + getUsername() +" - " + getEmail());
 		
 	    return(hasValue(getName()) &&
 	           hasValue(getEmail()) && this.error[0]==0 && this.error[1]==0);

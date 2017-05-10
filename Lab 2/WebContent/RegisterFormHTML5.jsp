@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  Javascript -->
+<script type="text/javascript" src="jsController.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -49,20 +51,20 @@ else {
 			<div class="form-group">
 				
 				<label> Name</label>
-				<input class="form-control" type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]{}"
+				<input class="form-control" type="text" name="name" id="name" value="<%=user.getName() %>" required pattern="[A-Za-z]{1,}"
        					title="Name should only contain letters contain"/>
 				<p class="help-block">(Required, only letters)</p>
 			</div>
 			
 			<div class="form-group">
 				<label> Surname</label>
-				<input class="form-control" type="text" name="surname" id="surname" value="<%=user.getSurname() %>" required pattern="[A-Za-z]{}"/>
+				<input class="form-control" type="text" name="surname" id="surname" value="<%=user.getSurname() %>" required pattern="[A-Za-z]{1,}"/>
 				<p class="help-block">(Required, only letters)</p>
 			</div>
 			
 			<div class="form-group">
 				<label> Username</label>
-				<input class="form-control" type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]{}"/>
+				<input class="form-control" type="text" name="username" id="username" value="<%=user.getUsername() %>" required pattern="[A-Za-z]{1,}"/>
 				<p class="help-block"> (Required, only letters and unique) </p>
 				<% 	
 					if ( user.getError()[1] == 1) {
@@ -75,14 +77,14 @@ else {
 			<div class="form-group">
 				<label> Nickname </label>
 				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required pattern="{1,20}"/>
-				<p class="help-block"> Some funny nick </p>
+				<p class="help-block"> Some funny nick (20 characters minimum)</p>
 			</div>
 			
 			<div class="form-group">
 				<label class="control-label" for="gender">Gender(Required)</label>
 				<div class="controls">
 					<div class="radio">
-						<label><input type="radio" name="gender" checked> Male</label>
+						<label><input type="radio" name="gender" value="Male"checked> Male</label>
 					</div>
 					<div class="radio">
 						<label><input type="radio" name="gender" value="Female">Female</label>
@@ -90,9 +92,7 @@ else {
 					<div class="radio">
 						<label><input type="radio" name="gender" value="Other">Other</label>
 					</div>
-					<input class="form-control" type="text" name="gender" id="gender" value="<%=user.getGender() %>"/>
-					<br>
-					</div>
+				</div>
 			</div>
 			
 			<div class="form-group">
@@ -103,7 +103,8 @@ else {
 			
 			<div class="form-group">
 				<label> E-mail </label>
-				<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" required />
+					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);"/>
+						<span id="status" class="status"></span>
 				<p class="help-block">(Required, valid e-mail address and unique) We will send you a login page</p>
 				<% 	
 					if ( user.getError()[0] == 1) {
@@ -113,11 +114,14 @@ else {
 			</div>
 			
 			<div class="form-group">
-				<label> Password (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</label>
-				<input class="form-control" type="password" name="password" id="password" value="<%=user.getPassword() %>" required pattern="\d\D[\.\,¡!?¿\$\-@]+{6}" />
-				<p class="help-block"> (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</p>
-				<label> Confirm password (Required) </label>
-				<input class="form-control" type="password" name="confirm_password" id="confirm_password" required  />
+				<label> Password </label>
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="chechForm(this)" required /> <!--required pattern="\d\D[\.\,¡!?¿\$\-@]{6,}" /> -->
+					<p class="help-bloc">(Required, 6 characters minimum, an UpperCase a LowerCase and a Number)</p>
+					<!-- <p class="help-block"> (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</p> -->
+				<label> Confirm password</label>
+					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();return false;"  required/>
+						<span id="confirmMessage" class="confirmMessage"></span>
+					<p class="help-block"> (Required)</p>
 			</div>
 		
 			
@@ -128,7 +132,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="[0-9]{9}"/>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="{0}|[0-9]{9}"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			
