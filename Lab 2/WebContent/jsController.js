@@ -25,7 +25,7 @@ function checkPass(){
 } 
 //validate pass
 function checkValidPass(pass){
-	var regPass = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
+	var regPass = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;	//Letters nums and some sign ( 6 min )
 	//http://stackoverflow.com/questions/12090077/javascript-regular-expression-password-validation-having-special-characters
     var passEl = document.getElementById('password');
     console.log("Pass:");

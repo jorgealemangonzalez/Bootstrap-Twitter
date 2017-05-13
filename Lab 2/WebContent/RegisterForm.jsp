@@ -101,8 +101,8 @@ else {
 			
 			<div class="form-group">
 				<label> Password </label>
-					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this)" required />
-					<p class="help-bloc">(Required, 6 characters minimum, an UpperCase a LowerCase and a Number)</p>
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this.value)" required />
+					<p class="help-bloc">(Required, 6 characters minimum, some letter , number and sing !@#$%^&*)</p>
 				<label> Confirm password</label>
 					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();return false;"  required/>
 						<span id="confirmMessage" class="confirmMessage"></span>
