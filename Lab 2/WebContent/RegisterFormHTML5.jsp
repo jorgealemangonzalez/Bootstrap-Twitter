@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  jQuery for bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--  Javascript -->
 <script type="text/javascript" src="jsController.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -18,22 +20,6 @@
 </head>
 
 <body>
-
-<script>
-var password = document.getElementById("password")
-, confirm_password = document.getElementById("confirm_password");
-
-function validatePassword(){
-if(password.value != confirm_password.value) {
-  confirm_password.setCustomValidity("Passwords Don't Match");
-} else {
-  confirm_password.setCustomValidity('');
-}
-}
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-</script>
 
 <% 
 BeanUser user = null;
@@ -115,9 +101,8 @@ else {
 			
 			<div class="form-group">
 				<label> Password </label>
-					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="chechForm(this)" required /> <!--required pattern="\d\D[\.\,¡!?¿\$\-@]{6,}" /> -->
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this)" required />
 					<p class="help-bloc">(Required, 6 characters minimum, an UpperCase a LowerCase and a Number)</p>
-					<!-- <p class="help-block"> (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</p> -->
 				<label> Confirm password</label>
 					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();return false;"  required/>
 						<span id="confirmMessage" class="confirmMessage"></span>

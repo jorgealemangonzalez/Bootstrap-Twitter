@@ -24,12 +24,17 @@ function checkPass(){
     }
 } 
 //validate pass
-function chechForm(pass){
-	var regPass = /(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/ ;
+function checkValidPass(pass){
+	var regPass = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
+	//http://stackoverflow.com/questions/12090077/javascript-regular-expression-password-validation-having-special-characters
     var passEl = document.getElementById('password');
+    console.log("Pass:");
+    console.log(pass);
     if(regPass.test(pass) == false){
+    	console.log("Invalid pass");
     	passEl.style.backgroundColor = red;
     }else{
+    	console.log("Valid pass");
     	passEl.style.backgroundColor = green;
     }
 }

@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  jQuery for bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--  Javascript -->
 <script type="text/javascript" src="jsController.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -19,22 +21,6 @@
 
 <body>
 
-<script>
-var password = document.getElementById("password")
-, confirm_password = document.getElementById("confirm_password");
-
-function validatePassword(){
-if(password.value != confirm_password.value) {
-  confirm_password.setCustomValidity("Passwords Don't Match");
-} else {
-  confirm_password.setCustomValidity('');
-}
-}
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-</script>
-
 <% 
 BeanUser user = null;
 if (request.getAttribute("user")!=null) {
@@ -46,7 +32,7 @@ else {
 %>
 <div class="container">
 	<h2>Register form</h2>
-	<form action="/Lab_2/FormController" method="post" id="registerForm" onsubmit="validateForm()">
+	<form action="/Lab_2/FormController" method="post" id="registerForm">
 		<fieldset>
 			<div class="form-group">
 				
@@ -100,10 +86,10 @@ else {
 				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
 				<p class="help-block">¿When did you born?</p>
 			</div>
-	
+			
 			<div class="form-group">
 				<label> E-mail </label>
-					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
+					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);"/>
 						<span id="status" class="status"></span>
 				<p class="help-block">(Required, valid e-mail address and unique) We will send you a login page</p>
 				<% 	
@@ -115,9 +101,8 @@ else {
 			
 			<div class="form-group">
 				<label> Password </label>
-					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="chechForm(this.value)" required /> <!--required pattern="\d\D[\.\,¡!?¿\$\-@]{6,}" /> -->
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this)" required />
 					<p class="help-bloc">(Required, 6 characters minimum, an UpperCase a LowerCase and a Number)</p>
-					<!-- <p class="help-block"> (Required, 6 characters minimum and some sign: .,¡!?¿$-@ )</p> -->
 				<label> Confirm password</label>
 					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();return false;"  required/>
 						<span id="confirmMessage" class="confirmMessage"></span>
@@ -132,7 +117,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".{0}|[0-9].{8,9}"/>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="{0}|[0-9]{9}"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			
