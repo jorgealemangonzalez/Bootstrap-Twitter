@@ -100,7 +100,7 @@ else {
 				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
 				<p class="help-block">¿When did you born?</p>
 			</div>
-			
+	
 			<div class="form-group">
 				<label> E-mail </label>
 					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
@@ -132,7 +132,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="{0}|[0-9]{9}"/>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".{0}|[0-9].{8,9}"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			
