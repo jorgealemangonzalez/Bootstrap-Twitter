@@ -32,7 +32,7 @@ public class BeanUser implements Serializable  {
 	private String email = "";
 	private String password = "";
 	private String nickname = "";
-	private Date dateofbirth = new Date(0);
+	private String dateofbirth = "";
 	private String address = "";
 	private Long phonenumber = (long) 0000000000;
 	
@@ -112,17 +112,13 @@ public class BeanUser implements Serializable  {
 		this.nickname = nickName;
 	}
 
-	public Date getDateofbirth() {
+	public String getDateofbirth() {
 		return dateofbirth;
 	}
 
-	public void setDateofbirth(String dateofbirth) throws IllegalAccessException, InvocationTargetException {
-		DateConverter converter = new DateConverter();
-		converter.setPattern("dd/mm/yyyy");
-		ConvertUtils.register(converter,Date.class);
-		BeanUtils.setProperty(this.getClass(), "dateofbirth", dateofbirth);
-		System.out.println("date - " + this.getDateofbirth());
-		//this.dateofbirth = dateofbirth; TODO: solve this problem
+	public void setDateofbirth(String dateofbirth) {
+		System.out.println("date - " + this.getDateofbirth() + "a - " + dateofbirth);
+		this.dateofbirth = dateofbirth; 
 	}
 
 	public String getAddress() {

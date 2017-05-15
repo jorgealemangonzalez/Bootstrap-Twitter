@@ -5,6 +5,11 @@
 <head>
 <!--  jQuery for bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Include Bootstrap Datepicker -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 <!--  Javascript -->
 <script type="text/javascript" src="jsController.js"></script>
 <!-- Latest compiled and minified CSS -->
@@ -82,12 +87,6 @@ else {
 			</div>
 			
 			<div class="form-group">
-				<label> Date of birth </label>
-				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"value="1996-08-28"/>
-				<p class="help-block">¿When did you born?</p>
-			</div>
-			
-			<div class="form-group">
 				<label> E-mail </label>
 					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
 						<span id="status" class="status"></span>
@@ -98,6 +97,26 @@ else {
 					}
 				%>
 			</div>
+			
+			 <div class="form-group">
+		        <label >Date</label>
+		            <div class="input-group input-append date" id="datePicker">
+		                <input type="text" class="form-control" id="dateofbirth" name="dateofbirth" />
+		                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+		        	</div>
+		    </div>
+			<script>
+			$(document).ready(function() {
+			    $('#datePicker')
+			        .datepicker({
+			            format: 'mm/dd/yyyy'
+			        })
+			        .on('changeDate', function(e) {
+			            // Revalidate the date field
+			            $('#eventForm').formValidation('revalidateField', 'date');
+			        });
+			});
+			</script>
 			
 			<div class="form-group">
 				<label> Password </label>

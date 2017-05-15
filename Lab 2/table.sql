@@ -9,7 +9,7 @@ CREATE TABLE taula (
     email VARCHAR(244) NOT NULL,
     password CHAR(24) NOT NULL,
     nickName CHAR(24),
-    dateOfBirth DATE,
+    dateOfBirth CHAR(24),
     address VARCHAR(24),
     phoneNumber INTEGER,
     PRIMARY KEY (username),

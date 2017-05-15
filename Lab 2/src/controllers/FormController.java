@@ -48,8 +48,8 @@ public class FormController extends HttpServlet {
 		   
 		   if (user.isComplete()) {
 			   //System.out.println("TODO: INSERT into DB");
-			   java.sql.Date sqlDate = new java.sql.Date(user.getDateofbirth().getTime());
-			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+sqlDate+"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+			   //java.sql.Date sqlDate = new java.sql.Date(user.getDateofbirth().getTime());
+			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
 			   //System.out.println(query);
 			   dao.insertSQL(query);
 			   System.out.println("añadido a DB");
