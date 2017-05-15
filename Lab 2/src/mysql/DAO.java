@@ -12,6 +12,7 @@ public class DAO {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		connection=DriverManager.getConnection("jdbc:mysql://localhost/ts1?user="+user+"&password="+password);
 		statement=connection.createStatement();
+		System.out.println("Succesfuly connected to the database");
 	}
 
 	// execute queries
@@ -20,7 +21,7 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	public int insertSQL(String query) throws SQLException{
-		System.out.println("Inserting data");
+		System.out.println("Inserting data of query "+query);
 		return statement.executeUpdate(query);
 		
 	}

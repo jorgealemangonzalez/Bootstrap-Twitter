@@ -17,7 +17,6 @@ public class BeanUser implements Serializable  {
 	public BeanUser(){
 		try {
 			dao = new DAO();	//Our interface to retrieve data fron DB
-			System.out.println("Mysql connected");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,7 @@ public class BeanUser implements Serializable  {
 		System.out.println(query);
 		ResultSet rs = dao.executeSQL(query);
 		if (rs.next()) {//get first result
-			System.out.println("el username existe");
+			System.out.println("The username already exists in  database");
 			this.error[1]=1;
         }else{
         	this.error[1]=0;
@@ -87,7 +86,7 @@ public class BeanUser implements Serializable  {
 		ResultSet rs = dao.executeSQL(query);
 		System.out.println(query);
 		if (rs.next()) {//get first result
-			System.out.println("el email existe");
+			System.out.println("The email already exists in  database");
 			this.error[0]=1;
         }else{
         	this.error[0]=0;
@@ -117,6 +116,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setDateofbirth(String dateofbirth) throws IllegalAccessException, InvocationTargetException {
+		System.out.println("Date of birth: "+dateofbirth);
 		DateConverter converter = new DateConverter();
 		converter.setPattern("dd/mm/yyyy");
 		ConvertUtils.register(converter,Date.class);

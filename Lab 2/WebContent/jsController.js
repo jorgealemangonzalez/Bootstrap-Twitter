@@ -3,11 +3,32 @@ var gray = "rgb(182,182,182)";
 var white = "rgb(255,255,255)";
 var red = "#ff6666";
 var green = "#66cc66";
+
+//Flags
 var boolpass = null;
+var validpass = null;
 var boolemail = null;
+
+function validateMyForm(){
+	checkPass();
+	checkValidPass(document.getElementById('password').value);
+	email_validate(document.getElementById('email').value);
+	console.log(boolpass);
+	console.log(validpass);
+	console.log(boolemail);
+	if(boolpass && validpass && boolemail){
+		console.log("Form succesfully filled");
+		return true;
+	}
+	else{
+		console.log("There is some error in the form");
+		return false;
+	}
+}
 
 function checkPass(){
     var pass1 = document.getElementById('password');
+    console.log("HOLA");
     var pass2 = document.getElementById('confirm_password');
     //Store the Confimation Message Object ...
     var message = document.getElementById('confirmMessage');
@@ -28,13 +49,15 @@ function checkValidPass(pass){
 	var regPass = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;	//Letters nums and some sign ( 6 min )
 	//http://stackoverflow.com/questions/12090077/javascript-regular-expression-password-validation-having-special-characters
     var passEl = document.getElementById('password');
-    console.log("Pass:");
-    console.log(pass);
+    //console.log("Pass:");
+    //console.log(pass);
     if(regPass.test(pass) == false){
-    	console.log("Invalid pass");
+    	validpass=false;
+    	//console.log("Invalid pass");
     	passEl.style.backgroundColor = red;
     }else{
-    	console.log("Valid pass");
+    	validpass=true;
+    	//console.log("Valid pass");
     	passEl.style.backgroundColor = green;
     }
 }
@@ -57,12 +80,6 @@ function email_validate(email){
     	message.style.color = green;
     	message.innerHTML	= "Correct Email!";	
     }
-}
-
-//validate Form
-function validateForm(){
-	if(boolpass && boolemail)return true;
-	else return false;
 }
 
 
