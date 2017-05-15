@@ -18,7 +18,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title> Template Register Form (Validation HTML5) </title>
 </head>
-
 <body>
 
 <% 
@@ -32,7 +31,7 @@ else {
 %>
 <div class="container">
 	<h2>Register form</h2>
-	<form action="/Lab_2/FormController" method="post" id="registerForm" onsubmit="return validateForm();">
+	<form action="/Lab_2/FormController" method="post" id="registerForm" onsubmit="return validateMyForm();">
 		<fieldset>
 			<div class="form-group">
 				
@@ -54,7 +53,7 @@ else {
 				<p class="help-block"> (Required, only letters and unique) </p>
 				<% 	
 					if ( user.getError()[1] == 1) {
-						System.out.println("The username already exists in our DB!");
+						 out.println("<div class=\"alert alert-danger\"><strong>Error!</strong>The username already exists in our DB!</div>"); 
 					}
 				%>
 				
@@ -62,7 +61,7 @@ else {
 			
 			<div class="form-group">
 				<label> Nickname </label>
-				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required pattern="{1,20}"/>
+				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required pattern=".{1,20}"/>
 				<p class="help-block"> Some funny nick (20 characters minimum)</p>
 			</div>
 			
@@ -83,7 +82,7 @@ else {
 			
 			<div class="form-group">
 				<label> Date of birth </label>
-				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"/>
+				<input class="form-control" id="dateofbirth" name="dateofbirth" type="date" value="<%=user.getDateofbirth() %>"value="1996-08-28"/>
 				<p class="help-block">¿When did you born?</p>
 			</div>
 			
@@ -91,17 +90,17 @@ else {
 				<label> E-mail </label>
 					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
 						<span id="status" class="status"></span>
-				<p class="help-block">(Required, valid e-mail address and unique) We will send you a login page</p>
-				<% 	
+ 				<p class="error-block">(Required, valid e-mail address and unique) We will send you a login page</p> 
+ 				<% 	
 					if ( user.getError()[0] == 1) {
-						System.out.println("The email already exists in our DB!");
+						out.println("<div class=\"alert alert-danger\"><strong>Error!</strong>The email already exists in our DB!</div>"); 				
 					}
 				%>
 			</div>
 			
 			<div class="form-group">
 				<label> Password </label>
-					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this.values);" required />
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass();" required />
 					<p class="help-bloc">(Required, 6 characters minimum, some letter , number and sing !@#$%^&*)</p>
 				<label> Confirm password</label>
 					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();"  required/>
@@ -117,7 +116,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".[0-9]{0,9}"/>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".{0}|[0-9]{0,9}"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			
