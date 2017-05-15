@@ -53,6 +53,9 @@ public class FormController extends HttpServlet {
 			   //System.out.println(query);
 			   dao.insertSQL(query);
 			   System.out.println("añadido a DB");
+			   request.setAttribute("user",user);
+			   RequestDispatcher dispatcher = request.getRequestDispatcher("/RegisterSuccess.jsp");
+			   dispatcher.forward(request, response);
 		   } 
 		   else {
 			   // Put the bean into the request as an attribute
