@@ -34,7 +34,7 @@ public class BeanUser implements Serializable  {
 	private String nickname = "";
 	private Date dateofbirth = new Date(0);
 	private String address = "";
-	private Long phonenumber = (long) 0000000;
+	private Long phonenumber = (long) 0000000000;
 	
 	/*getters and setters*/
 	public String getName() {

@@ -32,7 +32,7 @@ else {
 %>
 <div class="container">
 	<h2>Register form</h2>
-	<form action="/Lab_2/FormController" method="post" id="registerForm">
+	<form action="/Lab_2/FormController" method="post" id="registerForm" onsubmit="return validateForm();">
 		<fieldset>
 			<div class="form-group">
 				
@@ -89,7 +89,7 @@ else {
 			
 			<div class="form-group">
 				<label> E-mail </label>
-					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);"/>
+					<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
 						<span id="status" class="status"></span>
 				<p class="help-block">(Required, valid e-mail address and unique) We will send you a login page</p>
 				<% 	
@@ -101,10 +101,10 @@ else {
 			
 			<div class="form-group">
 				<label> Password </label>
-					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this.value)" required />
+					<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass(this.values);" required />
 					<p class="help-bloc">(Required, 6 characters minimum, some letter , number and sing !@#$%^&*)</p>
 				<label> Confirm password</label>
-					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();return false;"  required/>
+					<input class="form-control inputpass" type="password" name="confirm_password" id="confirm_password"  placeholder="Enter again to validate"  onkeyup="checkPass();"  required/>
 						<span id="confirmMessage" class="confirmMessage"></span>
 					<p class="help-block"> (Required)</p>
 			</div>
@@ -117,7 +117,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern="{0}|[0-9]{9}"/>
+				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".[0-9]{0,9}"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			
