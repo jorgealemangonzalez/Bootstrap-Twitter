@@ -8,10 +8,27 @@ $(document).ready(function() {
         });
 });
 </script>
-
+<!--
 <table>
 <tr>
 <td> <a class="menu" id="RegisterController" href=#> Registration </a> </td>
 <td> <a class="menu" id="LoginController" href=#> Login </a> </td>
 </tr>
-</table>	
+</table>	-->
+
+<div id="header" class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Logo</a>
+                </div>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class=""><a class="menu" id="RegisterController" href="#">Register</a></li>
+                        <li class=""><a class="menu" id="LoginController" href="#">Log as anonymous</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

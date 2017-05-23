@@ -7,4 +7,4 @@ $(document).ready(function() {
 });
 </script>
 
-Login for user ${user} done!
+Login for user ${username} done!
