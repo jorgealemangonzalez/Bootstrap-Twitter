@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,7 +58,7 @@ public class LoginController extends HttpServlet {
 			    dispatcher.forward(request, response);
 		    	
 		    }
-		} catch (IllegalAccessException | InvocationTargetException e) {
+		} catch (IllegalAccessException | InvocationTargetException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
