@@ -12,22 +12,7 @@ $(document).ready(function(){
     });
 });
 </script>
-<!-- 
-<form id="loginForm" action="" method="POST">
-<table>
-<tr> 
-<td> User id </td> 
-<td> <input type="text" name="user" value="${login.user}" id="user" class="required" minlength="5"/> </td> 
-<c:if test="${login.error[0] == 1}">
-   <td class="error"> Nonexistent username in our DB! </td> 
-</c:if>
-</tr>
-<tr> 
-<td> <input name="sumbit" type="submit" value="Enviar"> </td>
-</tr>
-</table>
-</form>
--->
+
 <div class="container">
 	<div class="row" style="margin-top:60px">
 	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">

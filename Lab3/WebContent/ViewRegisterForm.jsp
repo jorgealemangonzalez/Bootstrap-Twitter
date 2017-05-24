@@ -23,7 +23,7 @@ else {
 %>
 <div class="container">
 	<h2>Register form</h2>
-	<form action="/Lab_2/FormController" method="post" id="registerForm" onsubmit="return validateMyForm();">
+	<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
 		<fieldset>
 			<div class="form-group">
 				

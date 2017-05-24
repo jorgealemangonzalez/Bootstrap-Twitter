@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanUser;
+import mysql.DAO;
 
 /**
  * Servlet implementation class FormController
@@ -20,12 +22,14 @@ import models.BeanUser;
 @WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static DAO dao;
     /**
+     * @throws Exception 
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public RegisterController() throws Exception {
         super();
+        dao = new DAO();
         // TODO Auto-generated constructor stub
     }
 
@@ -42,7 +46,9 @@ public class RegisterController extends HttpServlet {
 		   BeanUtils.populate(user, request.getParameterMap());
 		
 		   if (user.isComplete()) {
-		   
+			   String query = "INSERT INTO login.taula VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+			   System.out.println("Inserting into DB");
+			   dao.insertSQL(query);
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			   dispatcher.forward(request, response);
 		   
@@ -58,7 +64,10 @@ public class RegisterController extends HttpServlet {
 	   } catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	   }
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 	}
 
