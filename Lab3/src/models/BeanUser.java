@@ -15,8 +15,8 @@ public class BeanUser implements Serializable  {
 
 	public BeanUser(){
 		try {
+			System.out.println("new BEAN");
 			dao = new DAO();	//Our interface to retrieve data fron DB
-			System.out.println("Mysql connected");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

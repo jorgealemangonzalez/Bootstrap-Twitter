@@ -45,13 +45,16 @@ public class BeanLogin {
 	}
 	
 	public boolean isComplete() throws SQLException {
-		String query = "SELECT name FROM login.taula where username='"+username+"'";
+		String query = "SELECT name,password FROM login.taula where username='"+username+"'";
 		ResultSet rs = dao.executeSQL(query);
 		if (rs.next()) {//get first result
-			return true;
-        }else{
-        	return false;
+			String pass = rs.getString("password");
+			if(pass.compareTo(password) == 0){
+				return true;
+			}
         }
+    	return false;
+     
 		//return(hasValue(getUsername()));
 	}
 	
