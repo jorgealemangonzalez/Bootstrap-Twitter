@@ -7,8 +7,8 @@ public class DAO {
 	private Statement statement;
 
 	public DAO() throws Exception {
-		String user = "root";
-		String password="";
+		String user = "mysql";
+		String password="prac";
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		connection=DriverManager.getConnection("jdbc:mysql://localhost/login?user="+user+"&password="+password);
 		statement=connection.createStatement();
