@@ -13,9 +13,9 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="container">
-	<div class="row" style="margin-top:60px">
-	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+<div class="container center_container">
+	<div class="row">
+	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"> <!-- Offset para centrar , col-ventana-size para poner un tamaño de ancho segun como de grande es la ventana -->
 	    	<form role="form" id="loginForm" action="" method="POST">
 				<fieldset>
 					<h2>Please Sign In</h2>

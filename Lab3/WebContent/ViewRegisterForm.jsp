@@ -21,7 +21,7 @@ else {
 	user = new BeanUser();
 }
 %>
-<div class="container">
+<div class="container center_container">
 	<h2>Register form</h2>
 	<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
 		<fieldset>
