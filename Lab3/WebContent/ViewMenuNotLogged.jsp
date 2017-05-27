@@ -8,13 +8,6 @@ $(document).ready(function() {
         });
 });
 </script>
-<!--
-<table>
-<tr>
-<td> <a class="menu" id="RegisterController" href=#> Registration </a> </td>
-<td> <a class="menu" id="LoginController" href=#> Login </a> </td>
-</tr>
-</table>	-->
 <div class="container">
 	<div id="header" class="navbar-wrapper">
 	    <div class="container-fluid">
@@ -24,8 +17,9 @@ $(document).ready(function() {
 	                   <a class="navbar-brand" href="#">Logo</a>
 	               </div>
 	               <ul class="nav navbar-nav pull-right">
+	                   <li class=""><a class="menu" id="LoginController" href="#">Log in</a></li>
+	                   <li class=""><a class="menu" id="UserInformationController" href="#">Log as anonymous</a></li>
 	                   <li class=""><a class="menu" id="RegisterController" href="#">Register</a></li>
-	                   <li class=""><a class="menu" id="LoginController" href="#">Log as anonymous</a></li>
 	               </ul>
               	</div>
 	        </nav>

@@ -11,7 +11,7 @@ CREATE TABLE taula (
     nickName CHAR(24),
     dateOfBirth CHAR(24),
     address VARCHAR(24),
-    phoneNumber INTEGER,
+    phoneNumber varchar(9),
     PRIMARY KEY (username),
     KEY (email)
 );

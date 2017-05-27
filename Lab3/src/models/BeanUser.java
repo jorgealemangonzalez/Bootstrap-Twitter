@@ -33,7 +33,7 @@ public class BeanUser implements Serializable  {
 	private String nickname = "";
 	private String dateofbirth = "";
 	private String address = "";
-	private Long phonenumber = (long) 0000000000;
+	private String phonenumber = "";
 	
 	/*getters and setters*/
 	public String getName() {
@@ -125,11 +125,11 @@ public class BeanUser implements Serializable  {
 		this.address = address;
 	}
 
-	public Long getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(Long phoneNumber) {
+	public void setPhonenumber(String phoneNumber) {
 		this.phonenumber = phoneNumber;
 	}
 

@@ -6,9 +6,22 @@
 $(document).ready(function(){
     $("#registerForm").validate({
     	submitHandler: function(form) {
-    		$('#content').load('RegisterController',$("#registerForm").serialize());
+    		if (confirm("You will be registered in our website!") == true) {
+    			$('#content').load('RegisterController',$("#registerForm").serialize());
+    	    }
     }
     });
+});
+$(document).ready(function() {
+    $('#datePicker')
+        .datepicker({
+            format: 'mm/dd/yyyy'
+        })
+        .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#eventForm').formValidation('revalidateField', 'date');
+            
+        });
 });
 </script>
 
@@ -20,7 +33,8 @@ if (request.getAttribute("user")!=null) {
 else {
 	user = new BeanUser();
 }
-%>
+%> 
+ 
 <div class="container center_container">
 	<h2>Register form</h2>
 	<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
@@ -53,7 +67,7 @@ else {
 			
 			<div class="form-group">
 				<label> Nickname </label>
-				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required pattern=".{1,20}"/>
+				<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required maxlength="20"/>
 				<p class="help-block"> Some funny nick (20 characters maximum)</p>
 			</div>
 			
@@ -92,19 +106,6 @@ else {
 		                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
 		        	</div>
 		    </div>
-			<script>
-			$(document).ready(function() {
-			    $('#datePicker')
-			        .datepicker({
-			            format: 'mm/dd/yyyy'
-			        })
-			        .on('changeDate', function(e) {
-			            // Revalidate the date field
-			            $('#eventForm').formValidation('revalidateField', 'date');
-			        });
-			});
-			</script>
-			
 			
 			<div class="form-group">
 				<label> Password </label>
@@ -124,7 +125,7 @@ else {
 			
 			
 			<label> Phone number </label>
-				<input class="form-control" type="text" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" pattern=".{0}|[0-9]{0,9}"/>
+				<input class="form-control" type="number" name="phonenumber" id="phonenumber" value="<%=user.getPhonenumber() %>" maxlength="9"/>
 				<p class="help-block">(Optional) Your 9 digit phone number</p>
 			<br>
 			

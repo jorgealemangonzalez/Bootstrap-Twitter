@@ -11,11 +11,17 @@ $(document).ready(function(){
     }
     });
 });
+
+$(document).ready(function() {
+    $("#ButtonRegister").click(function(event) {
+        $('#content').load('ContentController',{content: "RegisterController"});
+        });
+});
 </script>
 
 <div class="container center_container">
 	<div class="row">
-	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"> <!-- Offset para centrar , col-ventana-size para poner un tamaño de ancho segun como de grande es la ventana -->
+	    <div class="col-md-6 col-md-offset-3"> <!-- Offset para centrar , col-ventana-size para poner un tamaño de ancho segun como de grande es la ventana -->
 	    	<form role="form" id="loginForm" action="" method="POST">
 				<fieldset>
 					<h2>Please Sign In</h2>
@@ -28,11 +34,11 @@ $(document).ready(function(){
 					</div>
 					<hr class="colorgraph">
 					<div class="row">
-						<div class="col-xs-6 col-sm-6 col-md-6">
+						<div class="col-xs-6 col-sm-6 col-md-6"> <!-- Fixed size -->
 	                        <input name="submit" type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-6">
-							<a href="" class="btn btn-lg btn-primary btn-block">Register</a>
+							<a href="#" class="btn btn-lg btn-primary btn-block" id="ButtonRegister">Register</a>
 						</div>
 					</div>
 				</fieldset>
