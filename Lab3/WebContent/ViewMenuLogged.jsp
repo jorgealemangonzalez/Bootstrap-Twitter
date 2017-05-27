@@ -69,7 +69,7 @@ $(document).ready(function() {
                                 <li ><a class="menu" id="UserInformation" href="#">My Profile</a></li>
                             </ul>
                         </li>
-                        <li class=""><a href="#">Logout</a></li>
+                        <li class=""><a class="menu" id="LogoutController" href="#">Logout</a></li>
                     </ul>
                 </div>
             </div>
