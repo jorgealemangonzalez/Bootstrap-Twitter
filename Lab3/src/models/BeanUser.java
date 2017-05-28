@@ -146,7 +146,33 @@ public class BeanUser implements Serializable  {
 	           hasValue(getEmail()) && this.error[0]==0 && this.error[1]==0);
 	}
 	
-
+	public boolean loadFromDatabase(String username){
+		try {		
+			String query = "SELECT * FROM login.taula where username='"+username+"'";
+			ResultSet rs = dao.executeSQL(query);
+			if(rs.next()){
+				this.name = rs.getString("name");
+				this.surname = rs.getString("surname");
+				this.username = rs.getString("username");
+				this.gender = rs.getString("gender");
+				this.email = rs.getString("email");
+				this.password = rs.getString("password");
+				this.nickname = rs.getString("nickname");
+				this.dateofbirth = rs.getString("dateofbirth");
+				this.address = rs.getString("address");
+				this.phonenumber = rs.getString("phonenumber");
+				System.out.println("User"+username+" loaded succesfully");
+				return true;
+			}
+			System.out.println("User "+username+" doesn't exists");
+			return false;
+		} catch (SQLException e) {
+			System.out.println("Error retrieving user "+username);
+			return false;
+			//e.printStackTrace();
+		}
+	}
+	
 	private boolean hasValue(String val) {
 		return((val != null) && (!val.equals("")));
 	}

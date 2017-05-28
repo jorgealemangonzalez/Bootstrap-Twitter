@@ -14,18 +14,19 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanUser;
+import mysql.DAO;
 
 /**
- * Servlet implementation class MenuController
+ * Servlet implementation class UserInformationController
  */
-@WebServlet("/UserInformation")
+@WebServlet("/UserInformationController")
 public class UserInformationController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserInformationController() {
+    public UserInformationController(){
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,9 +37,18 @@ public class UserInformationController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			System.out.println("UserInformation");
-			//BeanUser myBean = (BeanUser) request.getSession().getAttribute("BeanUser");
-			//System.out.println("aaa" + myBean.getAddress());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMyProfile.jsp");
+			HttpSession session = request.getSession();
+			RequestDispatcher dispatcher = null;
+			
+			BeanUser user = new BeanUser();
+			if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
+				
+				request.setAttribute("user",user);
+				dispatcher = request.getRequestDispatcher("ViewMyProfile.jsp");
+			}else{
+				dispatcher = request.getRequestDispatcher("LoginController");
+			}
+			
 			dispatcher.forward(request, response);
 
 	}

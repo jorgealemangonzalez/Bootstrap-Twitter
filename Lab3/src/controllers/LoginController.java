@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 		    	
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("username",login.getUsername());
-		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
+		    	RequestDispatcher dispatcher = request.getRequestDispatcher("UserInformationController");
 			    dispatcher.forward(request, response);
 			    
 		    } 

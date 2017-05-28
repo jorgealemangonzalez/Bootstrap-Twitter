@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false" %>
+    pageEncoding="UTF-8" session="true" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#content').load('ContentController',{content: "UserInformationController"});
+});
+</script>
 
    <!-- Begin Wrapper -->
    <div id="wrapper">
@@ -54,7 +59,7 @@
 		       <!-- Begin Content Column -->
 		       <div id="content">
 		       
-		       <jsp:include page="ViewLoginForm.jsp" />
+		       <!--<jsp:include page="ViewLoginForm.jsp" />-->
 	  		       			  
 		       </div>
 		       <!-- End Content Column -->

@@ -33,7 +33,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session!=null) session.invalidate();
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLogoutDone.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("LoginController");
 	    if (dispatcher != null) dispatcher.forward(request, response);
 	}
 

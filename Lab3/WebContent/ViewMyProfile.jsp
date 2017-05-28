@@ -16,14 +16,13 @@
 
 <body>
 <script type="text/javascript">
-$(document).one('ready',function() {
+$(document).ready(function() {
 	    $.ajaxSetup({ cache: false }); // Avoids Internet Explorer caching!
-	    $('#navigation').load('UserInformationController');
+	    $('#navigation').load('MenuController');
 });
 </script>
 
-
-<div class="container">
+<div class="container center_container">
 	<div class="row">
 		 <form class="form-horizontal">
             <fieldset>
@@ -36,7 +35,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Name</label>
                     <div class="controls">
                         <input id="name" name="name" type="text" placeholder="Name"
-                        class="input-xlarge" value="${nickname}">
+                        class="input-xlarge" value="${user.nickname}">
                     </div>
                 </div>
                 
@@ -44,7 +43,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Username</label>
                     <div class="controls">
                         <input id="username" name="username" type="text" placeholder="username"
-                        class="input-xlarge" value="${username}">
+                        class="input-xlarge" value="${user.username}">
                     </div>
                 </div>
                 
@@ -52,7 +51,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Gender</label>
                     <div class="controls">
                         <input id="gender" name="gender" type="text" placeholder="gender"
-                        class="input-xlarge" value="${gender}">
+                        class="input-xlarge" value="${user.gender}">
                     </div>
                 </div>
                 
@@ -60,7 +59,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Email</label>
                     <div class="controls">
                         <input id="email" name="email" type="text" placeholder="email"
-                        class="input-xlarge" value="${email}">
+                        class="input-xlarge" value="${user.email}">
                     </div>
                 </div>
                 
@@ -68,7 +67,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Password</label>
                     <div class="controls">
                         <input id="password" name="password" type="text" placeholder="password"
-                        class="input-xlarge" value="${password}">
+                        class="input-xlarge" value="${user.password}">
                     </div>
                 </div>
                 
@@ -76,7 +75,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Nickname</label>
                     <div class="controls">
                         <input id="nickname" name="nickname" type="text" placeholder="nickname"
-                        class="input-xlarge" value="${nickname}">
+                        class="input-xlarge" value="${user.nickname}">
                     </div>
                 </div>
                 
@@ -84,7 +83,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Birth</label>
                     <div class="controls">
                         <input id="birth" name="birth" type="text" placeholder="birth"
-                        class="input-xlarge" value="${dateofbirth}">
+                        class="input-xlarge" value="${user.dateofbirth}">
                     </div>
                 </div>
                 
@@ -92,7 +91,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Address</label>
                     <div class="controls">
                         <input id="address" name="address" type="text" placeholder="address"
-                        class="input-xlarge" value="${address}">
+                        class="input-xlarge" value="${user.address}">
                     </div>
                 </div>
                 
@@ -100,7 +99,7 @@ $(document).one('ready',function() {
                     <label class="control-label">Phone number</label>
                     <div class="controls">
                         <input id="number" name="number" type="text" placeholder="number"
-                        class="input-xlarge" value="${phonenumber}">
+                        class="input-xlarge" value="${user.phonenumber}">
                     </div>
                 </div>
                 
