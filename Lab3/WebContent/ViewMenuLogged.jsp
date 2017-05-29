@@ -66,7 +66,7 @@ $(document).ready(function() {
                         <li class=" dropdown"><a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Change Password</a></li>
-                                <li ><a class="menu" id="UserInformation" href="#">My Profile</a></li>
+                                <li ><a class="menu" id="UserInformationController" href="#">My Profile</a></li>
                             </ul>
                         </li>
                         <li class=""><a class="menu" id="LogoutController" href="#">Logout</a></li>
