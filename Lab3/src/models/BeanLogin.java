@@ -19,7 +19,16 @@ public class BeanLogin {
 	private static DAO dao;
 	private String username = "";
 	private String password = "";
+	public String error = "";
 	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -27,9 +36,6 @@ public class BeanLogin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	private int[] error = {0};
 	
 	public String getUsername(){
 		return username;
@@ -40,9 +46,6 @@ public class BeanLogin {
 	}
 	
 	
-	public int[] getError() {
-		return error;
-	}
 	
 	public boolean isComplete() throws SQLException {
 		String query = "SELECT name,password FROM login.taula where username='"+username+"'";

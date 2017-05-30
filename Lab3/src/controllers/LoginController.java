@@ -50,9 +50,10 @@ public class LoginController extends HttpServlet {
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("UserInformationController");
 			    dispatcher.forward(request, response);
 			    
-		    } 
+		    }	
 			else {
-		     
+				if(login.getUsername().length() > 0)
+					login.error = "<div class=\"alert alert-danger\"><strong>Error!</strong>Username or password do not match</div>";
 			    request.setAttribute("login",login);
 			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			    dispatcher.forward(request, response);
