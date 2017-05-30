@@ -17,6 +17,11 @@ $(document).ready(function() {
         $('#content').load('ContentController',{content: "RegisterController"});
         });
 });
+
+$(document).ready(function() {
+    $.ajaxSetup({ cache: false }); // Avoids Internet Explorer caching!
+    $('#navigation').load('MenuController');
+});
 </script>
 
 <div class="container center_container">
