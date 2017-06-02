@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true" %>
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@
 <body>
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#content').load('ContentController',{content: "UserInformationController"});
+	$('#content').load('UserInformationController');
 });
 </script>
 
@@ -59,8 +59,6 @@ $(document).ready(function() {
 		       <!-- Begin Content Column -->
 		       <div id="content">
 		       
-		       <!--<jsp:include page="ViewLoginForm.jsp" />-->
-	  		       			  
 		       </div>
 		       <!-- End Content Column -->
 			   

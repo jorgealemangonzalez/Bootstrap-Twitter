@@ -36,8 +36,8 @@ public class UserInformationController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			System.out.println("UserInformation");
 			HttpSession session = request.getSession();
+			System.out.println("UserInformation"+ session.getAttribute("username"));
 			RequestDispatcher dispatcher = null;
 			
 			BeanUser user = new BeanUser();

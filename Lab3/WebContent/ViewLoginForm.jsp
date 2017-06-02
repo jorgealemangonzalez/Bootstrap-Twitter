@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>
+    pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 <div class="container center_container">
 	<div class="row">
-	    <div class="col-md-6 col-md-offset-3"> <!-- Offset para centrar , col-ventana-size para poner un tamaño de ancho segun como de grande es la ventana -->
+	    <div class="col-md-6 col-md-offset-3"> <!-- Offset to center it , col-widnow-size to select the size of the component depending on the window size -->
 	    	<form role="form" id="loginForm" action="" method="POST">
 				<fieldset>
 					<h2>Please Sign In</h2>
@@ -37,7 +37,7 @@ $(document).ready(function() {
 					<div class="form-group">
 	                    <input type="password" name="password" id="password" value="${login.password}" class="form-control input-lg" placeholder="Password">
 					</div>
-					${login.error }
+					${ login.error }
 					<hr class="colorgraph">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6"> <!-- Fixed size -->

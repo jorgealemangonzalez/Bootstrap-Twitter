@@ -24,37 +24,30 @@ a:hover{
 }
 
 /*HEADER------------------------*/
-.full_bar_style{
+.full_bar_style{				/* Defines how the top bar is shown*/
 	width:100% !important; 
-	min-height:58px;
-	background:#09ba32;
-	margin: 0px 0px 0px 0px;
+	min-height:58px;			/* Manually adjust the height of the bar to be as we want */
+	background:#09ba32;			/* The green color */
+	margin: 0px 0px 0px 0px;	/* No margins around the bar */
 }
 
-.navbar, .dropdown-menu{
+.navbar, .dropdown-menu{		/* When the submenu is shown we eliminate all borders inherited and reset the color if bootstrap changed it*/
 	border: none;
 	background:#09ba32;
 }
 
-.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a, .dropdown-menu>li{
-  border-bottom: 3px solid transparent;
-}
-.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
-  border-bottom: 3px solid transparent;
-  background: rgba(154, 154, 154, 0.27);
-}
 .navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .navbar-toggle{
- color: #fff;
+ color: #fff;		/* Default text color of the links is white */
 }
 .dropdown-menu{
-      -webkit-box-shadow: none;
-    box-shadow:none;
+      -webkit-box-shadow: none;   /* Enable all shadows */
+    box-shadow:none;              /* Enable all shadows */
 }
-.nav li{
+.nav li{ /* Set a transparent border to later add color to it when some button is hover */
 	border-bottom: transparent 4px solid;
 }
 
-.nav li:hover:nth-child(8n+1){	/* Colores al seleccionar */
+.nav li:hover:nth-child(8n+1){	/* Depending of how many buttons (and the order) there are in the bar add some color to the border if hovered */
   border-bottom: #b6f423 4px solid;
 }
 .nav li:hover:nth-child(8n+2){
@@ -79,17 +72,14 @@ a:hover{
   border-bottom: #2aed9a 4px solid;
 }
 
-.navbar-toggle .icon-bar{
+.navbar-toggle .icon-bar{ 
     color: #fff;
     background: #000000;
 }
 
-#header{
-	
-}
 /*END_HEADER------------------------*/
 /*LOGIN---------------------------*/
-.colorgraph { /* Colores para la barra multicolor del login*/
+.colorgraph { /* Multicolor login bar */
   height: 5px;
   border-top: 0;
   background: #c4e17f;

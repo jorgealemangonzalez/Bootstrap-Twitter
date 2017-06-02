@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
 	    	BeanUtils.populate(login, request.getParameterMap());
 			
 	    	if (login.isComplete()) {
-		    	
+		    	System.out.println("Login is complete");
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("username",login.getUsername());
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("UserInformationController");
