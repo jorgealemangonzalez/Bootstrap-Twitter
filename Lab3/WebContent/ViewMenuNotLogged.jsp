@@ -14,7 +14,7 @@ $(document).ready(function() {
 	        <nav class="navbar navbar-fixed-top full_bar_style">
 	        	<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 	               <div class="navbar-header">
-	                   <a class="navbar-brand" href="#">Logo</a>
+	                    <a class="navbar-brand" href="#"><img alt="Logo" src="images/logo.jpg" height="42" width="42"/></a>
 	               </div>
 	               <ul class="nav navbar-nav pull-right">
 	                   <li class=""><a class="menu" id="LoginController" href="#">Log in</a></li>

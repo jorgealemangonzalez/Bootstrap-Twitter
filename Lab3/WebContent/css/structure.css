@@ -1,5 +1,7 @@
 * { padding: 0; margin: 0;}
 
+
+
 html,body{
 	height:100%;
 }
@@ -90,9 +92,7 @@ a:hover{
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 /*END_LOGIN-------------------------------*/
-/*REGISTER--------------------------_*/
 
-/*END_REGISTER--------------------*/
 .center_container{
 	margin-top:60px;
 	height:100%;
@@ -119,12 +119,71 @@ a:hover{
  width: 195px;
  float: right;
 }
-/*
-#footer { 
- width: 902px;
- clear: both;
- color: #333;
- background: #ABBEBE;
- margin: 0px 0px 10px 0px;
- padding: 10px;
-}*/
+
+/*TWEET CARACTERISTICS-------------------*/
+.chat
+{
+	background-color:rgb(245, 248, 250);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 250px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+/*END TWEET CARACTERISTICS-------------------*/
+
+
+
+
