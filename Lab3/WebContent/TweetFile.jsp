@@ -26,33 +26,40 @@
 </head>
 
 
-<body>
-	<div class="panel-body">
-	      <ul class="chat">
-	          <li class="left clearfix"><span class="chat-img pull-left">
-	              <img src="images/logo.jpg" height="42" width="42" alt="User Avatar" class="img-circle" />
-	          </span>
-	              <div class="chat-body clearfix">
-	                  <div class="header">
-	                      <strong class="primary-font">Username</strong> <small class="pull-right text-muted">
-	                          <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
-	                  </div>
-	                  <p>This is a tweet
-	                  </p>
-	              </div>
-	          </li>
-	           <li class="left clearfix"><span class="chat-img pull-left">
-	              <img src="images/logo.jpg" height="42" width="42" alt="User Avatar" class="img-circle" />
-	          </span>
-	              <div class="chat-body clearfix">
-	                  <div class="header">
-	                      <strong class="primary-font">Username 1 </strong> <small class="pull-right text-muted">
-	                          <span class="glyphicon glyphicon-time"></span>15 mins ago</small>
-	                  </div>
-	                  <p>This is another tweet </p>
-	              </div>
-	          </li>
-          </ul>
+<body style="backgound-color: rgb(245, 248, 250);">
+	<div class="tweet-list col-xs-4 col-sm-4 col-md-4 col-md-offset-4">
+		<div class="card tweet">
+		  <div class="card-block">
+		  	<div class="flex-heading-container">
+	  			<img src="http://d2jljza7x0a5yy.cloudfront.net/media/k2/items/cache/92ba0f2a9349e9b1fc0dfba8cc36c330_XL.jpg" height="42" width="42" alt="User Avatar" class="flex-image"/>
+		  		<div class="flex-content">
+				    <h4 class="card-title"><a href="#" >Jon Nieve</a></h4>
+				    <h6 class="card-subtitle mb-2 text-muted">
+						<span class="glyphicon glyphicon-time"></span>12 mins ago
+				    </h6>
+			    </div>
+		    </div>
+		    <p class="card-text">This is my first tweet in the music tweeter. I hope you like this kind of card.</p>
+		    <a href="#" class="like-tweet" ><span class="glyphicon glyphicon-thumbs-up"></span> Like it!</a>
+		  </div>
+		</div>
+		
+		<div class="card tweet">
+		  <div class="card-block">
+		  	<div class="flex-heading-container">
+	  			<img src="http://d2jljza7x0a5yy.cloudfront.net/media/k2/items/cache/92ba0f2a9349e9b1fc0dfba8cc36c330_XL.jpg" height="42" width="42" alt="User Avatar" class="flex-image"/>
+		  		<div class="flex-content">
+				    <h4 class="card-title"><a href="#" >Jon Nieve</a></h4>
+				    <h6 class="card-subtitle mb-2 text-muted">
+						<span class="glyphicon glyphicon-time"></span>12 mins ago
+				    </h6>
+			    </div>
+		    </div>
+		    <p class="card-text">This is my first tweet in the music tweeter. I hope you like this kind of card.</p>
+		    <a href="#" class="like-tweet" ><span class="glyphicon glyphicon-thumbs-up"></span> Like it!</a>
+		  </div>
+		</div>
+	</div>
 </body>
 
 
