@@ -1,20 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="models.BeanUser" %>
-<!DOCTYPE html>
-<html>
-<head>
-<!--  jQuery for bootstrap -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-
-<!-- Optional theme -->
-
-<!-- Latest compiled and minified JavaScript -->
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title> Register complete! </title>
-</head>
-
-<body>
 <script type="text/javascript">
 $(document).ready(function() {
 	    $.ajaxSetup({ cache: false }); // Avoids Internet Explorer caching!
@@ -107,6 +92,3 @@ $(document).ready(function() {
          </form>
       </div>
   </div>
-                
-</body>
-</html>

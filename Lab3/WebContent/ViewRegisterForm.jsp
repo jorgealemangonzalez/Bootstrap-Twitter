@@ -28,10 +28,6 @@ else {
 	user = new BeanUser();
 }
 %> 
- 
-<body>
-
-
 <!--Form with header-->
 <div class="card">
 	<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
@@ -144,7 +140,3 @@ else {
     </form>
 </div>
 <!--/Form with header-->
-
-
-</body>
-</html>

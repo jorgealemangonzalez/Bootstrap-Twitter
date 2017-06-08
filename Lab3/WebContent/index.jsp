@@ -9,15 +9,18 @@
 <link rel="stylesheet" type="text/css" href="css/structure.css" />
 
 <!-- Bootstrap core CSS -->
-<link href="css/MDB_Free/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/MDB_Free/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
-<link href="css/MDB_Free/css/mdb.min.css" rel="stylesheet">
+<link href="css/MDB_Free/css/mdb.min.css" type="text/css" rel="stylesheet">
 <!-- Your custom styles (optional) -->
-<link href="css/MDB_Free/css/style.css" rel="stylesheet">
+<link href="css/MDB_Free/css/style.css" type="text/css" rel="stylesheet">
 
+</head>
+<body>
 <!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="css/MDB_Free/js/jquery-3.1.1.min.js"></script>
+<!--  jQuery for bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"> </script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="css/MDB_Free/js/tether.min.js"></script>
 <!-- Bootstrap core JavaScript -->
@@ -25,9 +28,6 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="css/MDB_Free/js/mdb.min.js"></script>
 
-
-</head>
-<body>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#content').load('UserInformationController');
