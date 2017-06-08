@@ -24,18 +24,25 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container center_container">
-	<div class="row">
-	    <div class="col-md-6 col-md-offset-3"> <!-- Offset to center it , col-widnow-size to select the size of the component depending on the window size -->
+<div class="container col-md-6 col-md-offset-3">
+	<div class="row card">
+	    <div class="card-block"> <!-- Offset to center it , col-widnow-size to select the size of the component depending on the window size -->
 	    	<form role="form" id="loginForm" action="" method="POST">
 				<fieldset>
-					<h2>Please Sign In</h2>
+					
+					<!--Header-->
+			        <div class="form-header  green">
+			            <h3><i class="fa fa-lock"></i> Login:</h3>
+			        </div>
+					
 					<hr class="colorgraph">
-					<div class="form-group">
-	                    <input type="text" name="username" id="username" value="${login.username}" class="form-control input-lg" placeholder="Username">
+					<div class="md-form">
+	                    <input type="text" name="username" id="username" value="${login.username}" class="form-control">
+						<label for="username" class="">Username</label>
 					</div>
-					<div class="form-group">
-	                    <input type="password" name="password" id="password" value="${login.password}" class="form-control input-lg" placeholder="Password">
+					<div class="md-form">
+	                    <input type="password" name="password" id="password" value="${login.password}" class="form-control">
+						<label for="password" class="">Password</label>
 					</div>
 					${ login.error }
 					<hr class="colorgraph">
