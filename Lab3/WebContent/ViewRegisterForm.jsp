@@ -31,7 +31,7 @@ else {
 }
 %> 
 <!--Form with header-->
-<div class="container">
+<div class="container col-md-6 col-md-offset-3">
 	<div class="card">
 		<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
 		
@@ -142,5 +142,5 @@ else {
 		    </div>
 	    </form>
 	</div>
-	</div>
+		</div>
 <!--/Form with header-->

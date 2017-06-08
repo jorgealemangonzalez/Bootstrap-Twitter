@@ -7,88 +7,79 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="container center_container">
-	<div class="row">
-		 <form class="form-horizontal">
-            <fieldset>
-                <!-- Address form -->
-                <h3>Register succes!</h3>
-                <br>
-                <h2>User Profile</h2>
-         
-                <div class="control-group">
-                    <label class="control-label">Name</label>
-                    <div class="controls">
-                        <input id="name" name="name" type="text" placeholder="Name"
-                        class="input-xlarge" value="${user.nickname}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Username</label>
-                    <div class="controls">
-                        <input id="username" name="username" type="text" placeholder="username"
-                        class="input-xlarge" value="${user.username}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Gender</label>
-                    <div class="controls">
-                        <input id="gender" name="gender" type="text" placeholder="gender"
-                        class="input-xlarge" value="${user.gender}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Email</label>
-                    <div class="controls">
-                        <input id="email" name="email" type="text" placeholder="email"
-                        class="input-xlarge" value="${user.email}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Password</label>
-                    <div class="controls">
-                        <input id="password" name="password" type="text" placeholder="password"
-                        class="input-xlarge" value="${user.password}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Nickname</label>
-                    <div class="controls">
-                        <input id="nickname" name="nickname" type="text" placeholder="nickname"
-                        class="input-xlarge" value="${user.nickname}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Birth</label>
-                    <div class="controls">
-                        <input id="birth" name="birth" type="text" placeholder="birth"
-                        class="input-xlarge" value="${user.dateofbirth}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Address</label>
-                    <div class="controls">
-                        <input id="address" name="address" type="text" placeholder="address"
-                        class="input-xlarge" value="${user.address}">
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Phone number</label>
-                    <div class="controls">
-                        <input id="number" name="number" type="text" placeholder="number"
-                        class="input-xlarge" value="${user.phonenumber}">
-                    </div>
-                </div>
-                
-              </fieldset>
-         </form>
-      </div>
-  </div>
+<% 
+BeanUser user = null;
+if (request.getAttribute("user")!=null) {
+	user = (BeanUser)request.getAttribute("user");
+}
+else {
+	user = new BeanUser();
+}
+%>
+
+<div class="container col-md-6 col-md-offset-3">
+	<div class="card">
+		<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
+	
+			<div class="card-block">
+				<!--Header-->
+		        <div class="form-header green">
+		            <h3><i class="fa fa-user"></i> User Information:</h3>
+		        </div>
+		        <!-- User information -->
+		        
+		        <!-- 
+   		        <div class="md-form">
+		           	<input class="form-control" type="text" name="surname" id="surname"  required pattern="[A-Za-z]{1,}"/>
+		            <label for="surname" id="puev"></label>
+		            <script>
+		            	document.getElementById('puev').innerHTML = '${user.username}'
+		            </script>
+		        </div>
+		        -->
+		        
+		        
+				<div class="md-form">
+		            <input type="text" id="name" placeholder="Name" class="form-control" value="${user.nickname}">
+		        </div>
+				<div class="md-form">
+		            <input type="text" id="username" placeholder="Username" class="form-control" value="${user.username}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="gender" placeholder="Gender" class="form-control" value="${user.gender}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="email" placeholder="Email" class="form-control" value="${user.email}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="passwords" placeholder="Password" class="form-control" value="${user.password}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="nickname" placeholder="Nickname" class="form-control" value="${user.nickname}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="dateofbirth" placeholder="Date of birth" class="form-control" value="${user.dateofbirth}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="address" placeholder="Address" class="form-control" value="${user.address}">
+		        </div>
+		        <div class="md-form">
+		            <input type="text" id="number" placeholder="Phone Number" class="form-control" value="${user.phonenumber}">
+		        </div>	
+		        <div class="text-center">
+		            <button class="btn btn-success waves-effect waves-light" type="submit" value="Enviar">Save</button>
+		            <hr>
+		        </div>	        	
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
