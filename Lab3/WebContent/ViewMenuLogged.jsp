@@ -3,56 +3,45 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".menu").click(function(event) {
+    $(".linkController").click(function(event) {
         $('#content').load('ContentController',{content: $(this).attr('id')});
         });
 });
 </script>
-<!-- 
-<table>
-<tr>
-<td> <a class="menu" id="LogoutController" href=#> Logout </a> </td>
-</tr>
-</table>
--->
-
-<div id="header" class="navbar-wrapper">
-    <div class="container-fluid">
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <div>
-	                    <a class="navbar-brand" href="#"><img alt="Logo" src="images/logo.jpg" height="42" width="42"/></a>
-              		</div>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tweets <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="TweetFile.jsp">All tweets</a></li>
-                                <li><a href="#">Only follow</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav pull-right">
-                        <li class=" dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My profile<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Public profile</a></li>
-                                <li><a href="#">Account settings</a></li>
-                            </ul>
-                        </li>
-                        <li class=""><a class="menu" id="LogoutController" href="#">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<!--Navbar-->
+<nav class="navbar navbar-toggleable-md navbar-dark bg-primary green">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapseEx12" aria-controls="collapseEx2" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img alt="Logo" src="images/logo.jpg" height="42" width="42"/></a>
+        <div class="collapse navbar-collapse" id="collapseEx12">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item">All tweets</a>
+                        <a class="dropdown-item">My followers tweets</a>
+                    </div>
+                </li>
+                <li class="nav-item btn-group">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item">My account</a>
+                        <a class="dropdown-item linkController" id="UserInformationController">My information</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link linkController" id="LogoutController">Log out</a>
+                </li>
+            </ul>
+            <form class="form-inline waves-effect waves-light">
+                <input class="form-control" type="text" placeholder="Search">
+            </form>
+        </div>
     </div>
-</div>
+</nav>
+<!--/.Navbar-->
+
 
 
