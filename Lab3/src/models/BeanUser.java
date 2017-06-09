@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -34,7 +36,16 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
+	private List<beanTweet> lisOfTweets = new ArrayList<beanTweet>();
 	
+	public List<beanTweet> getLisOfTweets() {
+		return lisOfTweets;
+	}
+
+	public void setLisOfTweets(List<beanTweet> lisOfTweets) {
+		this.lisOfTweets = lisOfTweets;
+	}
+
 	/*getters and setters*/
 	public String getName() {
 		return name;
@@ -57,8 +68,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setUsername(String username) throws SQLException {
-		String query = "SELECT name FROM login.taula where username='"+username+"'";
-		ResultSet rs = dao.executeSQL(query);
+		ResultSet rs = dao.getUserAndPass(this.username);
 		if (rs.next()) {//get first result
 			System.out.println("el username existe");
 			this.error[1]=1;
@@ -81,8 +91,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setEmail(String email) throws SQLException {
-		String query = "SELECT email FROM login.taula where email='"+email+"'";
-		ResultSet rs = dao.executeSQL(query);
+		ResultSet rs = dao.getUserAndPass(this.username);
 		if (rs.next()) {//get first result
 			System.out.println("el email existe");
 			this.error[0]=1;
@@ -148,8 +157,7 @@ public class BeanUser implements Serializable  {
 	
 	public boolean loadFromDatabase(String username){
 		try {		
-			String query = "SELECT * FROM login.taula where username='"+username+"'";
-			ResultSet rs = dao.executeSQL(query);
+			ResultSet rs = dao.getUserInfo(username);
 			if(rs.next()){
 				this.name = rs.getString("name");
 				this.surname = rs.getString("surname");
@@ -171,6 +179,22 @@ public class BeanUser implements Serializable  {
 			return false;
 			//e.printStackTrace();
 		}
+	}
+	
+	public boolean loadTweetsFromDB(String uername){
+		try {
+			ResultSet rs = dao.getTweetsFromUser(username);
+			while(rs.next()){
+				beanTweet tmp = new beanTweet();
+				//tmp.setDate(date);
+			}
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 	
 	private boolean hasValue(String val) {
