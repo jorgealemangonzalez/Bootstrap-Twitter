@@ -15,12 +15,29 @@ public class DAO {
 	}
 
 	// execute queries
-	public ResultSet executeSQL(String query) throws SQLException {
+	/*public ResultSet executeSQL(String query) throws SQLException {
 		return statement.executeQuery(query);
-	}
+	}*/
 	public int insertSQL(String query) throws SQLException{
 		return statement.executeUpdate(query);
 		
+	}
+	public ResultSet getFollowers(String username) throws SQLException {
+		String query = "SELECT followed FROM follow WHERE follower='"+username+"';";
+		return statement.executeQuery(query);
+	} 
+	public ResultSet getUserAndPass(String username) throws SQLException {
+		String query = "SELECT name,password FROM taula where username='"+username+"'";
+		return statement.executeQuery(query);
+	} 
+	
+	public ResultSet getUserInfo(String username) throws SQLException {
+		String query = "SELECT * FROM taula where username='"+username+"'";
+		return statement.executeQuery(query);
+	} 
+	public ResultSet getTweetsFromUser(String username) throws SQLException{
+		String query = "SELECT * FROM tweets WHERE username='"+username+"';"; 
+		return statement.executeQuery(query);
 	}
 
 	// TODO: code for updates for Assignments 2, 3 and 4.
