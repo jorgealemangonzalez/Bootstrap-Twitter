@@ -11,7 +11,7 @@ $(document).ready(function() {
 	$("#logout").click(function(event){
 		$.get("LogoutController", function(data, status){
 			if(data == "Logout done"){
-				$('#content').load('UserInformationController');
+				$('#content').load('ContentController');
 				$('#navigation').load('MenuController');
 			}else
 	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);

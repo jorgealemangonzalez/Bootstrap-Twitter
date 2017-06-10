@@ -33,7 +33,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#content').load('UserInformationController');
+	$('#content').load('ContentController');
 	$('#navigation').load('MenuController');
 });
 </script>

@@ -22,15 +22,12 @@ $(document).ready(function() {
                <a class="nav-link" id="LoginController">Log in <span class="sr-only">(current)</span></a>
            </li>
            <li class="nav-item">
-               <a class="nav-link" id="UserInformationController" >Log as Anonymous</a>
+               <a class="nav-link" id="ContentController" >Log as Anonymous</a>
            </li>
            <li class="nav-item">
                <a class="nav-link" id="RegisterController">Register</a>
            </li>
        </ul>
-       <form class="form-inline waves-effect waves-light">
-           <input class="form-control" type="text" placeholder="Search">
-       </form>
    </div>
 </nav>
 <!--/.Navbar-->

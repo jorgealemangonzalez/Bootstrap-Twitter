@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import models.BeanUser;
 
 /**
  * Servlet implementation class ContentController
@@ -29,9 +32,22 @@ public class ContentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String content = (String)request.getParameter("content");
-		System.out.println("ContentController, loading: " + content);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(content);
+		HttpSession session = request.getSession();
+		System.out.println("Session user: "+ session.getAttribute("username"));
+		RequestDispatcher dispatcher = null;
+		
+		BeanUser user = new BeanUser();
+		if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
+			
+			request.setAttribute("user",user);
+			
+			String params = "?userProfileUsername="+user.getUsername();
+			System.out.println(params);
+			dispatcher = request.getRequestDispatcher("/ProfileController"+params);
+		}else{
+			dispatcher = request.getRequestDispatcher("LoginController");
+		}
+		
 		dispatcher.forward(request, response);
 		
 	}

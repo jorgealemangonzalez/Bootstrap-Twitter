@@ -9,7 +9,7 @@ $(document).ready(function(){
     	submitHandler: function(form) {
     		$.post("LoginController",$("#loginForm").serialize())
     			.done(function(msg){
-    				$('#content').load('UserInformationController');
+    				$('#content').load('ContentController');
     				$('#navigation').load('MenuController');
     			})
     			.fail(function(xhr, status, error) {

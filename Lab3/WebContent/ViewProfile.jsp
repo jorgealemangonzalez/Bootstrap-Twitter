@@ -9,6 +9,14 @@ if (request.getAttribute("user")!=null) {
 else {
 	user = new BeanUser();
 }
+
+BeanUser userProfile = null;
+if (request.getAttribute("userProfile")!=null) {
+	userProfile = (BeanUser)request.getAttribute("userProfile");
+}
+else {
+	userProfile = new BeanUser();
+}
 %>
 
 <div class="container col-md-6 col-md-offset-3">
@@ -48,32 +56,32 @@ else {
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Nick</h5>
 			    </div>
-			    <p class="mb-1">${user.nickname}</p>
+			    <p class="mb-1">${userProfile.nickname}</p>
 			  </div>
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Name</h5>
 			    </div>
-			    <p class="mb-1">${user.name} ${user.surname}</p>
+			    <p class="mb-1">${userProfile.name} ${userProfile.surname}</p>
 			  </div>
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Email</h5>
 			    </div>
-			    <p class="mb-1">${user.email}</p>
+			    <p class="mb-1">${userProfile.email}</p>
 			  </div>
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Birth</h5>
 			    </div>
-			    <p class="mb-1">${user.dateofbirth}</p>
+			    <p class="mb-1">${userProfile.dateofbirth}</p>
 			  </div>
 			  
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Adress</h5>
 			    </div>
-			    <p class="mb-1">${user.address}</p>
+			    <p class="mb-1">${userProfile.address}</p>
 			  </div>
 			  
 		  </div>
