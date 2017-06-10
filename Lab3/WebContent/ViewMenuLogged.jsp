@@ -21,6 +21,7 @@ $(document).ready(function() {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item">All tweets</a>
                     <a class="dropdown-item">My followers tweets</a>
+                    <a class="dropdown-item linkController" id="MyTweetsController">My tweets</a>
                 </div>
             </li>
             <li class="nav-item btn-group">

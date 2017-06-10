@@ -42,6 +42,7 @@ public class BeanUser implements Serializable  {
 		return lisOfTweets;
 	}
 
+	
 	public void setLisOfTweets(List<beanTweet> lisOfTweets) {
 		this.lisOfTweets = lisOfTweets;
 	}
@@ -181,15 +182,28 @@ public class BeanUser implements Serializable  {
 		}
 	}
 	
-	public boolean loadTweetsFromDB(String uername){
+	public boolean loadTweetsFromDB(String user){
 		try {
-			ResultSet rs = dao.getTweetsFromUser(username);
+			int cont = 0;
+			ResultSet rs = dao.getTweetsFromUser(user);
 			while(rs.next()){
 				beanTweet tmp = new beanTweet();
-				//tmp.setDate(date);
+				tmp.setDate(rs.getString("date"));
+				tmp.setProf_image(rs.getString("profile_image"));
+				tmp.setTweet_id(rs.getInt("tweet_id"));
+				tmp.setTweet_text(rs.getString("tweet_text"));
+				tmp.setUsername(rs.getString("username"));
+				System.out.println("Tweet added to user "+username);
+				this.lisOfTweets.add(tmp);
+				cont++;
 			}
-			return true;
+			if(cont>0){
+				return true;
+			}else{
+				return false;
+			}
 		} catch (SQLException e) {
+			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

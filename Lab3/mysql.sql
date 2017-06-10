@@ -42,4 +42,5 @@ INSERT INTO follow VALUES ('guini','drako');
 
 INSERT INTO tweets VALUES
 ('1','first tweet of guini by db','09/06/2017','guini',NULL),
+('3','second tweet of guini by db','11/06/2017','guini',NULL),
 ('2','first tweet of drako by db','09/06/2017','drako',NULL);

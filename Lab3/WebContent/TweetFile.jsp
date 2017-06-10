@@ -7,16 +7,24 @@ $(document).ready(function() {
 	    $('#navigation').load('MenuController');
 });
 </script>
+<% 
+BeanUser user = null;
+if (request.getAttribute("user")!=null) {
+	user = (BeanUser)request.getAttribute("user");
+}
+else {
+	user = new BeanUser();
+}
+%>
 
-
-<wl:repeat id="repeat" count="4" >
-</wl:repeat>
 
 <div class="container col-md-6 col-md-offset-3">
 	<div class="row card">
 	    <div class="card-block" id ="repeat"> <!-- Offset to center it , col-widnow-size to select the size of the component depending on the window size -->
 			<div class="md-form">
-                   <input type="text" name="username" id="username" value="${login.username}" class="form-control">
+				<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { %>
+						<p><%=user.getLisOfTweets().get(i).getTweet_text() %> <p>
+                <% } %>
 			</div>
 		</div>
 	</div>
