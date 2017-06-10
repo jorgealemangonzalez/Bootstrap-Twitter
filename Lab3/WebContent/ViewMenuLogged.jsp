@@ -2,10 +2,21 @@
     pageEncoding="UTF-8" %>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    $(".linkController").click(function(event) {
-        $('#content').load('ContentController',{content: $(this).attr('id')});
-        });
+
+$(document).ready(function() {    
+    $("#myProfile").click(function(event){
+    	$('#content').load('PrefileController',{profile: ""});	//No profile means my profile
+    });
+    
+	$("#logout").click(function(event){
+		$.get("LogoutController", function(data, status){
+			if(data == "Logout done"){
+				$('#content').load('UserInformationController');
+				$('#navigation').load('MenuController');
+			}else
+	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
+	    });
+    });
 });
 </script>
 <!--Navbar-->
@@ -28,11 +39,11 @@ $(document).ready(function() {
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item">My account</a>
-                    <a class="dropdown-item linkController" id="UserInformationController">My information</a>
+                    <a class="dropdown-item" id="myProfile">My information</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link linkController" id="LogoutController">Log out</a>
+                <a class="nav-link linkController" id="logout">Log out</a>
             </li>
         </ul>
         <form class="form-inline waves-effect waves-light">

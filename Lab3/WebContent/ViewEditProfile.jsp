@@ -29,7 +29,7 @@ $(document).ready(function() {
 		        
 		        
 				<div class="md-form">
-		            <input type="text" id="name" placeholder="Name" class="form-control" value="${user.nickname}">
+		            <input type="text" id="name" placeholder="Name" class="form-control" value="${user.name}">
 		        </div>
 				<div class="md-form">
 		            <input type="text" id="username" placeholder="Username" class="form-control" value="${user.username}">

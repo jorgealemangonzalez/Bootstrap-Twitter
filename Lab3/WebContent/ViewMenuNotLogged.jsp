@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $(".nav-link").click(function(event) {
-        $('#content').load('ContentController',{content: $(this).attr('id')});
+        $('#content').load($(this).attr('id'));
         });
 });
 </script>

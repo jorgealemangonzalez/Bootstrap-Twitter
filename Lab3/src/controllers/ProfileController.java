@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import models.BeanUser;
+import mysql.DAO;
+
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class ProfileController
  */
-@WebServlet("/LogoutController")
-public class LogoutController extends HttpServlet {
+@WebServlet("/ProfileController")
+public class ProfileController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutController() {
+    public ProfileController(){
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +35,9 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession(false);
-		if (session!=null) session.invalidate();
-		
-		response.getWriter().print("Logout done");;
-		
+		RequestDispatcher dispatcher = null;
+		dispatcher = request.getRequestDispatcher("ViewProfile.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

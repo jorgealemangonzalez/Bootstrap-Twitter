@@ -36,3 +36,8 @@
 (TODO) Like/dislike a tweet and his comments
 
 (TODO) Retweet
+
+
+** ideas **
+
+https://bootsnipp.com/snippets/z4P39

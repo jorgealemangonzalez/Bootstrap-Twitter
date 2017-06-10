@@ -37,14 +37,14 @@ public class UserInformationController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			HttpSession session = request.getSession();
-			System.out.println("UserInformation"+ session.getAttribute("username"));
+			System.out.println("Session user: "+ session.getAttribute("username"));
 			RequestDispatcher dispatcher = null;
 			
 			BeanUser user = new BeanUser();
 			if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
 				
 				request.setAttribute("user",user);
-				dispatcher = request.getRequestDispatcher("ViewMyProfile.jsp");
+				dispatcher = request.getRequestDispatcher("ProfileController");
 			}else{
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}

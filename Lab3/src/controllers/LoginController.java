@@ -47,17 +47,16 @@ public class LoginController extends HttpServlet {
 		    	System.out.println("Login is complete");
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("username",login.getUsername());
-		    	RequestDispatcher dispatcher = request.getRequestDispatcher("UserInformationController");
-			    dispatcher.forward(request, response);
+		    	response.setStatus(200);
 			    
 		    }	
-			else {
-				if(login.getUsername().length() > 0)
-					login.error = "<div class=\"alert alert-danger\"><strong>Error!</strong>Username or password do not match</div>";
-			    request.setAttribute("login",login);
+			else if(login.getUsername().length() == 0){
+				System.out.println("View login");
+				request.setAttribute("login",login);
 			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
-			    dispatcher.forward(request, response);
-		    	
+			    dispatcher.forward(request, response);	
+		    } else {
+		    	response.setStatus(401);
 		    }
 		} catch (IllegalAccessException | InvocationTargetException | SQLException e) {
 			// TODO Auto-generated catch block

@@ -7,20 +7,22 @@
 $(document).ready(function(){
     $("#loginForm").validate({
     	submitHandler: function(form) {
-    		$('#content').load('LoginController',$("#loginForm").serialize());
+    		$.post("LoginController",$("#loginForm").serialize())
+    			.done(function(msg){
+    				$('#content').load('UserInformationController');
+    				$('#navigation').load('MenuController');
+    			})
+    			.fail(function(xhr, status, error) {
+    				$("#loginError").html("<div class=\"alert alert-danger\"><strong>Error!</strong>Username or password do not match</div>")
+    		    });
     }
     });
 });
 
 $(document).ready(function() {
     $("#ButtonRegister").click(function(event) {
-        $('#content').load('ContentController',{content: "RegisterController"});
-        });
-});
-
-$(document).ready(function() {
-    $.ajaxSetup({ cache: false }); // Avoids Internet Explorer caching!
-    $('#navigation').load('MenuController');
+        $('#content').load('RegisterController');
+    });
 });
 </script>
 
@@ -44,7 +46,7 @@ $(document).ready(function() {
 	                    <input type="password" name="password" id="password" value="${login.password}" class="form-control">
 						<label for="password" class="">Password</label>
 					</div>
-					${ login.error }
+					<div id="loginError"></div>
 					<hr class="colorgraph">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6"> <!-- Fixed size -->

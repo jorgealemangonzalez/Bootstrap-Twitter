@@ -8,6 +8,8 @@
 <title> Lab 3 template </title>
 <link rel="stylesheet" type="text/css" href="css/structure.css" />
 
+<!-- Font awesome icons -->
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 <!-- Bootstrap core CSS -->
 <link href="css/MDB_Free/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
@@ -15,8 +17,9 @@
 <!-- Material pretty design ( our modifications ) -->
 <link href="css/MDB_Free/css/addons_mdb.css" type="text/css" rel="stylesheet">
 
+
 </head>
-<body>
+<body style="background-color:rgb(245, 248, 250)">
 <!-- SCRIPTS -->
 <!--  jQuery for bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,48 +34,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#content').load('UserInformationController');
+	$('#navigation').load('MenuController');
 });
 </script>
 
-   <!-- Begin Wrapper -->
-   <div id="wrapper">
-   
-         <!-- Begin Header -->
-         
-		 <!-- End Header -->
-		 
-		 <!-- Begin Navigation -->
-         <div id="navigation">
-		 
-	     <jsp:include page="ViewMenuNotLogged.jsp" />
-			   
-		 </div>
-		 <!-- End Navigation -->
-		 
-         <!-- Begin Faux Columns -->
-		 <div id="faux">
-		 
-		       <!-- Begin Left Column -->
-		       <div id="leftcolumn">
-		 
-		       </div>
-		       <!-- End Left Column -->
-		 
-		       <!-- Begin Content Column -->
-		       <div id="content">
-		       
-		       </div>
-		       <!-- End Content Column -->
-			   
-			   <!-- Begin Right Column -->
-		       <div id="rightcolumn">
-		 
-		       </div>
-		       <!-- End Right Column -->
+<div id="navigation">
+	 			   
+</div>
+	
+<div id="content">
+	
+</div>
 
-         </div>	   
-		 
-   </div>
-   <!-- End Wrapper -->
 </body>
 </html>
