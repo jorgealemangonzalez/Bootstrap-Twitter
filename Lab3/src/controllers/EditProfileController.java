@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import models.BeanUser;
+import mysql.DAO;
 
 /**
- * Servlet implementation class ContentController
+ * Servlet implementation class EditProfileController
  */
-@WebServlet("/ContentController")
-public class ContentController extends HttpServlet {
+@WebServlet("/EditProfileController")
+public class EditProfileController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContentController() {
+    public EditProfileController(){
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +35,15 @@ public class ContentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		System.out.println("Session user: "+ session.getAttribute("username"));
+		System.out.println("holholholholholholholholholholholholholholholholholholholholholholhola");
 		RequestDispatcher dispatcher = null;
-		
+		HttpSession session = request.getSession();
 		BeanUser user = new BeanUser();
 		if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
 			request.setAttribute("user",user);
-			String params = "?userProfileUsername="+user.getUsername();
-			System.out.println(params);
-			dispatcher = request.getRequestDispatcher("/ProfileController"+params);
-		}else{
-			dispatcher = request.getRequestDispatcher("LoginController");
 		}
-		
+		dispatcher = request.getRequestDispatcher("ViewEditProfile.jsp");
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**

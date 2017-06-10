@@ -21,6 +21,7 @@
 </head>
 <body style="background-color:rgb(245, 248, 250)">
 <!-- SCRIPTS -->
+<script type="text/javascript" src="jsController.js"></script> 
 <!--  jQuery for bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"> </script>

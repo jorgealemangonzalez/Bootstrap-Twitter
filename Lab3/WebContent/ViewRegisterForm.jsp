@@ -2,8 +2,6 @@
     pageEncoding="UTF-8" import="models.BeanUser"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    
-<script type="text/javascript" src="jsController.js"></script>   
-   
 <script>
 $(document).ready(function(){
     $("#registerForm").validate({

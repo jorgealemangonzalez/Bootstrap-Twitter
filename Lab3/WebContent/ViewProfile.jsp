@@ -19,6 +19,15 @@ else {
 }
 %>
 
+<script>
+$(document).ready(function() {
+    $("#editProfile").click(function(event) {
+    	console.log("click")
+        $('#content').load('EditProfileController');
+    });
+});
+</script>
+
 <div class="container col-md-6 col-md-offset-3">
 	<div class="card testimonial-card">
 
@@ -29,11 +38,14 @@ else {
 		</div>
 		
 		
-		
-		<a title="follow" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card green"><i class="fa fa-plus"></i></a>
-		<!-- if followed
-		<a title="unfollow" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card red"><i class="fa fa-close "></i></a>
-		 -->
+		<% if(user.getUsername().equals(userProfile.getUsername())){ %>
+			<a title="follow" id="editProfile" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card green"><i class="fa fa-pencil"></i></a>
+		<% }else{ %>
+			<a title="follow" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card green"><i class="fa fa-plus"></i></a>
+			<!-- if followed
+			<a title="unfollow" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card red"><i class="fa fa-close "></i></a>
+			 -->
+		<% } %>
 		<div class="card-block">
 			<h4 class="card-title statics-resume">
 				<div class="resume-statics">
@@ -51,7 +63,7 @@ else {
 			</h4>
 			<hr>
 
-			<div class="list-group">
+			<div class="card-content list-group">
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
 			      <h5 class="mb-1">Nick</h5>
