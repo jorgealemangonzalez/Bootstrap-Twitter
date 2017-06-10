@@ -1,7 +1,5 @@
 * { padding: 0; margin: 0;}
 
-
-
 html,body{
 	height:100%;
 }
@@ -173,6 +171,14 @@ img:hover {
 }
 
 /*END TWEET CARACTERISTICS-------------------*/
+
+/* START USER PROFILE -------------------------*/
+
+.statics-resume{
+	
+}
+
+/* END USER PROFILE --------------------------- */
 
 
 

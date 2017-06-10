@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS login ;
 CREATE DATABASE login;
 USE login;
-CREATE TABLE IF NOT EXISTS taula (
+CREATE TABLE IF NOT EXISTS users (
     name CHAR(24) NOT NULL,
     surname CHAR(24) NOT NULL,
     username CHAR(24) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS follow(
     KEY(followed,follower)
 );
 
-INSERT INTO taula(name,surname,username,gender,email,password) VALUES
+INSERT INTO users(name,surname,username,gender,email,password) VALUES
 ('Arnau','Guinart','guini','Male','guinartarnau@gmail.com','pass1'),
 ('Jorge','Aleman','drako','Female','jale@gm.com','asda1@');
 
