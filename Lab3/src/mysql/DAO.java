@@ -27,12 +27,12 @@ public class DAO {
 		return statement.executeQuery(query);
 	} 
 	public ResultSet getUserAndPass(String username) throws SQLException {
-		String query = "SELECT name,password FROM taula where username='"+username+"'";
+		String query = "SELECT name,password FROM users where username='"+username+"'";
 		return statement.executeQuery(query);
 	} 
 	
 	public ResultSet getUserInfo(String username) throws SQLException {
-		String query = "SELECT * FROM taula where username='"+username+"'";
+		String query = "SELECT * FROM users where username='"+username+"'";
 		return statement.executeQuery(query);
 	} 
 	public ResultSet getTweetsFromUser(String username) throws SQLException{

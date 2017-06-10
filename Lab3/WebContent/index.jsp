@@ -12,8 +12,8 @@
 <link href="css/MDB_Free/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="css/MDB_Free/css/mdb.min.css" type="text/css" rel="stylesheet">
-<!-- Your custom styles (optional) -->
-<link href="css/MDB_Free/css/style.css" type="text/css" rel="stylesheet">
+<!-- Material pretty design ( our modifications ) -->
+<link href="css/MDB_Free/css/addons_mdb.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>

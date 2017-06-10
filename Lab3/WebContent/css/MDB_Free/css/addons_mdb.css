@@ -1,0 +1,82 @@
+.card-up{
+	background-color:rgb(0, 105, 92);
+	box-sizing:border-box;
+	color:rgb(41, 43, 44);
+	display:block;
+	font-family:Roboto, sans-serif;
+	font-size:15.5px;
+	font-weight:normal;
+	height:120px;
+	line-height:23.25px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	text-size-adjust:100%;
+	-webkit-box-direction:normal;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+.avatar{
+	background-clip:border-box;
+	background-color:rgb(255, 255, 255);
+	background-image:none;
+	background-origin:padding-box;
+	border-bottom-color:rgb(255, 255, 255);
+	border-bottom-left-radius:50%;
+	border-bottom-right-radius:50%;
+	border-bottom-style:solid;
+	border-bottom-width:5px;
+	border-image-source:none;
+	border-image-width:1;
+	border-left-color:rgb(255, 255, 255);
+	border-left-style:solid;
+	border-left-width:5px;
+	border-right-color:rgb(255, 255, 255);
+	border-right-style:solid;
+	border-right-width:5px;
+	border-top-color:rgb(255, 255, 255);
+	border-top-left-radius:50%;
+	border-top-right-radius:50%;
+	border-top-style:solid;
+	border-top-width:5px;
+	box-sizing:border-box;
+	color:rgb(41, 43, 44);
+	display:block;
+	font-family:Roboto, sans-serif;
+	font-size:15.5px;
+	font-weight:normal;
+	height:120px;
+	line-height:23.25px;
+	margin-bottom:0px;
+	margin-left:calc(50% - 55px);
+	margin-right:50%;
+	margin-top:-65px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	text-size-adjust:100%;
+	width:120px;
+	-webkit-box-direction:normal;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0)
+}
+.avatar img{
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-bottom-style:none;
+	border-left-style:none;
+	border-right-style:none;
+	border-top-left-radius:50%;
+	border-top-right-radius:50%;
+	border-top-style:none;
+	box-sizing:border-box;
+	color:rgb(41, 43, 44);
+	display:block;
+	font-family:Roboto, sans-serif;
+	font-size:15.5px;
+	font-weight:normal;
+	height:110px;
+	line-height:23.25px;
+	max-width:100%;
+	text-size-adjust:100%;
+	vertical-align:middle;
+	width:110px;
+	-webkit-box-direction:normal;
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}

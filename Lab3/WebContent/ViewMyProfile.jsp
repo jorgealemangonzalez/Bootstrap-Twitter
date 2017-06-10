@@ -18,60 +18,34 @@ else {
 %>
 
 <div class="container col-md-6 col-md-offset-3">
-	<div class="card">
-		<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
-	
-			<div class="card-block">
-				<!--Header-->
-		        <div class="form-header green">
-		            <h3><i class="fa fa-user"></i> User Information:</h3>
-		        </div>
-		        <!-- User information -->
-		        
-		        <!-- 
-   		        <div class="md-form">
-		           	<input class="form-control" type="text" name="surname" id="surname"  required pattern="[A-Za-z]{1,}"/>
-		            <label for="surname" id="puev"></label>
-		            <script>
-		            	document.getElementById('puev').innerHTML = '${user.username}'
-		            </script>
-		        </div>
-		        -->
-		        
-		        
-				<div class="md-form">
-		            <input type="text" id="name" placeholder="Name" class="form-control" value="${user.nickname}">
-		        </div>
-				<div class="md-form">
-		            <input type="text" id="username" placeholder="Username" class="form-control" value="${user.username}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="gender" placeholder="Gender" class="form-control" value="${user.gender}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="email" placeholder="Email" class="form-control" value="${user.email}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="passwords" placeholder="Password" class="form-control" value="${user.password}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="nickname" placeholder="Nickname" class="form-control" value="${user.nickname}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="dateofbirth" placeholder="Date of birth" class="form-control" value="${user.dateofbirth}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="address" placeholder="Address" class="form-control" value="${user.address}">
-		        </div>
-		        <div class="md-form">
-		            <input type="text" id="number" placeholder="Phone Number" class="form-control" value="${user.phonenumber}">
-		        </div>	
-		        <div class="text-center">
-		            <button class="btn btn-success waves-effect waves-light" type="submit" value="Enviar">Save</button>
-		            <hr>
-		        </div>	        	
-			</div>
-		</form>
+	<div class="card testimonial-card">
+
+		<div class="card-up default-color-dark">
+		</div>
+
+		<div class="avatar"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%288%29.jpg" class="rounded-circle img-responsive">
+		</div>
+
+		<div class="card-block">
+			<h4 class="card-title statics-resume">
+				<div class="tweets-resume">
+					<h1>Tweets</h1>
+					<p> 23 </p>
+				</div>
+				<div class="tweets-resume">
+					<h1>Tweets</h1>
+					<p> 23 </p>
+				</div>
+				<div class="tweets-resume">
+					<h1>Tweets</h1>
+					<p> 23 </p>
+				</div>
+			</h4>
+			<hr>
+
+			<p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>
+
+		</div>
 	</div>
 </div>
 
