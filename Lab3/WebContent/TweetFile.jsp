@@ -19,13 +19,27 @@ else {
 
 
 <div class="container col-md-6 col-md-offset-3">
-	<div class="row card">
-	    <div class="card-block" id ="repeat"> <!-- Offset to center it , col-widnow-size to select the size of the component depending on the window size -->
-			<div class="md-form">
-				<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { %>
-						<p><%=user.getLisOfTweets().get(i).getTweet_text() %> <p>
-                <% } %>
+	<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { %>
+		<div class="card green tweet">
+			<div class="row card">
+			    <div class="card-block" >
+			    	 <!--Title-->
+			        <h4 class="card-title"><%=user.getLisOfTweets().get(i).getUsername() %></h4>
+			        <hr>
+			        <!--Text-->
+			        <p class="card-text"><%=user.getLisOfTweets().get(i).getTweet_text() %></p>
+				</div>
 			</div>
+			 <!-- Card footer -->
+            <div class="card-data">
+                <ul>
+                <!-- NO SE VEN LOS PUTOOOOOOS ICONOS -->
+                    <li><i class="fa fa-clock-o" ></i></li>
+                    <li><i class="fa fa-twitter"> <%=user.getLisOfTweets().get(i).getDate() %></i></li>
+                   	<li><i class="fa fa-thumbs-up" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+            <!-- Card footer -->
 		</div>
-	</div>
+	<% } %>
 </div>

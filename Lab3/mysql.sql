@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS tweets(
     tweet_id INT(4) unsigned NOT NULL,
     tweet_text VARCHAR(120) NOT NULL,
-    date    VARCHAR(24)  NOT NULL,
+    date    DATE  NOT NULL,
     username CHAR(24) NOT NULL,
     profile_image VARCHAR(120) DEFAULT NULL,
     PRIMARY KEY(tweet_id),
@@ -41,6 +41,7 @@ INSERT INTO users(name,surname,username,gender,email,password) VALUES
 INSERT INTO follow VALUES ('guini','drako');
 
 INSERT INTO tweets VALUES
-('1','first tweet of guini by db','09/06/2017','guini',NULL),
-('3','second tweet of guini by db','11/06/2017','guini',NULL),
-('2','first tweet of drako by db','09/06/2017','drako',NULL);
+('1','first tweet of guini by db','2017-06-08','guini',NULL),
+('3','second tweet of guini by db','2017-06-09','guini',NULL),
+('4','third tweet of guini by db','2017-06-10','guini',NULL),
+('2','first tweet of drako by db','2017-06-08','drako',NULL);

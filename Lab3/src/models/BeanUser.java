@@ -193,7 +193,6 @@ public class BeanUser implements Serializable  {
 				tmp.setTweet_id(rs.getInt("tweet_id"));
 				tmp.setTweet_text(rs.getString("tweet_text"));
 				tmp.setUsername(rs.getString("username"));
-				System.out.println("Tweet added to user "+username);
 				this.lisOfTweets.add(tmp);
 				cont++;
 			}
