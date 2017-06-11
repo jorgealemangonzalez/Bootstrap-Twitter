@@ -36,7 +36,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	} 
 	public ResultSet getTweetsFromUser(String username) throws SQLException{
-		String query = "SELECT * FROM tweets WHERE username='"+username+"';"; 
+		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY date DESC;"; 
+		return statement.executeQuery(query);
+	}
+	public ResultSet getTweets() throws SQLException{
+		String query = "SELECT * FROM tweets ORDER BY date DESC;"; 
 		return statement.executeQuery(query);
 	}
 

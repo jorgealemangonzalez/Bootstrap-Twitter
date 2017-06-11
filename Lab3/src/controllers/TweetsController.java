@@ -12,21 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import models.BeanUser;
+import models.beanTweet;
 import mysql.DAO;
 
 /**
  * Servlet implementation class UserInformationController
  */
-@WebServlet("/MyTweetsController")
+@WebServlet("/TweetsController")
 
-public class MyTweetsController extends HttpServlet{
+public class TweetsController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyTweetsController(){
+    public TweetsController(){
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,14 +37,13 @@ public class MyTweetsController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			HttpSession session = request.getSession();
-			System.out.println("My Tweets of "+ session.getAttribute("username"));
+			System.out.println("All Tweets of ");
 			RequestDispatcher dispatcher = null;
 			
-			BeanUser user = new BeanUser();
-			if(session.getAttribute("username") != null && user.loadUserTweetsFromDB((String) session.getAttribute("username"))){
+			beanTweet bTweet = new beanTweet();
+			if(session.getAttribute("username") != null && (!bTweet.loadAllTweetsFromDB().isEmpty()) ){
 				
-				request.setAttribute("user",user);
-				dispatcher = request.getRequestDispatcher("TweetFile.jsp");
+				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
 			}else{
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}

@@ -5,7 +5,15 @@
 
 $(document).ready(function() {    
     $("#myProfile").click(function(event){
-    	$('#content').load('PrefileController',{profile: ""});	//No profile means my profile
+    	$('#content').load('EditProfileController',{profile: ""});	//No profile means my profile
+    });
+    
+    $("#MyTweetsController").click(function(event){
+    	$('#content').load('MyTweetsController',{profile: ""});	//No profile means my profile
+    });
+    
+    $("#allTweetsController").click(function(event){
+    	$('#content').load('TweetsController',{profile: ""});	//No profile means my profile
     });
     
 	$("#logout").click(function(event){
@@ -30,7 +38,7 @@ $(document).ready(function() {
             <li class="nav-item btn-group">
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <a class="dropdown-item">All tweets</a>
+                    <a class="dropdown-item" id="allTweetsController">All tweets</a>
                     <a class="dropdown-item">My followers tweets</a>
                     <a class="dropdown-item linkController" id="MyTweetsController">My tweets</a>
                 </div>
