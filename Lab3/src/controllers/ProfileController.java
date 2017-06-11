@@ -49,7 +49,7 @@ public class ProfileController extends HttpServlet{
 		}else{
 			System.out.println("Username param is mandatory");
 		}
-		dispatcher = request.getRequestDispatcher("ViewProfile.jsp");
+		dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
 		dispatcher.forward(request, response);
 	}
 
