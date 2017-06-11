@@ -183,6 +183,7 @@ public class BeanUser implements Serializable  {
 	}
 	
 	public boolean loadUserTweetsFromDB(String user){
+		this.lisOfTweets.clear();
 		try {
 			int cont = 0;
 			ResultSet rs = dao.getTweetsFromUser(user);
