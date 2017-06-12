@@ -16,14 +16,20 @@ CREATE TABLE IF NOT EXISTS users (
     KEY (email)
 );
 
+CREATE TABLE IF NOT EXISTS likeTweet(
+	id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    tweet_id INT(10) unsigned NOT NULL,
+    PRIMARY KEY(id),
+    foreign key(tweet_id) references tweets(id)
+);
+
 CREATE TABLE IF NOT EXISTS tweets(
-    tweet_id INT(4) unsigned NOT NULL,
+    id INT(10) unsigned NOT NULL AUTO_INCREMENT,
     tweet_text VARCHAR(120) NOT NULL,
     date    DATE  NOT NULL,
     username CHAR(24) NOT NULL,
-    profile_image VARCHAR(120) DEFAULT NULL,
     PRIMARY KEY(tweet_id),
-    KEY(username),
+    FOREIGN KEY(username) REFERENCES users(username),
     KEY(date)
 );
 
@@ -31,7 +37,8 @@ CREATE TABLE IF NOT EXISTS follow(
     follower CHAR(24) NOT NULL,
     followed CHAR(24) NOT NULL,
     PRIMARY KEY(follower,followed),
-    KEY(followed,follower)
+    FOREIGN KEY(followed) REFERENCES users(username),
+    FOREIGN KEY(follower) REFERENCES users(username)
 );
 
 INSERT INTO users(name,surname,username,gender,email,password) VALUES
@@ -40,8 +47,8 @@ INSERT INTO users(name,surname,username,gender,email,password) VALUES
 
 INSERT INTO follow VALUES ('guini','drako');
 
-INSERT INTO tweets VALUES
-('1','first tweet of guini by db','2017-06-08','guini',NULL),
-('3','second tweet of guini by db','2017-06-09','guini',NULL),
-('4','third tweet of guini by db','2017-06-10','guini',NULL),
-('2','first tweet of drako by db','2017-06-08','drako',NULL);
+INSERT INTO tweets(tweet_text, date,username) VALUES
+('first tweet of guini by db','2017-06-08','drako'),
+('second tweet of guini by db','2017-06-09','drako'),
+('third tweet of guini by db','2017-06-10','drako'),
+('first tweet of drako by db','2017-06-08','drako');

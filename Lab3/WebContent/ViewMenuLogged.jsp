@@ -9,11 +9,11 @@ $(document).ready(function() {
     });
     
     $("#MyTweetsController").click(function(event){
-    	$('#content').load('MyTweetsController',{profile: ""});	//No profile means my profile
+    	$('#content').load('MyTweetsController');	
     });
     
     $("#allTweetsController").click(function(event){
-    	$('#content').load('TweetsController',{profile: ""});	//No profile means my profile
+    	$('#content').load('TweetsController');	
     });
     
 	$("#logout").click(function(event){
@@ -25,6 +25,10 @@ $(document).ready(function() {
 	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
 	    });
     });
+	$("#newTweet").click(function(event){
+	  	$('#content').load('TweetPublisherController');	
+	  });
+	
 });
 </script>
 <!--Navbar-->
@@ -53,6 +57,14 @@ $(document).ready(function() {
             <li class="nav-item">
                 <a class="nav-link linkController" id="logout">Log out</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+        	<li class="nav-item">
+        		<a class="nav-link waves-effect waves-light">
+        			<i class="fa fa-edit" id="newTweet">Publish Tweet</i>
+        		</a>
+        	</li>
+        
         </ul>
         <form class="form-inline waves-effect waves-light">
             <input class="form-control" type="text" placeholder="Search">

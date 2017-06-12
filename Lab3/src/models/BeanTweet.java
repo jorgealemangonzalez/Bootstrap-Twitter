@@ -7,8 +7,8 @@ import java.util.List;
 
 import mysql.DAO;
 
-public class beanTweet {
-	public beanTweet(){
+public class BeanTweet {
+	public BeanTweet(){
 		try {
 			dao = new DAO();	//Our interface to retrieve data fron DB
 		} catch (Exception e) {
@@ -16,18 +16,17 @@ public class beanTweet {
 		}
 	}
 	
-	private int tweet_id;
+	private int id;
 	private String tweet_text="";
 	private String date="";
 	private String username ="";
-	private String prof_image ="";
 	private static DAO dao;
 	
-	public int getTweet_id() {
-		return tweet_id;
+	public int getId() {
+		return id;
 	}
-	public void setTweet_id(int tweet_id) {
-		this.tweet_id = tweet_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTweet_text() {
 		return tweet_text;
@@ -47,23 +46,16 @@ public class beanTweet {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getProf_image() {
-		return prof_image;
-	}
-	public void setProf_image(String prof_image) {
-		this.prof_image = prof_image;
-	}
 	
 
-	public List<beanTweet> loadAllTweetsFromDB(){
-		List<beanTweet> tmp = new ArrayList<beanTweet>();
+	public List<BeanTweet> loadAllTweetsFromDB(){
+		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 		try {
 			ResultSet rs = dao.getTweets();
 			while(rs.next()){
-				beanTweet tmpT = new beanTweet();
+				BeanTweet tmpT = new BeanTweet();
 				tmpT.setDate(rs.getString("date"));
-				tmpT.setProf_image(rs.getString("profile_image"));
-				tmpT.setTweet_id(rs.getInt("tweet_id"));
+				tmpT.setId(rs.getInt("id"));
 				tmpT.setTweet_text(rs.getString("tweet_text"));
 				tmpT.setUsername(rs.getString("username"));
 				tmp.add(tmpT);
@@ -76,4 +68,13 @@ public class beanTweet {
 		return tmp;
 	}
 	
+	public boolean publish(){
+		//TODO Returns true if publish successful
+		try{
+			dao.publishTweet(this);
+			return true;
+		}catch(SQLException e){
+			return false;
+		}
+	}
 }

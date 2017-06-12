@@ -12,21 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import models.BeanTweet;
+import models.beanTweet;
 import mysql.DAO;
 
 /**
  * Servlet implementation class UserInformationController
  */
-@WebServlet("/TweetsController")
+@WebServlet("/TweetPublisherController")
 
-public class TweetsController extends HttpServlet{
+public class TweetPublisherController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TweetsController(){
+    public TweetPublisherController(){
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class TweetsController extends HttpServlet{
 			System.out.println("All Tweets of ");
 			RequestDispatcher dispatcher = null;
 			
-			BeanTweet bTweet = new BeanTweet();
+			beanTweet bTweet = new beanTweet();
 			if(session.getAttribute("username") != null && (!bTweet.loadAllTweetsFromDB().isEmpty()) ){
 				
 				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
