@@ -16,21 +16,23 @@ CREATE TABLE IF NOT EXISTS users (
     KEY (email)
 );
 
-CREATE TABLE IF NOT EXISTS likeTweet(
-	id INT(10) unsigned NOT NULL AUTO_INCREMENT,
-    tweet_id INT(10) unsigned NOT NULL,
-    PRIMARY KEY(id),
-    foreign key(tweet_id) references tweets(id)
-);
+
 
 CREATE TABLE IF NOT EXISTS tweets(
     id INT(10) unsigned NOT NULL AUTO_INCREMENT,
     tweet_text VARCHAR(120) NOT NULL,
     date    DATE  NOT NULL,
     username CHAR(24) NOT NULL,
-    PRIMARY KEY(tweet_id),
+    PRIMARY KEY(id),
     FOREIGN KEY(username) REFERENCES users(username),
     KEY(date)
+);
+
+CREATE TABLE IF NOT EXISTS likeTweet(
+	id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    tweet_id INT(10) unsigned NOT NULL,
+    PRIMARY KEY(id),
+    foreign key(tweet_id) references tweets(id)
 );
 
 CREATE TABLE IF NOT EXISTS follow(
