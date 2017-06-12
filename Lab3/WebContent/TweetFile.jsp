@@ -18,6 +18,8 @@ else {
 %>
 
 
+
+<button type="button" class="btn btn-primary pull-left"><i class="fa fa-twitter "></i> New Tweet</button>
 <div class="container col-md-6 col-md-offset-3">
 	<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { %>
 		<div class="card green tweet">
@@ -34,8 +36,7 @@ else {
             <div class="card-data">
                 <ul>
                 <!-- NO SE VEN LOS PUTOOOOOOS ICONOS -->
-                    <li><i class="fa fa-clock-o" ></i></li>
-                    <li><i class="fa fa-twitter"> <%=user.getLisOfTweets().get(i).getDate() %></i></li>
+                    <li><i class="fa fa-clock-o" ><%=user.getLisOfTweets().get(i).getDate() %></i></li>
                    	<li><i class="fa fa-thumbs-up" aria-hidden="true"></i></li>
                 </ul>
             </div>
