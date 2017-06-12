@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="models.BeanUser" %>
+    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet" %>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -16,27 +16,32 @@ else {
 	user = new BeanUser();
 }
 %>
+<<script type="text/javascript">
+$(".like").click(function(event){
 
+});
+</script>
 
 <div class="container col-md-6 col-md-offset-3">
-	<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { %>
+	<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { 
+		BeanTweet t = user.getLisOfTweets().get(i);
+	%>
 		<div class="card green tweet">
 			<div class="row card">
 			    <div class="card-block" >
 			    	 <!--Title-->
-			        <h4 class="card-title"><%=user.getLisOfTweets().get(i).getUsername() %></h4>
+			        <h4 class="card-title"><%=t.getUsername() %></h4>
 			        <hr>
 			        <!--Text-->
-			        <p class="card-text"><%=user.getLisOfTweets().get(i).getTweet_text() %></p>
+			        <p class="card-text"><%=t.getTweet_text() %></p>
 				</div>
 			</div>
 			 <!-- Card footer -->
             <div class="card-data">
                 <ul>
-                <!-- NO SE VEN LOS PUTOOOOOOS ICONOS -->
                     <li><i class="fa fa-clock-o" ></i></li>
-                    <li><i class="fa fa-twitter"> <%=user.getLisOfTweets().get(i).getDate() %></i></li>
-                   	<li><i class="fa fa-thumbs-up" aria-hidden="true"></i></li>
+                    <%=t.getDate() %></i></li>
+                   	<li><i class="fa fa-thumbs-up like" id="<%=t.getId() %>" aria-hidden="true"></i></li>
                 </ul>
             </div>
             <!-- Card footer -->

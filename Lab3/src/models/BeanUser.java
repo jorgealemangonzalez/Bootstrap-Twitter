@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,14 +38,14 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
-	private List<beanTweet> lisOfTweets = new ArrayList<beanTweet>();
+	private List<BeanTweet> lisOfTweets = new ArrayList<BeanTweet>();
 	
-	public List<beanTweet> getLisOfTweets() {
+	public List<BeanTweet> getLisOfTweets() {
 		return lisOfTweets;
 	}
 
 	
-	public void setLisOfTweets(List<beanTweet> lisOfTweets) {
+	public void setLisOfTweets(List<BeanTweet> lisOfTweets) {
 		this.lisOfTweets = lisOfTweets;
 	}
 
@@ -188,10 +190,9 @@ public class BeanUser implements Serializable  {
 			int cont = 0;
 			ResultSet rs = dao.getTweetsFromUser(user);
 			while(rs.next()){
-				beanTweet tmp = new beanTweet();
+				BeanTweet tmp = new BeanTweet();
 				tmp.setDate(rs.getString("date"));
-				tmp.setProf_image(rs.getString("profile_image"));
-				tmp.setTweet_id(rs.getInt("tweet_id"));
+				tmp.setId(rs.getInt("id"));
 				tmp.setTweet_text(rs.getString("tweet_text"));
 				tmp.setUsername(rs.getString("username"));
 				this.lisOfTweets.add(tmp);
@@ -221,5 +222,19 @@ public class BeanUser implements Serializable  {
 
 	public void setError(int[] error) {
 		this.error = error;
+	}
+	
+	public void publishTweet(String text){
+		BeanTweet bt = new BeanTweet();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		bt.setDate(dateFormat.format(date));
+		bt.setTweet_text(text);
+		bt.setUsername(this.username);
+		if(bt.publish())
+			System.out.println("Publish tweet successfull");
+		else
+			System.out.println("Publish tweet UNSUCCESSFULL");
+		
 	}
 }

@@ -57,8 +57,30 @@ public class MyTweetsController extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action = (String)request.getParameter("action");
+		int status = 200;
+		String printResponse = "";
+		if(action.equals("likeTweet")){
+			HttpSession session = request.getSession();
+			String username = (String) session.getAttribute("username");
+			//TODO sacar parametros de la request y mandar a DB
+			if(username != null){
+				BeanUser user = new BeanUser();
+				user.loadFromDatabase(username);
+				
+			}else{
+				printResponse = "You must be logged in to publish tweet";
+				status = 401;
+			}
+		}else if(action.equals("publishTweet")){
+			
+		}else{
+			printResponse = "You must specify the action (likeTweet,publishTweet)";
+			status = 400;
+		}
+		if(printResponse != "")
+			response.getWriter().print(printResponse);
+		response.setStatus(status);
 	}
 
 }

@@ -2,6 +2,8 @@ package mysql;
 
 import java.sql.*;
 
+import models.BeanTweet;
+
 public class DAO {
 	private Connection connection;
 	private Statement statement;
@@ -43,7 +45,13 @@ public class DAO {
 		String query = "SELECT * FROM tweets ORDER BY date DESC;"; 
 		return statement.executeQuery(query);
 	}
-
+	
+	public ResultSet publishTweet(BeanTweet bt) throws SQLException{
+		String query = "INSERT INTO tweets(tweet_text, date,username) VALUES ("+bt.getTweet_text()+","+bt.getDate()+","+bt.getUsername()+");";
+		return statement.executeQuery(query);
+		
+	}
+	
 	// TODO: code for updates for Assignments 2, 3 and 4.
 	public void disconnectBD() throws SQLException {
 		statement.close();
