@@ -40,7 +40,8 @@ public class TweetPublisherController extends HttpServlet{
 			RequestDispatcher dispatcher = null;
 			
 			BeanTweet bTweet = new BeanTweet();
-			if(session.getAttribute("username") != null  ){
+
+			if(session.getAttribute("username") != null && (!bTweet.loadAllTweetsFromDB().isEmpty()) ){	//TODO controler si es vacío desde frontend mostrando algo , no desde aqui
 				
 				dispatcher = request.getRequestDispatcher("PublishTweet.jsp");
 			}else{

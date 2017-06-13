@@ -237,4 +237,23 @@ public class BeanUser implements Serializable  {
 			System.out.println("Publish tweet UNSUCCESSFULL");
 		
 	}
+	
+	public void create(){
+		//Creates the user in the database
+		try {
+			dao.createUser(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void update(){
+		try {
+			dao.updateUser(this);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

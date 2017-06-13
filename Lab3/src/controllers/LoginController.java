@@ -56,6 +56,7 @@ public class LoginController extends HttpServlet {
 			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			    dispatcher.forward(request, response);	
 		    } else {
+		    	System.out.println("Login not complete and username set");
 		    	response.setStatus(401);
 		    }
 		} catch (IllegalAccessException | InvocationTargetException | SQLException e) {
