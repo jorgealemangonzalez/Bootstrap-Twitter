@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="models.beanTweet , java.util.List" %>
+    pageEncoding="ISO-8859-1" import="models.BeanTweet , java.util.List" %>
 <script type="text/javascript">
 $(document).ready(function() {
 	    $.ajaxSetup({ cache: false }); // Avoids Internet Explorer caching!
@@ -7,12 +7,12 @@ $(document).ready(function() {
 });
 </script>
 <% 
-beanTweet bTweet = new beanTweet();
+BeanTweet bTweet = new BeanTweet();
 %>
 
 
 <div class="container col-md-6 col-md-offset-3">
-	<% List<beanTweet> list = bTweet.loadAllTweetsFromDB();
+	<% List<BeanTweet> list = bTweet.loadAllTweetsFromDB();
 		for(int i = 0 ; i < list.size() ; i++) { %>
 		<div class="card green tweet">
 			<div class="row card">

@@ -184,11 +184,11 @@ public class BeanUser implements Serializable  {
 		}
 	}
 	
-	public boolean loadUserTweetsFromDB(String user){
+	public boolean loadUserTweetsFromDB(){
 		this.lisOfTweets.clear();
 		try {
 			int cont = 0;
-			ResultSet rs = dao.getTweetsFromUser(user);
+			ResultSet rs = dao.getTweetsFromUser(this.username);
 			while(rs.next()){
 				BeanTweet tmp = new BeanTweet();
 				tmp.setDate(rs.getString("date"));

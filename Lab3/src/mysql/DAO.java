@@ -1,6 +1,7 @@
 package mysql;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 import models.BeanTweet;
 
@@ -38,17 +39,20 @@ public class DAO {
 		return statement.executeQuery(query);
 	} 
 	public ResultSet getTweetsFromUser(String username) throws SQLException{
-		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY date DESC;"; 
+		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY id DESC;"; 
 		return statement.executeQuery(query);
 	}
 	public ResultSet getTweets() throws SQLException{
-		String query = "SELECT * FROM tweets ORDER BY date DESC;"; 
+		String query = "SELECT * FROM tweets ORDER BY id DESC;"; 
 		return statement.executeQuery(query);
 	}
 	
-	public ResultSet publishTweet(BeanTweet bt) throws SQLException{
-		String query = "INSERT INTO tweets(tweet_text, date,username) VALUES ("+bt.getTweet_text()+","+bt.getDate()+","+bt.getUsername()+");";
-		return statement.executeQuery(query);
+	public int publishTweet(BeanTweet bt) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO tweets(tweet_text, date,username) VALUES (?,?,?)");
+		ps.setString(1, bt.getTweet_text());
+		ps.setString(3, bt.getUsername());
+		ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+		return ps.executeUpdate();
 		
 	}
 	

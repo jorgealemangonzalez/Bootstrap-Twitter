@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import models.BeanTweet;
 import models.BeanUser;
 import mysql.DAO;
 
@@ -41,10 +42,10 @@ public class MyTweetsController extends HttpServlet{
 			RequestDispatcher dispatcher = null;
 			
 			BeanUser user = new BeanUser();
-			if(session.getAttribute("username") != null && user.loadUserTweetsFromDB((String) session.getAttribute("username"))){
+			if(session.getAttribute("username") != null ){
 				
 				request.setAttribute("user",user);
-				dispatcher = request.getRequestDispatcher("TweetFile.jsp");
+				dispatcher = request.getRequestDispatcher("PublishTweet.jsp");
 			}else{
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}
@@ -58,21 +59,53 @@ public class MyTweetsController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = (String)request.getParameter("action");
+		System.out.println("doPost of mytweets");
 		int status = 200;
 		String printResponse = "";
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+
 		if(action.equals("likeTweet")){
-			HttpSession session = request.getSession();
-			String username = (String) session.getAttribute("username");
 			//TODO sacar parametros de la request y mandar a DB
 			if(username != null){
 				BeanUser user = new BeanUser();
 				user.loadFromDatabase(username);
 				
 			}else{
-				printResponse = "You must be logged in to publish tweet";
+				printResponse = "You must be logged in to like a tweet";
 				status = 401;
 			}
 		}else if(action.equals("publishTweet")){
+			System.out.println("publish twe");
+			if(username == null){
+				printResponse = "You must be logged in to publish tweet";
+				status = 401;
+				return;
+			}
+			BeanTweet tweet = new BeanTweet();
+			//TODO correct date!
+			tweet.setDate("1999-9-9");
+			tweet.setTweet_text(request.getParameter("tweet_text"));
+			tweet.setUsername(username);
+			if(tweet.publish())
+				printResponse = "Tweet published";
+		}else if(action.equals("getUserTweets")){
+			System.out.println("dopost of mytweets");
+			if(username == null){
+				printResponse = "You must be logged in to view your tweets";
+				status = 401;
+				return;
+			}
+			BeanUser user = new BeanUser();
+			user.loadFromDatabase(username);
+			if(user.loadUserTweetsFromDB()){
+				printResponse = "user loaded";
+			}
+			
+		}else if(action.equals("getAllTweets")){
+			System.out.println("getting all tweets");
+			printResponse = "tweets loaded";
+			
 			
 		}else{
 			printResponse = "You must specify the action (likeTweet,publishTweet)";

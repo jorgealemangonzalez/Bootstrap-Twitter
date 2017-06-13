@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import models.beanTweet;
+import models.BeanTweet;
 import mysql.DAO;
 
 /**
@@ -37,13 +37,12 @@ public class TweetPublisherController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			HttpSession session = request.getSession();
-			System.out.println("All Tweets of ");
 			RequestDispatcher dispatcher = null;
 			
-			beanTweet bTweet = new beanTweet();
-			if(session.getAttribute("username") != null && (!bTweet.loadAllTweetsFromDB().isEmpty()) ){
+			BeanTweet bTweet = new BeanTweet();
+			if(session.getAttribute("username") != null  ){
 				
-				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
+				dispatcher = request.getRequestDispatcher("PublishTweet.jsp");
 			}else{
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}

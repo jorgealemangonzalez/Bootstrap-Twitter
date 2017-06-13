@@ -71,9 +71,13 @@ public class BeanTweet {
 	public boolean publish(){
 		//TODO Returns true if publish successful
 		try{
-			dao.publishTweet(this);
-			return true;
+			if(dao.publishTweet(this) != 0){
+				return true;
+			}else{
+				return false;
+			}
 		}catch(SQLException e){
+			e.printStackTrace();
 			return false;
 		}
 	}

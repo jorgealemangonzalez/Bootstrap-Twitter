@@ -41,6 +41,7 @@ public class EditProfileController extends HttpServlet{
 		BeanUser user = new BeanUser();
 		if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
 			request.setAttribute("user",user);
+
 		}
 		dispatcher = request.getRequestDispatcher("ViewEditProfile.jsp");
 		dispatcher.forward(request, response);

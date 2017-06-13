@@ -9,11 +9,21 @@ $(document).ready(function() {
     });
     
     $("#MyTweetsController").click(function(event){
-    	$('#content').load('MyTweetsController');	
+    	$('#content').load('MyTweetsController',{action:"getUserTweets"},function(data, status){
+    		if(data == "user loaded"){
+				$('#content').load('TweetsController',{action: "getUserTweets"});
+			}else
+	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
+    	});	
     });
     
     $("#allTweetsController").click(function(event){
-    	$('#content').load('TweetsController');	
+    	$('#content').load('MyTweetsController',{action:"getAllTweets"},function(data,status){
+    		if(data == "tweets loaded"){
+				$('#content').load('TweetsController',{action: "getAllTweets"});
+			}else
+	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
+    	});	
     });
     
 	$("#logout").click(function(event){
