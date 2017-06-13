@@ -12,6 +12,8 @@ $(document).ready(function() {
     	$.get('MyTweetsController',{action: "getUserTweets"},function(data,status){
     		if(data == null){
 	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
+    		}else{
+    			$('#content').load('TweetsController',{action: "getUserTweets"});
     		}
     	})
     	.done(function(){
@@ -25,8 +27,8 @@ $(document).ready(function() {
     		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
     			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
 			}else{
-				//$('#content').load('TweetsController',{action: "getAllTweets"});
-				System.out.printl(".");
+				$('#content').load('TweetsController',{action: "getAllTweets"});
+				//System.out.printl(".");
 			}
 	        	
     	});	
