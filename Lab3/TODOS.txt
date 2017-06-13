@@ -37,6 +37,8 @@
 
 (TODO) Retweet
 
+(TODO) Username and mail can not be changed
+
 
 ** ideas **
 

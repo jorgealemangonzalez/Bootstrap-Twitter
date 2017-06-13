@@ -4,6 +4,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 
 import models.BeanTweet;
+import models.BeanUser;
 
 public class DAO {
 	private Connection connection;
@@ -25,6 +26,28 @@ public class DAO {
 		return statement.executeUpdate(query);
 		
 	}
+	
+	public int createUser(BeanUser user) throws SQLException{
+		String query = "INSERT INTO login.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+		System.out.println("Inserting into DB");
+		return this.insertSQL(query);
+	}
+	
+	public int updateUser(BeanUser user) throws SQLException{	//NOTE username and mail can not be changed , is primary key
+		String query = "UPDATE login.users SET "
+				+ "name='"+user.getName()+"'"
+				+ "surname='"+user.getSurname()+"'"
+				+ "gender='"+user.getGender()+"'"
+				+ "password='"+user.getPassword()+"'"
+				+ "nickName='"+user.getNickname()+"'"
+				+ "dateOfBirth='"+user.getDateofbirth()+"'"
+				+ "address="+user.getAddress()+"'"
+				+ "phoneNumber='"+user.getPhonenumber()+"' "
+						+ "WHERE username='"+user.getUsername()+"'";
+		System.out.println("Updating user");
+		return this.insertSQL(query);
+	}
+	
 	public ResultSet getFollowers(String username) throws SQLException {
 		String query = "SELECT followed FROM follow WHERE follower='"+username+"';";
 		return statement.executeQuery(query);

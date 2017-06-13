@@ -46,9 +46,7 @@ public class RegisterController extends HttpServlet {
 		   BeanUtils.populate(user, request.getParameterMap());
 		
 		   if (user.isComplete()) {
-			   String query = "INSERT INTO login.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
-			   System.out.println("Inserting into DB");
-			   dao.insertSQL(query);
+			   user.create();
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			   dispatcher.forward(request, response);
 		   
@@ -64,10 +62,7 @@ public class RegisterController extends HttpServlet {
 	   } catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-	   } catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	   }
 		
 	}
 

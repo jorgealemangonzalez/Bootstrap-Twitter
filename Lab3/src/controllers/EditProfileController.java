@@ -36,6 +36,7 @@ public class EditProfileController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("holholholholholholholholholholholholholholholholholholholholholholhola");
+		
 		RequestDispatcher dispatcher = null;
 		HttpSession session = request.getSession();
 		BeanUser user = new BeanUser();
@@ -52,7 +53,14 @@ public class EditProfileController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		BeanUser user = new BeanUser();
+	    try {
+			BeanUtils.populate(user, request.getParameterMap());
+			user.update();
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
