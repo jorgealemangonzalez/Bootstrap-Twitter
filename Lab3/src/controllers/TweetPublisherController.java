@@ -39,7 +39,6 @@ public class TweetPublisherController extends HttpServlet{
 			HttpSession session = request.getSession();
 			RequestDispatcher dispatcher = null;
 			
-			BeanTweet bTweet = new BeanTweet();
 			if(session.getAttribute("username") != null  ){
 				
 				dispatcher = request.getRequestDispatcher("PublishTweet.jsp");

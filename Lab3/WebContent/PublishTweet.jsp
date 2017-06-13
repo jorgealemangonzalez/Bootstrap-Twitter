@@ -8,7 +8,7 @@ BeanTweet bTweet = new BeanTweet();
 $(document).ready(function() {  
 	$('#publishTweet').click(function(event){
 		var text = $('#tweet_text').val()
-		$('#content').load('MyTweetsController',{tweet_text : text, action: "publishTweet"},function(data, status){
+		$.post('MyTweetsController',{tweet_text : text, action: "publishTweet"},function(data, status){
 			if(data == "Tweet published"){
 				alert("Tweet added to your profile")
 				$('#content').load('ContentController');

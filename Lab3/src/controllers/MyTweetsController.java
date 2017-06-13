@@ -36,20 +36,38 @@ public class MyTweetsController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-			HttpSession session = request.getSession();
-			System.out.println("My Tweets of "+ session.getAttribute("username"));
+			
 			RequestDispatcher dispatcher = null;
+	
 			
-			BeanUser user = new BeanUser();
-			if(session.getAttribute("username") != null ){
-				
-				request.setAttribute("user",user);
-				dispatcher = request.getRequestDispatcher("PublishTweet.jsp");
-			}else{
-				dispatcher = request.getRequestDispatcher("LoginController");
+			String action = (String)request.getParameter("action");
+			int status = 200;
+			String printResponse = "";
+			HttpSession session = request.getSession();
+			String username = (String) session.getAttribute("username");
+			if(action.equals("getUserTweets")){
+				System.out.println("doGet of mytweets");
+				if(username == null){
+					printResponse = "You must be logged in to view your tweets";
+					status = 401;
+					dispatcher = request.getRequestDispatcher("LoginController");
+					return;
+				}
+				BeanUser user = new BeanUser();
+				user.loadFromDatabase(username);
+				if(user.loadUserTweetsFromDB()){
+					printResponse = "user loaded";
+					request.setAttribute("user",user);
+				}
+				dispatcher = request.getRequestDispatcher("TweetFile.jsp");
+			}else if(action.equals("getAllTweets")){
+				System.out.println("getting all tweets");
+				printResponse = "tweets loaded";
+				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
 			}
-			
+			if(printResponse != "")
+				response.getWriter().print(printResponse);
+			response.setStatus(status);
 			dispatcher.forward(request, response);
 
 	}
@@ -89,24 +107,6 @@ public class MyTweetsController extends HttpServlet{
 			tweet.setUsername(username);
 			if(tweet.publish())
 				printResponse = "Tweet published";
-		}else if(action.equals("getUserTweets")){
-			System.out.println("dopost of mytweets");
-			if(username == null){
-				printResponse = "You must be logged in to view your tweets";
-				status = 401;
-				return;
-			}
-			BeanUser user = new BeanUser();
-			user.loadFromDatabase(username);
-			if(user.loadUserTweetsFromDB()){
-				printResponse = "user loaded";
-			}
-			
-		}else if(action.equals("getAllTweets")){
-			System.out.println("getting all tweets");
-			printResponse = "tweets loaded";
-			
-			
 		}else{
 			printResponse = "You must specify the action (likeTweet,publishTweet)";
 			status = 400;

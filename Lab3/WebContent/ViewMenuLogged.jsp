@@ -9,20 +9,26 @@ $(document).ready(function() {
     });
     
     $("#MyTweetsController").click(function(event){
-    	$('#content').load('MyTweetsController',{action:"getUserTweets"},function(data, status){
-    		if(data == "user loaded"){
-				$('#content').load('TweetsController',{action: "getUserTweets"});
-			}else
+    	$.get('MyTweetsController',{action: "getUserTweets"},function(data,status){
+    		if(data == null){
 	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
-    	});	
+    		}
+    	})
+    	.done(function(){
+    		alert ("User loadded");
+    	});
     });
     
+    
     $("#allTweetsController").click(function(event){
-    	$('#content').load('MyTweetsController',{action:"getAllTweets"},function(data,status){
-    		if(data == "tweets loaded"){
-				$('#content').load('TweetsController',{action: "getAllTweets"});
-			}else
-	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
+    	$.get('MyTweetsController',{action:"getAllTweets"},function(data,status){
+    		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
+    			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
+			}else{
+				//$('#content').load('TweetsController',{action: "getAllTweets"});
+				System.out.printl(".");
+			}
+	        	
     	});	
     });
     
