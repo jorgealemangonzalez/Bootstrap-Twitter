@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import models.BeanLogin;
+import models.BeanUser;
 
 /**
  * Servlet implementation class LoginController
@@ -46,7 +47,9 @@ public class LoginController extends HttpServlet {
 	    	if (login.isComplete()) {
 		    	System.out.println("Login is complete");
 		    	HttpSession session = request.getSession();
-		    	session.setAttribute("username",login.getUsername());
+		    	BeanUser user = new BeanUser();
+		    	user.loadFromDatabase(login.getUsername());
+		    	session.setAttribute("user",user);
 		    	response.setStatus(200);
 			    
 		    }	

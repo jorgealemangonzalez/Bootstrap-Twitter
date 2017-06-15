@@ -15,8 +15,12 @@ else {
 $(document).ready(function(){
     $("#editForm").validate({
     	submitHandler: function(form) {
-   			$('#content').load('EditProfileController',$("#editForm").serialize());
-    }
+    		console.log("GO EDIT FORM");
+   			$.post('EditProfileController',$("#editForm").serialize()).done(function(data){
+   				alert("Your changes has been saved!");
+   			});
+   			
+    	}
     });
 });
 </script>
@@ -45,7 +49,7 @@ $(document).ready(function(){
 				</div>
 			</h4>
 			<hr>
-			<form action="" method="post" id="editForm" onsubmit="return validateMyForm();">
+			<form action="" method="post" id="editForm" onsubmit="return validateMyEditForm();">
 			        
 				<div class="md-form">
 				          <input type="text" id="name" placeholder="Name" class="form-control" value="${user.name}">
@@ -60,8 +64,13 @@ $(document).ready(function(){
 			        <input type="text" id="email" placeholder="Email" class="form-control" value="${user.email}">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="passwords" placeholder="Password" class="form-control" value="${user.password}">
+			        <input type="text" id="password" name="password" placeholder="Password" class="form-control" value="${user.password}">
 			    </div>
+			    <div class="md-form">
+			        <input type="text" name="confirm_password" id="confirm_password" onkeyup="checkPass();" placeholder="Password" class="form-control" value="${user.password}">
+			    </div>
+			    <span id="confirmMessage" class="confirmMessage"></span>
+			    
 			    <div class="md-form">
 			        <input type="text" id="nickname" placeholder="Nickname" class="form-control" value="${user.nickname}">
 			    </div>

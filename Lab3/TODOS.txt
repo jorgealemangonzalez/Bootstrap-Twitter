@@ -39,6 +39,8 @@
 
 (TODO) Username and mail can not be changed
 
+(TODO) Mejorar edit profile para que funcione bien
+
 
 ** ideas **
 
