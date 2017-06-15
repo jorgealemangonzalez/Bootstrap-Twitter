@@ -62,11 +62,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	} 
 	public ResultSet getTweetsFromUser(String username) throws SQLException{
-		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY id DESC;"; 
+		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY date DESC;"; 
 		return statement.executeQuery(query);
 	}
 	public ResultSet getTweets() throws SQLException{
-		String query = "SELECT * FROM tweets ORDER BY id DESC;"; 
+		String query = "SELECT * FROM tweets ORDER BY date DESC;"; 
 		return statement.executeQuery(query);
 	}
 	
@@ -74,7 +74,9 @@ public class DAO {
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO tweets(tweet_text, date,username) VALUES (?,?,?)");
 		ps.setString(1, bt.getTweet_text());
 		ps.setString(3, bt.getUsername());
-		ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+		ps.setTimestamp(2, date);
+		System.out.println(date);
 		return ps.executeUpdate();
 		
 	}

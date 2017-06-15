@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS tweets(
     id INT(10) unsigned NOT NULL AUTO_INCREMENT,
     tweet_text VARCHAR(120) NOT NULL,
-    date    DATE  NOT NULL,
+    date    DATETIME  NOT NULL,
     username CHAR(24) NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(username) REFERENCES users(username),
