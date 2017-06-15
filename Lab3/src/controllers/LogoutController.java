@@ -34,7 +34,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session!=null) session.invalidate();
 		
-		response.getWriter().print("Logout done");;
+		response.getWriter().print("Logout done");
 		
 	}
 

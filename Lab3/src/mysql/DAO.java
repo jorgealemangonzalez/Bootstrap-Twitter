@@ -34,18 +34,23 @@ public class DAO {
 	}
 	
 	public int updateUser(BeanUser user) throws SQLException{	//NOTE username and mail can not be changed , is primary key
-		String query = "UPDATE login.users SET "
-				+ "name='"+user.getName()+"'"
-				+ "surname='"+user.getSurname()+"'"
-				+ "gender='"+user.getGender()+"'"
-				+ "password='"+user.getPassword()+"'"
-				+ "nickName='"+user.getNickname()+"'"
-				+ "dateOfBirth='"+user.getDateofbirth()+"'"
-				+ "address="+user.getAddress()+"'"
-				+ "phoneNumber='"+user.getPhonenumber()+"' "
-						+ "WHERE username='"+user.getUsername()+"'";
+		/*String query = "UPDATE login.users SET"
+				+ " name='"+user.getName()+"'"
+				+ " surname='"+user.getSurname()+"'"
+				+ " gender='"+user.getGender()+"'"
+				+ " password='"+user.getPassword()+"'"
+				+ " nickName='"+user.getNickname()+"'"
+				+ " dateOfBirth='"+user.getDateofbirth()+"'"
+				+ " address='"+user.getAddress()+"'"
+				+ " phoneNumber='"+user.getPhonenumber()+"' "
+						+ " WHERE username='"+user.getUsername()+"'";*/
+	    PreparedStatement ps = connection.prepareStatement(
+	    	      "UPDATE login.users SET name = ?, surname = ?,  gender = ?, "
+	    	      + "password = ?, nickName = ?, dateOfBirth = ?, address = ?, phoneNumber = ?  WHERE username = ?");
+	    ps.setString(1,user.getName());//TODO continue http://alvinalexander.com/blog/post/jdbc/sample-jdbc-preparedstatement-sql-update
+	    
 		System.out.println("Updating user");
-		return this.insertSQL(query);
+		return ps.executeUpdate();
 	}
 	
 	public ResultSet getFollowers(String username) throws SQLException {

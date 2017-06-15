@@ -9,6 +9,10 @@ var green = "#66cc66";
 var boolpass = null;
 var validpass = null;
 var boolemail = null;
+function validateMyEditForm(){
+	checkPass();
+	checkValidPass(document.getElementById('password').value)
+}
 
 function validateMyForm(){
 	checkPass();

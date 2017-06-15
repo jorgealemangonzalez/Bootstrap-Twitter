@@ -27,7 +27,6 @@ $(document).ready(function() {
     		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
     			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
 			}else{
-				console.log(data);
 				$('#content').html(data);
 			}
 	        	

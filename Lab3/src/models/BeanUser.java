@@ -250,6 +250,7 @@ public class BeanUser implements Serializable  {
 	
 	public void update(){
 		try {
+			System.out.println("Update "+username);
 			dao.updateUser(this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

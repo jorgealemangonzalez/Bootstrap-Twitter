@@ -49,7 +49,7 @@ public class RegisterController extends HttpServlet {
 			   user.create();
 			   RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			   dispatcher.forward(request, response);
-		   
+			   
 		   } 
 		   else {
 		

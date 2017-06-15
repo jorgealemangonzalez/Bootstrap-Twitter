@@ -36,8 +36,8 @@ public class ContentController extends HttpServlet {
 		System.out.println("Session user: "+ session.getAttribute("username"));
 		RequestDispatcher dispatcher = null;
 		
-		BeanUser user = new BeanUser();
-		if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
+		BeanUser user = (BeanUser) session.getAttribute("user");
+		if(user != null){
 			request.setAttribute("user",user);
 			String params = "?userProfileUsername="+user.getUsername();
 			System.out.println(params);

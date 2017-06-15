@@ -90,6 +90,7 @@ public class MyTweetsController extends HttpServlet{
 				BeanUser user = new BeanUser();
 				user.loadFromDatabase(username);
 				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
+				dispatcher.forward(request, response);
 			}else{
 				printResponse = "You must be logged in to like a tweet";
 				status = 401;
@@ -116,7 +117,7 @@ public class MyTweetsController extends HttpServlet{
 			response.getWriter().print(printResponse);
 		response.setStatus(status);
 		
-		dispatcher.forward(request, response);
+		
 	}
 
 }

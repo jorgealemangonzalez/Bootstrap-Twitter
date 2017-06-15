@@ -35,12 +35,11 @@ public class EditProfileController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("holholholholholholholholholholholholholholholholholholholholholholhola");
 		
 		RequestDispatcher dispatcher = null;
 		HttpSession session = request.getSession();
-		BeanUser user = new BeanUser();
-		if(session.getAttribute("username") != null && user.loadFromDatabase((String)session.getAttribute("username"))){
+		BeanUser user = (BeanUser) session.getAttribute("user");
+		if(user != null){
 			request.setAttribute("user",user);
 
 		}
@@ -52,11 +51,13 @@ public class EditProfileController extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("EDIT PROFILE__");
 		BeanUser user = new BeanUser();
 	    try {
 			BeanUtils.populate(user, request.getParameterMap());
 			user.update();
+			HttpSession session = request.getSession();
+			session.setAttribute("user",user);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
