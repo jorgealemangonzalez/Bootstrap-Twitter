@@ -70,6 +70,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet getTweetsFromFollowers(String username) throws SQLException{
+		String query = "";
+		return statement.executeQuery(query);
+	}
+	
 	public int publishTweet(BeanTweet bt) throws SQLException{
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO tweets(tweet_text, date,username) VALUES (?,?,?)");
 		ps.setString(1, bt.getTweet_text());

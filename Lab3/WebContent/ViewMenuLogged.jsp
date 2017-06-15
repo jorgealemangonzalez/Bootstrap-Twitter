@@ -8,21 +8,17 @@ $(document).ready(function() {
     	$('#content').load('EditProfileController',{profile: ""});	//No profile means my profile
     });
     
-    $("#MyTweetsController").click(function(event){
-    	$.get('MyTweetsController',{action: "getUserTweets"},function(data,status){
-    		if(data == null){
-	        	alert("Error while getting tweets: Data: " + data + "\nStatus: " + status);
-    		}else{
-    			$('#content').load('TweetsController',{action: "getUserTweets"});
+    $("#myTweets").click(function(event){
+    	$.get('TweetsController',{action: "getUserTweets"},function(data,status){
+    		if(status != 401){
+    			console.log(data);
+    			$('#content').html(data);
     		}
-    	})
-    	.done(function(){
-    		alert ("User loadded");
     	});
     });
     
     
-    $("#allTweetsController").click(function(event){
+    $("#TweetsController").click(function(event){
     	$.get('MyTweetsController',{action:"getAllTweets"},function(data,status){
     		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
     			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
@@ -60,9 +56,9 @@ $(document).ready(function() {
             <li class="nav-item btn-group">
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <a class="dropdown-item" id="allTweetsController">All tweets</a>
+                    <a class="dropdown-item" id="TweetsController">All tweets</a>
                     <a class="dropdown-item">My followers tweets</a>
-                    <a class="dropdown-item linkController" id="MyTweetsController">My tweets</a>
+                    <a class="dropdown-item " id="myTweets">My tweets</a>
                 </div>
             </li>
             <li class="nav-item btn-group">

@@ -55,7 +55,7 @@ public class MyTweetsController extends HttpServlet{
 				}
 				BeanUser user = new BeanUser();
 				user.loadFromDatabase(username);
-				if(user.loadUserTweetsFromDB()){
+				if(!user.loadUserTweetsFromDB().isEmpty()){
 					printResponse = "user loaded";
 					request.setAttribute("user",user);
 				}

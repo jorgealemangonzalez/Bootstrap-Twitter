@@ -38,17 +38,7 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
-	private List<BeanTweet> lisOfTweets = new ArrayList<BeanTweet>();
 	
-	public List<BeanTweet> getLisOfTweets() {
-		return lisOfTweets;
-	}
-
-	
-	public void setLisOfTweets(List<BeanTweet> lisOfTweets) {
-		this.lisOfTweets = lisOfTweets;
-	}
-
 	/*getters and setters*/
 	public String getName() {
 		return name;
@@ -158,6 +148,8 @@ public class BeanUser implements Serializable  {
 	           hasValue(getEmail()) && this.error[0]==0 && this.error[1]==0);
 	}
 	
+	
+	
 	public boolean loadFromDatabase(String username){
 		try {		
 			ResultSet rs = dao.getUserInfo(username);
@@ -184,31 +176,46 @@ public class BeanUser implements Serializable  {
 		}
 	}
 	
-	public boolean loadUserTweetsFromDB(){
-		this.lisOfTweets.clear();
+	public List<BeanTweet> loadFollowersTweets(){
+		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 		try {
-			int cont = 0;
-			ResultSet rs = dao.getTweetsFromUser(this.username);
+			ResultSet rs = dao.getTweetsFromFollowers(this.username);
 			while(rs.next()){
-				BeanTweet tmp = new BeanTweet();
-				tmp.setDate(rs.getString("date"));
-				tmp.setId(rs.getInt("id"));
-				tmp.setTweet_text(rs.getString("tweet_text"));
-				tmp.setUsername(rs.getString("username"));
-				this.lisOfTweets.add(tmp);
-				cont++;
-			}
-			if(cont>0){
-				return true;
-			}else{
-				return false;
+				BeanTweet tmpB = new BeanTweet();
+				tmpB.setDate(rs.getString("date"));
+				tmpB.setId(rs.getInt("id"));
+				tmpB.setTweet_text(rs.getString("tweet_text"));
+				tmpB.setUsername(rs.getString("username"));
+				tmp.add(tmpB);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
 		}
+		return tmp;
+		
+	}
+	
+	
+	public List<BeanTweet> loadUserTweetsFromDB(){
+		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
+		try {
+			ResultSet rs = dao.getTweetsFromUser(this.username);
+			while(rs.next()){
+				BeanTweet tmpB = new BeanTweet();
+				tmpB.setDate(rs.getString("date"));
+				tmpB.setId(rs.getInt("id"));
+				tmpB.setTweet_text(rs.getString("tweet_text"));
+				tmpB.setUsername(rs.getString("username"));
+				tmp.add(tmpB);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error retrieving tweet");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tmp;
 		
 	}
 	
