@@ -78,6 +78,7 @@ public class MyTweetsController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = (String)request.getParameter("action");
 		System.out.println("doPost of mytweets");
+		RequestDispatcher dispatcher = null;
 		int status = 200;
 		String printResponse = "";
 		HttpSession session = request.getSession();
@@ -88,7 +89,7 @@ public class MyTweetsController extends HttpServlet{
 			if(username != null){
 				BeanUser user = new BeanUser();
 				user.loadFromDatabase(username);
-				
+				dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
 			}else{
 				printResponse = "You must be logged in to like a tweet";
 				status = 401;
@@ -114,6 +115,8 @@ public class MyTweetsController extends HttpServlet{
 		if(printResponse != "")
 			response.getWriter().print(printResponse);
 		response.setStatus(status);
+		
+		dispatcher.forward(request, response);
 	}
 
 }

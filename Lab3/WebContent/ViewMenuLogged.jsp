@@ -27,8 +27,8 @@ $(document).ready(function() {
     		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
     			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
 			}else{
-				$('#content').load('TweetsController',{action: "getAllTweets"});
-				//System.out.printl(".");
+				console.log(data);
+				$('#content').html(data);
 			}
 	        	
     	});	
