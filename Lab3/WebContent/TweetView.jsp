@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet" %>
+    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet,java.util.List,java.util.ArrayList" %>
     
 
 <% 
+
+List<BeanTweet> list = new ArrayList<BeanTweet>();
+
+list = (List<BeanTweet>) request.getAttribute("listTweets");
+
+
 BeanUser user = null;
 if (request.getAttribute("user")!=null) {
 	user = (BeanUser)request.getAttribute("user");
@@ -19,8 +25,8 @@ $(".like").click(function(event){
 
 
 <div class="container col-md-6 col-md-offset-3">
-	<% for(int i = 0 ; i < user.getLisOfTweets().size() ; i++) { 
-		BeanTweet t = user.getLisOfTweets().get(i);
+	<% for(int i = 0 ; i < list.size() ; i++) { 
+		BeanTweet t = list.get(i);
 	%>
 		<div class="card green tweet">
 			<div class="row card">

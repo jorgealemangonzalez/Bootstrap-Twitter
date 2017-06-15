@@ -1,6 +1,7 @@
 package controllers;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,21 +42,36 @@ public class TweetsController extends HttpServlet{
 			RequestDispatcher dispatcher = null;
 			String action = (String)request.getParameter("action");
 			String username = (String) session.getAttribute("username");
+			int status = 200;
+			String printResponse = "";
+			BeanUser user = new BeanUser();
 			if(username != null ){	
-				BeanUser user = new BeanUser();
-				user.loadFromDatabase(username);
-				user.loadUserTweetsFromDB();
-				request.setAttribute("user", user);
+				user.loadFromDatabase(username); //load user info
 				if(action.equals("getUserTweets")){
-					dispatcher = request.getRequestDispatcher("TweetFile.jsp");
+					System.out.println("get User tweets");
+					List<BeanTweet> tmp = user.loadUserTweetsFromDB();
+					request.setAttribute("listTweets", tmp);
 				}else if(action.equals("getAllTweets")){
-					dispatcher = request.getRequestDispatcher("AllTweetsFile.jsp");
+					System.out.println("get All tweets");
+					BeanTweet tweet = new BeanTweet();
+					List<BeanTweet> tmp = tweet.loadAllTweetsFromDB();
+					request.setAttribute("listTweets", tmp);
+				}else if(action.equals("getFollowersTweets")){
+					System.out.println("get Followers Tweets");
+					List<BeanTweet> tmp = user.loadFollowersTweets();
+					request.setAttribute("listTweets", tmp);
 				}
+				dispatcher = request.getRequestDispatcher("TweetView.jsp");
 			}else{
+				status = 401;
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}
-			
+			request.setAttribute("user", user);
+			if(printResponse != "")
+				response.getWriter().print(printResponse);
+			response.setStatus(status);
 			dispatcher.forward(request, response);
+			
 
 	}
 
@@ -63,8 +79,28 @@ public class TweetsController extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		HttpSession session = request.getSession();
+		RequestDispatcher dispatcher = null;
+		String action = (String)request.getParameter("action");
+		String username = (String) session.getAttribute("username");
+		BeanUser user = new BeanUser();
+		if(username != null){
+			if(action.equals("likeTweets")){
+				//BeanTweet
+			}else if(action.equals("publishTweet")){
+				System.out.println("publish TweeT");
+				BeanTweet tweet = new BeanTweet();
+				tweet.setTweet_text(request.getParameter("tweet_text"));
+				tweet.setUsername(username);
+				dispatcher = request.getRequestDispatcher("ContentController");
+			}
+		}else{
+			dispatcher = request.getRequestDispatcher("LoginController");
+		}
+		request.setAttribute("user", user);
+		dispatcher.forward(request, response);
+
 	}
 
 }
