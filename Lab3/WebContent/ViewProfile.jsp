@@ -50,15 +50,15 @@ $(document).ready(function() {
 			<h4 class="card-title statics-resume">
 				<div class="resume-statics">
 					<h3>Tweets</h3>
-					<p> 23 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getLisOfTweets().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Following</h3>
-					<p> 7 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getFollowing().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Followers</h3>
-					<p> 1 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getFollowers().size() %> </span>
 				</div>
 			</h4>
 			<hr>

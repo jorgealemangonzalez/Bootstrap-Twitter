@@ -37,51 +37,51 @@ $(document).ready(function(){
 			<h4 class="card-title statics-resume">
 				<div class="resume-statics">
 					<h3>Tweets</h3>
-					<p> 23 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getLisOfTweets().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Following</h3>
-					<p> 7 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getFollowing().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Followers</h3>
-					<p> 1 </p>
+					<span class="badge badge-primary badge-pill"><%= user.getFollowers().size() %> </span>
 				</div>
 			</h4>
 			<hr>
 			<form action="" method="post" id="editForm" onsubmit="return validateMyEditForm();">
 			        
 				<div class="md-form">
-				          <input type="text" id="name" placeholder="Name" class="form-control" value="${user.name}">
+				          <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="<%=user.getName() %>">
 				      </div>
 				<div class="md-form">
-				          <input type="text" id="username" placeholder="Username" class="form-control" value="${user.username}">
-				      </div>
+		            <input type="text" id="username" name="username" placeholder="Username" class="form-control" value="<%=user.getUsername() %>">
+		        </div>
 			    <div class="md-form">
-			        <input type="text" id="gender" placeholder="Gender" class="form-control" value="${user.gender}">
+			        <input type="text" id="gender" name="gender" placeholder="Gender" class="form-control" value="<%=user.getGender() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="email" placeholder="Email" class="form-control" value="${user.email}">
+			        <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<%=user.getEmail() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="password" name="password" placeholder="Password" class="form-control" value="${user.password}">
+			        <input type="text" id="password" name="password" name="password" placeholder="Password" class="form-control" value="<%=user.getPassword() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" name="confirm_password" id="confirm_password" onkeyup="checkPass();" placeholder="Password" class="form-control" value="${user.password}">
+			        <input type="text" name="confirm_password" id="confirm_password" onkeyup="checkPass();" placeholder="Password" class="form-control" value="<%=user.getPassword() %>">
 			    </div>
 			    <span id="confirmMessage" class="confirmMessage"></span>
 			    
 			    <div class="md-form">
-			        <input type="text" id="nickname" placeholder="Nickname" class="form-control" value="${user.nickname}">
+			        <input type="text" id="nickname" name="nickname" placeholder="Nickname" class="form-control" value="<%=user.getNickname() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="dateofbirth" placeholder="Date of birth" class="form-control" value="${user.dateofbirth}">
+			        <input type="text" id="dateofbirth" name="dateofbirth" placeholder="Date of birth" class="form-control" value="<%=user.getDateofbirth() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="address" placeholder="Address" class="form-control" value="${user.address}">
+			        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%=user.getAddress() %>">
 			    </div>
 			    <div class="md-form">
-			        <input type="text" id="number" placeholder="Phone Number" class="form-control" value="${user.phonenumber}">
+			        <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number" class="form-control" value="<%=user.getPhonenumber() %>">
 			    </div>	
 			    <div class="text-center">
 			        <button class="btn btn-success waves-effect waves-light" type="submit" value="Enviar">Save</button>

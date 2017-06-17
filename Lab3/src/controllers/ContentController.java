@@ -33,11 +33,11 @@ public class ContentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		System.out.println("Session user: "+ session.getAttribute("username"));
 		RequestDispatcher dispatcher = null;
 		
 		BeanUser user = (BeanUser) session.getAttribute("user");
 		if(user != null){
+			System.out.println("Session user: "+user.getUsername());
 			request.setAttribute("user",user);
 			String params = "?userProfileUsername="+user.getUsername();
 			System.out.println(params);

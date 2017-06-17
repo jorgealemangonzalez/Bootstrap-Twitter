@@ -18,6 +18,19 @@ import mysql.DAO;
 public class BeanUser implements Serializable  {
 
 	public BeanUser(){
+		name = "";
+		surname = "";
+		username = "";
+		gender = "";
+		email = "";
+		password = "";
+		nickname = "";
+		dateofbirth = "";
+		address = "";
+		phonenumber = "";
+		lisOfTweets = new ArrayList<BeanTweet>();
+		following = new ArrayList<String>();
+		followers = new ArrayList<String>();
 		try {
 			System.out.println("new BEAN");
 			dao = new DAO();	//Our interface to retrieve data fron DB
@@ -38,6 +51,28 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
+	private List<BeanTweet> lisOfTweets = new ArrayList<BeanTweet>();
+	private List<String> following = new ArrayList<String>();
+	
+	public List<String> getFollowing() {
+		return following;
+	}
+
+
+	public void setFollowing(List<String> following) {
+		this.following = following;
+	}
+
+
+	public List<String> getFollowers() {
+		return followers;
+	}
+
+
+	public void setFollowers(List<String> followers) {
+		this.followers = followers;
+	}
+	private List<String> followers = new ArrayList<String>();
 	
 	/*getters and setters*/
 	public String getName() {
@@ -165,6 +200,9 @@ public class BeanUser implements Serializable  {
 				this.address = rs.getString("address");
 				this.phonenumber = rs.getString("phonenumber");
 				System.out.println("User"+username+" loaded succesfully");
+				this.loadUserFollowers();
+				this.loadUserFollowing();
+				this.loadUserTweetsFromDB();
 				return true;
 			}
 			System.out.println("User "+username+" doesn't exists");
@@ -217,6 +255,38 @@ public class BeanUser implements Serializable  {
 		}
 		return tmp;
 		
+	}
+	
+	public void loadUserFollowers(){
+		followers.clear();
+		try {
+			ResultSet rs = dao.getFollowersFromUser(this.username);
+			while(rs.next()){
+				String follower = rs.getString("follower");
+				System.out.println("follower "+follower);
+				followers.add(follower);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error retrieving followers");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadUserFollowing(){
+		following.clear();
+		try {
+			ResultSet rs = dao.getFollowingFromUser(this.username);
+			while(rs.next()){
+				String followin = rs.getString("followed");
+				System.out.println("followin "+followin);
+				following.add(followin);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error retrieving following");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private boolean hasValue(String val) {

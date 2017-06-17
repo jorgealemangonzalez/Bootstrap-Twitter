@@ -49,6 +49,7 @@ INSERT INTO users(name,surname,username,gender,email,password) VALUES
 ('Jorge','Aleman','drako','Female','jale@gm.com','asda1@');
 
 INSERT INTO follow VALUES ('guini','drako');
+INSERT INTO follow VALUES ('drako','guini');
 
 INSERT INTO tweets(tweet_text, date,username) VALUES
 ('first tweet of guini by db','2017-06-08','drako'),

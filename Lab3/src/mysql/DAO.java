@@ -33,7 +33,7 @@ public class DAO {
 		return this.insertSQL(query);
 	}
 	
-	public int updateUser(BeanUser user) throws SQLException{	//NOTE username and mail can not be changed , is primary key
+	public int updateUser(BeanUser user) throws SQLException{	//TODO date of birth update
 		/*String query = "UPDATE login.users SET"
 				+ " name='"+user.getName()+"'"
 				+ " surname='"+user.getSurname()+"'"
@@ -46,8 +46,15 @@ public class DAO {
 						+ " WHERE username='"+user.getUsername()+"'";*/
 	    PreparedStatement ps = connection.prepareStatement(
 	    	      "UPDATE login.users SET name = ?, surname = ?,  gender = ?, "
-	    	      + "password = ?, nickName = ?, dateOfBirth = ?, address = ?, phoneNumber = ?  WHERE username = ?");
-	    ps.setString(1,user.getName());//TODO continue http://alvinalexander.com/blog/post/jdbc/sample-jdbc-preparedstatement-sql-update
+	    	      + "password = ?, nickName = ?, address = ?, phoneNumber = ?  WHERE username = ?");
+	    ps.setString(1,user.getName());
+	    ps.setString(2, user.getSurname());
+	    ps.setString(3, user.getGender());
+	    ps.setString(4, user.getPassword());
+	    ps.setString(5, user.getNickname());
+	    ps.setString(6, user.getAddress());
+	    ps.setString(7, user.getPhonenumber());
+	    ps.setString(8, user.getUsername());
 	    
 		System.out.println("Updating user");
 		return ps.executeUpdate();
@@ -70,6 +77,17 @@ public class DAO {
 		String query = "SELECT * FROM tweets WHERE username='"+username+"' ORDER BY date DESC;"; 
 		return statement.executeQuery(query);
 	}
+	
+	public ResultSet getFollowersFromUser(String username) throws SQLException{
+		String query = "SELECT * FROM follow WHERE followed = '"+username+"';";
+		return statement.executeQuery(query);
+	}
+	
+	public ResultSet getFollowingFromUser(String username) throws SQLException{
+		String query = "SELECT * FROM follow WHERE follower = '"+username+"';";
+		return statement.executeQuery(query);
+	}
+	
 	public ResultSet getTweets() throws SQLException{
 		String query = "SELECT * FROM tweets ORDER BY date DESC;"; 
 		return statement.executeQuery(query);

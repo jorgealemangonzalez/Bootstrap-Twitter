@@ -55,9 +55,12 @@ public class EditProfileController extends HttpServlet{
 		BeanUser user = new BeanUser();
 	    try {
 			BeanUtils.populate(user, request.getParameterMap());
+			System.out.println("Udating user: "+user.getUsername());
 			user.update();
 			HttpSession session = request.getSession();
 			session.setAttribute("user",user);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewEditProfile.jsp");
+			dispatcher.forward(request, response);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
