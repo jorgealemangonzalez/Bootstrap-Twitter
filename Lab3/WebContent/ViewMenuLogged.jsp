@@ -11,18 +11,22 @@ $(document).ready(function() {
     $("#myTweets").click(function(event){
     	$.get('TweetsController',{action: "getUserTweets"},function(data,status){
     		if(status != 401){
-    			console.log(data);
     			$('#content').html(data);
     		}
     	});
     });
+    $("#FolloweTweets").click(function(event){
+    	$.get('TweetsController'),{action: "getFollowersTweets"},function(data,status){
+    		if(status != 401){
+    			$('#content').html(data);
+    		}
+    	}
+    });
     
     
     $("#TweetsController").click(function(event){
-    	$.get('MyTweetsController',{action:"getAllTweets"},function(data,status){
-    		if(data == null){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
-    			alert("Error while getting all tweets: Data: " + data + "\nStatus: " + status);
-			}else{
+    	$.get('TweetsController',{action:"getAllTweets"},function(data,status){
+    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
 				$('#content').html(data);
 			}
 	        	
@@ -39,7 +43,7 @@ $(document).ready(function() {
 	    });
     });
 	$("#newTweet").click(function(event){
-	  	$('#content').load('TweetPublisherController');	
+	  	$('#content').load('PublishTweet.jsp');	
 	  });
 	
 });
@@ -56,7 +60,7 @@ $(document).ready(function() {
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item" id="TweetsController">All tweets</a>
-                    <a class="dropdown-item">My followers tweets</a>
+                    <a class="dropdown-item" id="FolloweTweets">My followers tweets</a>
                     <a class="dropdown-item " id="myTweets">My tweets</a>
                 </div>
             </li>

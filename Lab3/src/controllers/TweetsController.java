@@ -41,12 +41,12 @@ public class TweetsController extends HttpServlet{
 			HttpSession session = request.getSession();
 			RequestDispatcher dispatcher = null;
 			String action = (String)request.getParameter("action");
-			String username = (String) session.getAttribute("username");
-			int status = 200;
+			int status = 200; 
 			String printResponse = "";
 			BeanUser user = new BeanUser();
-			if(username != null ){	
-				user.loadFromDatabase(username); //load user info
+			user = (BeanUser) session.getAttribute("user");
+			if(user.getUsername() != null ){	
+				user.loadFromDatabase(user.getUsername()); //load user info
 				if(action.equals("getUserTweets")){
 					System.out.println("get User tweets");
 					List<BeanTweet> tmp = user.loadUserTweetsFromDB();
@@ -83,19 +83,24 @@ public class TweetsController extends HttpServlet{
 		HttpSession session = request.getSession();
 		RequestDispatcher dispatcher = null;
 		String action = (String)request.getParameter("action");
-		String username = (String) session.getAttribute("username");
 		BeanUser user = new BeanUser();
-		if(username != null){
+		int status = 200; 
+		user = (BeanUser) session.getAttribute("user");
+		if(user.getUsername() != null){
 			if(action.equals("likeTweets")){
 				//BeanTweet
 			}else if(action.equals("publishTweet")){
 				System.out.println("publish TweeT");
 				BeanTweet tweet = new BeanTweet();
 				tweet.setTweet_text(request.getParameter("tweet_text"));
-				tweet.setUsername(username);
+				tweet.setUsername(user.getUsername());
+				if(!tweet.publish()){
+					status = 401;
+				}
 				dispatcher = request.getRequestDispatcher("ContentController");
 			}
 		}else{
+			status = 401;
 			dispatcher = request.getRequestDispatcher("LoginController");
 		}
 		request.setAttribute("user", user);
