@@ -28,7 +28,7 @@ public class BeanUser implements Serializable  {
 		dateofbirth = "";
 		address = "";
 		phonenumber = "";
-		lisOfTweets = new ArrayList<BeanTweet>();
+		userTweets = new ArrayList<BeanTweet>();
 		following = new ArrayList<String>();
 		followers = new ArrayList<String>();
 		try {
@@ -51,7 +51,7 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
-	private List<BeanTweet> lisOfTweets = new ArrayList<BeanTweet>();
+	private List<BeanTweet> userTweets = new ArrayList<BeanTweet>();
 	private List<String> following = new ArrayList<String>();
 	
 	public List<String> getFollowing() {
@@ -62,7 +62,15 @@ public class BeanUser implements Serializable  {
 	public void setFollowing(List<String> following) {
 		this.following = following;
 	}
+	
+	public List<BeanTweet> getUserTweets() {
+		return userTweets;
+	}
 
+
+	public void setUserTweets(List<BeanTweet> userTweets) {
+		this.userTweets = userTweets;
+	}
 
 	public List<String> getFollowers() {
 		return followers;
@@ -74,7 +82,6 @@ public class BeanUser implements Serializable  {
 	}
 	private List<String> followers = new ArrayList<String>();
 	
-	/*getters and setters*/
 	public String getName() {
 		return name;
 	}
@@ -237,7 +244,7 @@ public class BeanUser implements Serializable  {
 	
 	
 	public List<BeanTweet> loadUserTweetsFromDB(){
-		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
+		this.userTweets.clear();
 		try {
 			ResultSet rs = dao.getTweetsFromUser(this.username);
 			while(rs.next()){
@@ -246,14 +253,14 @@ public class BeanUser implements Serializable  {
 				tmpB.setId(rs.getInt("id"));
 				tmpB.setTweet_text(rs.getString("tweet_text"));
 				tmpB.setUsername(rs.getString("username"));
-				tmp.add(tmpB);
+				this.userTweets.add(tmpB);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return tmp;
+		return this.userTweets;
 		
 	}
 	
