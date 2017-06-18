@@ -52,7 +52,10 @@ INSERT INTO follow VALUES ('guini','drako');
 INSERT INTO follow VALUES ('drako','guini');
 
 INSERT INTO tweets(tweet_text, date,username) VALUES
-('first tweet of guini by db','2017-06-08','drako'),
-('second tweet of guini by db','2017-06-09','drako'),
-('third tweet of guini by db','2017-06-10','drako'),
+('first tweet of drako by db','2017-06-08','drako'),
+('second tweet of guini by db','2017-06-09','guini'),
+('third tweet of drako by db','2017-06-10','drako'),
+('first tweet of guini by db','2017-06-08','guini'),
+('second tweet of drako by db','2017-06-09','drako'),
+('third tweet of guini by db','2017-06-10','guini'),
 ('first tweet of drako by db','2017-06-08','drako');

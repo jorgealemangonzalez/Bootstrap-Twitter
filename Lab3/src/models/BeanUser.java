@@ -308,17 +308,17 @@ public class BeanUser implements Serializable  {
 		this.error = error;
 	}
 	
-	public void publishTweet(String text){
-		BeanTweet bt = new BeanTweet();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		bt.setDate(dateFormat.format(date));
-		bt.setTweet_text(text);
-		bt.setUsername(this.username);
-		if(bt.publish())
-			System.out.println("Publish tweet successfull");
-		else
-			System.out.println("Publish tweet UNSUCCESSFULL");
+	public boolean publishTweet(String text){
+		BeanTweet tweet = new BeanTweet();
+		tweet.setTweet_text(text);
+		tweet.setUsername(username);
+		if(tweet.publish()){
+			this.userTweets.add(tweet);
+			return true;
+		}else
+			return false;
+		
+		
 		
 	}
 	

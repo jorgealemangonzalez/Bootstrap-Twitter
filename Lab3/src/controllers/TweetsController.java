@@ -91,10 +91,7 @@ public class TweetsController extends HttpServlet{
 				//BeanTweet
 			}else if(action.equals("publishTweet")){
 				System.out.println("publish TweeT");
-				BeanTweet tweet = new BeanTweet();
-				tweet.setTweet_text(request.getParameter("tweet_text"));
-				tweet.setUsername(user.getUsername());
-				if(!tweet.publish()){
+				if(!user.publishTweet(request.getParameter("tweet_text"))){
 					status = 401;
 				}
 				dispatcher = request.getRequestDispatcher("ContentController");
