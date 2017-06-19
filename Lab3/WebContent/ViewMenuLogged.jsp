@@ -15,7 +15,7 @@ $(document).ready(function() {
     		}
     	});
     });
-    $("#FolloweTweets").click(function(event){
+    $("#FollowerTweets").click(function(event){
     	$.get('TweetsController'),{action: "getFollowersTweets"},function(data,status){
     		if(status != 401){
     			$('#content').html(data);
@@ -23,6 +23,23 @@ $(document).ready(function() {
     	}
     });
     
+    $("#allUsers").click(function(event){
+    	$.get('UsersController',{action:"getAllUsers"},function(data,status){
+    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
+				$('#content').html(data);
+			}
+	        	
+    	});	
+    });
+    
+    $("#followingUsers").click(function(event){
+    	$.get('UsersController',{action:"getMyFollowers"},function(data,status){
+    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
+				$('#content').html(data);
+			}
+	        	
+    	});	
+    });
     
     $("#TweetsController").click(function(event){
     	$.get('TweetsController',{action:"getAllTweets"},function(data,status){
@@ -60,7 +77,7 @@ $(document).ready(function() {
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item" id="TweetsController">All tweets</a>
-                    <a class="dropdown-item" id="FolloweTweets">My followers tweets</a>
+                    <a class="dropdown-item" id="FollowerTweets">My followers tweets</a>
                     <a class="dropdown-item " id="myTweets">My tweets</a>
                 </div>
             </li>
@@ -69,6 +86,13 @@ $(document).ready(function() {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item" id="myAccount">My account</a>
                     <a class="dropdown-item" id="myProfile">My information</a>
+                </div>
+            </li>
+            <li class="nav-item btn-group">
+                <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <a class="dropdown-item" id="allUsers">All users</a>
+                    <a class="dropdown-item" id="followingUsers">Following users</a>
                 </div>
             </li>
             <li class="nav-item">

@@ -98,6 +98,16 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet getAllUsersUsername() throws SQLException{
+		String query = "select username from users;";
+		return statement.executeQuery(query);
+	}
+	
+	public ResultSet getMyFollowersUsername(String username) throws SQLException{
+		String query ="select follower from follow where followed='"+username+"';";
+		return statement.executeQuery(query);
+	}
+	
 	public int publishTweet(BeanTweet bt) throws SQLException{
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO tweets(tweet_text, date,username) VALUES (?,?,?)");
 		ps.setString(1, bt.getTweet_text());
