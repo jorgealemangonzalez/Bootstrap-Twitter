@@ -55,11 +55,12 @@ public class FollowController extends HttpServlet{
 			String printResponse = "";
 			BeanUser user = new BeanUser();
 			user = (BeanUser) session.getAttribute("user");
+			List<BeanUser> tmp = new ArrayList<BeanUser>();
 			if(user.getUsername() != null ){	
-				//user.loadFromDatabase(user.getUsername()); //load user info
+				user.loadFromDatabase(user.getUsername()); //load user info
 				if(action.equals("getAllUsers")){
 					System.out.println("get all Users");
-					List<BeanUser> tmp = new ArrayList<BeanUser>();
+					tmp.clear();
 					try {
 						ResultSet rs = dao.getAllUsersUsername();
 						while(rs.next()){
@@ -75,7 +76,7 @@ public class FollowController extends HttpServlet{
 					request.setAttribute("listUsers", tmp);
 				}else if(action.equals("getMyFollowers")){
 					System.out.println("get my followers users");
-					List<BeanUser> tmp = new ArrayList<BeanUser>();
+					tmp.clear();
 					try {
 						ResultSet rs = dao.getMyFollowersUsername(user.getUsername());
 						while(rs.next()){

@@ -6,6 +6,8 @@
 List<BeanUser> list = new ArrayList<BeanUser>();
 
 list = (List<BeanUser>) request.getAttribute("listUsers");
+BeanUser user = (BeanUser)request.getAttribute("user");
+
 
 %>
 
@@ -23,6 +25,11 @@ list = (List<BeanUser>) request.getAttribute("listUsers");
                   	<p><strong><%= t.getName()  %>  <%=t.getSurname() %></strong></p>
         			<span class=" badge badge-warning"><%=t.getUserTweets().size() %> Tweets</span>
         			<span class=" badge badge-info"><%=t.getFollowers().size() %> followers</span>
+        			<%if (user.getFollowing().contains(t.getUsername())){ %>
+        				<span class="badge badge-success">Following</span>
+        			<%}else if(user.getUsername().compareTo(t.getUsername()) != 0){ %>
+        				<span class="badge badge-warning">Follow</span>
+        			<%} %>
         		</div>
         	</div>
         </div>
