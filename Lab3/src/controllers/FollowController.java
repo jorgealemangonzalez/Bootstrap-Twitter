@@ -24,16 +24,16 @@ import mysql.DAO;
 /**
  * Servlet implementation class UserInformationController
  */
-@WebServlet("/UsersController")
+@WebServlet("/FollowController")
 
-public class UsersController extends HttpServlet{
+public class FollowController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private static DAO dao;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsersController(){
+    public FollowController(){
         super();
         try {
 			dao = new DAO();	//Our interface to retrieve data fron DB
@@ -80,7 +80,7 @@ public class UsersController extends HttpServlet{
 						ResultSet rs = dao.getMyFollowersUsername(user.getUsername());
 						while(rs.next()){
 							BeanUser b = new BeanUser();
-							b.loadFromDatabase(rs.getString("follower"));
+							b.loadFromDatabase(rs.getString("followed"));
 							tmp.add(b);
 						}
 					} catch (SQLException e) {

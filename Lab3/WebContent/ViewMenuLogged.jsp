@@ -15,16 +15,16 @@ $(document).ready(function() {
     		}
     	});
     });
-    $("#FollowerTweets").click(function(event){
-    	$.get('TweetsController'),{action: "getFollowersTweets"},function(data,status){
+    $("#followerTweets").click(function(event){
+    	$.get('TweetsController',{action: "getMyFollowers"},function(data,status){
     		if(status != 401){
     			$('#content').html(data);
     		}
-    	}
+    	});
     });
     
     $("#allUsers").click(function(event){
-    	$.get('UsersController',{action:"getAllUsers"},function(data,status){
+    	$.get('FollowController',{action:"getAllUsers"},function(data,status){
     		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
 				$('#content').html(data);
 			}
@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
     
     $("#followingUsers").click(function(event){
-    	$.get('UsersController',{action:"getMyFollowers"},function(data,status){
+    	$.get('FollowController',{action:"getMyFollowers"},function(data,status){
     		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
 				$('#content').html(data);
 			}
@@ -77,7 +77,7 @@ $(document).ready(function() {
                 <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <a class="dropdown-item" id="TweetsController">All tweets</a>
-                    <a class="dropdown-item" id="FollowerTweets">My followers tweets</a>
+                    <a class="dropdown-item" id="followerTweets">Following users tweets</a>
                     <a class="dropdown-item " id="myTweets">My tweets</a>
                 </div>
             </li>

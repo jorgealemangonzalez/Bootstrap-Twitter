@@ -94,7 +94,7 @@ public class DAO {
 	}
 	
 	public ResultSet getTweetsFromFollowers(String username) throws SQLException{
-		String query = "";
+		String query = "SELECT * FROM tweets JOIN follow ON username=followed WHERE follower='" + username + "'";
 		return statement.executeQuery(query);
 	}
 	
@@ -104,7 +104,8 @@ public class DAO {
 	}
 	
 	public ResultSet getMyFollowersUsername(String username) throws SQLException{
-		String query ="select follower from follow where followed='"+username+"';";
+		String query ="select followed from follow where follower='"+username+"';";
+		System.out.println(query);
 		return statement.executeQuery(query);
 	}
 	
