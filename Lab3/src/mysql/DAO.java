@@ -94,7 +94,7 @@ public class DAO {
 	}
 	
 	public ResultSet getTweetsFromFollowers(String username) throws SQLException{
-		String query = "SELECT * FROM tweets JOIN follow ON username=followed WHERE follower='" + username + "'";
+		String query = "SELECT * FROM tweets JOIN follow ON username=followed WHERE follower='" + username + "' ORDER BY date DESC";
 		return statement.executeQuery(query);
 	}
 	
@@ -124,6 +124,15 @@ public class DAO {
 		return ps.executeUpdate();
 		
 	}
+	
+	public int deleteFollow(String follower, String followed) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("DELETE from follow WHERE follower = ? AND followed = ? ;");
+		ps.setString(1, follower);
+		ps.setString(2, followed);
+		return ps.executeUpdate();
+		
+	}
+	
 	
 	// TODO: code for updates for Assignments 2, 3 and 4.
 	public void disconnectBD() throws SQLException {

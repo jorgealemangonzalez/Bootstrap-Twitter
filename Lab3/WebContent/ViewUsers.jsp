@@ -22,7 +22,20 @@ $(document).ready(function() {
     	$.post('FollowController',{action: "followUser", username: userN },
     			function(data,status){
 		    		if(status != 401){
-		    			console.log("Added to mysql");
+		    			$.get('FollowController',{action: act},function(data,status){
+		    	    		if(status != 401){ 
+		    					$('#content').html(data);
+		    				}
+		    			});
+    				}
+    			});	
+    	});
+    $("#following").click(function(event){
+    	var userN= document.getElementById("following").className;
+    	var act = document.getElementById("action").className;
+    	$.post('FollowController',{action: "unFollow", username: userN },
+    			function(data,status){
+		    		if(status != 401){
 		    			$.get('FollowController',{action: act},function(data,status){
 		    	    		if(status != 401){ 
 		    					$('#content').html(data);
@@ -51,9 +64,9 @@ $(document).ready(function() {
 							<li class="breadcrumb-item active"><%=t.getUserTweets().size() %> Tweets</li>
 							<li class="breadcrumb-item active"><%=t.getFollowers().size() %> followers</li>
 						    <%if (user.getFollowing().contains(t.getUsername())){ %>
-	        					<li class="breadcrumb-item"> <a id="following" >Following</a></li>
+	        					<li class="breadcrumb-item"> <a class="<%=t.getUsername() %>" id="following" >Following</a></li>
 		        			<%}else if(user.getUsername().compareTo(t.getUsername()) != 0){ %>
-		 			        	<li class="breadcrumb-item"> <a class="<%=t.getUsername() %> "id="follow" >Follow</a></li>
+		 			        	<li class="breadcrumb-item"> <a class="<%=t.getUsername() %>" id="follow" >Follow</a></li>
 		        			<%} %>
 		        		</ol>
 	       		</div>

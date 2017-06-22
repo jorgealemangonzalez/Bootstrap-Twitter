@@ -104,6 +104,12 @@ public class FollowController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//TODO important
+		/*
+		cuando hacemos follow o unfollow, no he sabido como coger el username del bucle en el html, he intentado en cada id
+		añadirle el numero de iteracion que lleva, pero esto me obliga a crear en el javascript tanto listeners al click de ese id como usuarios haya
+		tal como esta ahora, solo coge al primer usuario y luego te deja coger el segundo,....
+		*/
 		HttpSession session = request.getSession();
 		RequestDispatcher dispatcher = null;
 		String action = (String)request.getParameter("action");
@@ -117,18 +123,24 @@ public class FollowController extends HttpServlet{
 			if(action.equals("followUser")){
 				System.out.println("posting follow to " + followed);
 				try {
-					if(dao.postFollower(user.getUsername(), followed) != 0){
-						System.out.println("follow to "+ followed);
-					}else{
-						System.out.println("cant put the follow to " + followed);
-						status = 401;
-					}
+					dao.postFollower(user.getUsername(), followed);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					status = 401;
 				}
-				dispatcher = request.getRequestDispatcher("ViewUsers.jsp");
+			}else if(action.compareTo("unFollow") == 0){
+				System.out.println("deleting from db");
+				try {
+					if(dao.deleteFollow(user.getUsername(), followed) == 0){
+						System.out.println("problem deleting mysql");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else{
+				System.out.println("invalid action " + action);
 			}
 		}else{
 			status = 401;
@@ -141,6 +153,7 @@ public class FollowController extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		dispatcher = request.getRequestDispatcher("ViewUsers.jsp");
 		request.setAttribute("action", action);
 		request.setAttribute("user", user);
 		request.setAttribute("listUsers", tmp);
