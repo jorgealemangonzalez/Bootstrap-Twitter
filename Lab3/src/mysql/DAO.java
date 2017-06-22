@@ -105,7 +105,6 @@ public class DAO {
 	
 	public ResultSet getMyFollowersUsername(String username) throws SQLException{
 		String query ="select followed from follow where follower='"+username+"';";
-		System.out.println(query);
 		return statement.executeQuery(query);
 	}
 	
@@ -115,7 +114,13 @@ public class DAO {
 		ps.setString(3, bt.getUsername());
 		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 		ps.setTimestamp(2, date);
-		System.out.println(date);
+		return ps.executeUpdate();
+		
+	}
+	public int postFollower(String follower, String followed) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO follow VALUES (?,?)");
+		ps.setString(1, follower);
+		ps.setString(2, followed);
 		return ps.executeUpdate();
 		
 	}

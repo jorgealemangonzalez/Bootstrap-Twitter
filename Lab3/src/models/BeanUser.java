@@ -32,7 +32,7 @@ public class BeanUser implements Serializable  {
 		following = new ArrayList<String>();
 		followers = new ArrayList<String>();
 		try {
-			System.out.println("new BEAN");
+			//System.out.println("new BEAN");
 			dao = new DAO();	//Our interface to retrieve data fron DB
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -206,13 +206,13 @@ public class BeanUser implements Serializable  {
 				this.dateofbirth = rs.getString("dateofbirth");
 				this.address = rs.getString("address");
 				this.phonenumber = rs.getString("phonenumber");
-				System.out.println("User"+username+" loaded succesfully");
+				//System.out.println("User"+username+" loaded succesfully");
 				this.loadUserFollowers();
 				this.loadUserFollowing();
 				this.loadUserTweetsFromDB();
 				return true;
 			}
-			System.out.println("User "+username+" doesn't exists");
+			//System.out.println("User "+username+" doesn't exists");
 			return false;
 		} catch (SQLException e) {
 			System.out.println("Error retrieving user "+username);
@@ -270,7 +270,7 @@ public class BeanUser implements Serializable  {
 			ResultSet rs = dao.getFollowersFromUser(this.username);
 			while(rs.next()){
 				String follower = rs.getString("follower");
-				System.out.println("follower "+follower);
+				//System.out.println("follower "+follower);
 				followers.add(follower);
 			}
 		} catch (SQLException e) {
@@ -286,7 +286,7 @@ public class BeanUser implements Serializable  {
 			ResultSet rs = dao.getFollowingFromUser(this.username);
 			while(rs.next()){
 				String followin = rs.getString("followed");
-				System.out.println("followin "+followin);
+				//System.out.println("followin "+followin);
 				following.add(followin);
 			}
 		} catch (SQLException e) {
@@ -294,6 +294,16 @@ public class BeanUser implements Serializable  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public List<BeanUser> getAllUsers() throws SQLException{
+		List<BeanUser> tmp = new ArrayList<BeanUser>();
+		ResultSet rs = dao.getAllUsersUsername();
+		while(rs.next()){
+			BeanUser b = new BeanUser();
+			b.loadFromDatabase(rs.getString("username"));
+			tmp.add(b);
+		}
+		return tmp;
 	}
 	
 	private boolean hasValue(String val) {

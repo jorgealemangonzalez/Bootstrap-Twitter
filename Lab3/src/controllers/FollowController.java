@@ -56,25 +56,18 @@ public class FollowController extends HttpServlet{
 			BeanUser user = new BeanUser();
 			user = (BeanUser) session.getAttribute("user");
 			List<BeanUser> tmp = new ArrayList<BeanUser>();
-			if(user.getUsername() != null ){	
+			if(user.getUsername() != " "){	
 				user.loadFromDatabase(user.getUsername()); //load user info
-				if(action.equals("getAllUsers")){
+				if(action.compareTo("getAllUsers") == 0){
 					System.out.println("get all Users");
 					tmp.clear();
 					try {
-						ResultSet rs = dao.getAllUsersUsername();
-						while(rs.next()){
-							BeanUser b = new BeanUser();
-							b.loadFromDatabase(rs.getString("username"));
-							tmp.add(b);
-						}
+						tmp = user.getAllUsers();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
-						System.out.println("Error gettin all users");
 						e.printStackTrace();
 					}
-					request.setAttribute("listUsers", tmp);
-				}else if(action.equals("getMyFollowers")){
+				}else if(action.compareTo("getMyFollowers") == 0){
 					System.out.println("get my followers users");
 					tmp.clear();
 					try {
@@ -89,20 +82,21 @@ public class FollowController extends HttpServlet{
 						System.out.println("Error gettin all users");
 						e.printStackTrace();
 					}
-					request.setAttribute("listUsers", tmp);
+				}else{
+					System.out.println("nada de action" + action);
 				}
+				request.setAttribute("listUsers", tmp);
 				dispatcher = request.getRequestDispatcher("ViewUsers.jsp");
 			}else{
 				status = 401;
 				dispatcher = request.getRequestDispatcher("LoginController");
 			}
+			request.setAttribute("action", action);
 			request.setAttribute("user", user);
 			if(printResponse != "")
 				response.getWriter().print(printResponse);
 			response.setStatus(status);
 			dispatcher.forward(request, response);
-			
-
 	}
 
 	/**
@@ -110,7 +104,50 @@ public class FollowController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//doGet(request, response);
+		HttpSession session = request.getSession();
+		RequestDispatcher dispatcher = null;
+		String action = (String)request.getParameter("action");
+		String followed = (String)request.getParameter("username");
+		int status = 200; 
+		String printResponse = "";
+		BeanUser user = new BeanUser();
+		user = (BeanUser) session.getAttribute("user");
+		if(user.getUsername() != null){
+			user.loadFromDatabase(user.getUsername()); //load user info
+			if(action.equals("followUser")){
+				System.out.println("posting follow to " + followed);
+				try {
+					if(dao.postFollower(user.getUsername(), followed) != 0){
+						System.out.println("follow to "+ followed);
+					}else{
+						System.out.println("cant put the follow to " + followed);
+						status = 401;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					status = 401;
+				}
+				dispatcher = request.getRequestDispatcher("ViewUsers.jsp");
+			}
+		}else{
+			status = 401;
+			dispatcher = request.getRequestDispatcher("LoginController");
+		}
+		List<BeanUser> tmp = new ArrayList<BeanUser>();
+		try {
+			tmp = user.getAllUsers();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("action", action);
+		request.setAttribute("user", user);
+		request.setAttribute("listUsers", tmp);
+		if(printResponse != "")
+			response.getWriter().print(printResponse);
+		response.setStatus(status);
+		dispatcher.forward(request, response);
 
 	}
 
