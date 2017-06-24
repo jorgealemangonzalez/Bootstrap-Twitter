@@ -23,27 +23,9 @@ $(document).ready(function() {
     	});
     });
     
-    $("#allUsers").click(function(event){
-    	$.get('FollowController',{action:"getAllUsers"},function(data,status){
-    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
-				$('#content').html(data);
-			}
-	        	
-    	});	
-    });
-    
-    $("#followingUsers").click(function(event){
-    	$.get('FollowController',{action:"getMyFollowers"},function(data,status){
-    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
-				$('#content').html(data);
-			}
-	        	
-    	});	
-    });
-    
     $("#TweetsController").click(function(event){
     	$.get('TweetsController',{action:"getAllTweets"},function(data,status){
-    		if(status != 401){ //WHAT I HAVE TO DO HERE? GET THE PAGE OF ALL TWEETS?
+    		if(status != 401){ 
 				$('#content').html(data);
 			}
 	        	
@@ -63,6 +45,28 @@ $(document).ready(function() {
 	  	$('#content').load('PublishTweet.jsp');	
 	  });
 	
+	$("#allUsers").click(function(event){
+		$("#content").load("UserListController");
+	});
+	
+	$("#followingUsers").click(function(event){
+		$.get('UserListController',{action:"getMyFollowing"},function(data,status){
+    		if(status != 401){ 
+				$('#content').html(data);
+			}
+	        	
+    	});
+	});
+	
+	$("#followersUsers").click(function(event){
+		$.get('UserListController',{action:"getMyFollowers"},function(data,status){
+    		if(status != 401){ 
+				$('#content').html(data);
+			}
+	        	
+    	});
+	});
+	
 });
 </script>
 <!--Navbar-->
@@ -74,27 +78,29 @@ $(document).ready(function() {
     <div class="collapse navbar-collapse" id="collapseEx12">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item btn-group">
-                <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuTweets" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuTweets">
                     <a class="dropdown-item" id="TweetsController">All tweets</a>
                     <a class="dropdown-item" id="followerTweets">Following users tweets</a>
                     <a class="dropdown-item " id="myTweets">My tweets</a>
                 </div>
             </li>
             <li class="nav-item btn-group">
-                <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuAccount">
                     <a class="dropdown-item" id="myAccount">My account</a>
                     <a class="dropdown-item" id="myProfile">My information</a>
                 </div>
             </li>
             <li class="nav-item btn-group">
-                <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	            <a class="nav-link dropdown-toggle" id="dropdownMenuUsers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Userss</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuUsers">
                     <a class="dropdown-item" id="allUsers">All users</a>
-                    <a class="dropdown-item" id="followingUsers">Following users</a>
+                    <a class="dropdown-item" id="followingUsers">Following</a>
+                    <a class="dropdown-item" id="followersUsers">Followers</a>
                 </div>
             </li>
+	                
             <li class="nav-item">
                 <a class="nav-link linkController" id="logout">Log out</a>
             </li>

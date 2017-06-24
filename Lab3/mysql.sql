@@ -46,10 +46,11 @@ CREATE TABLE IF NOT EXISTS follow(
 
 INSERT INTO users(name,surname,username,gender,email,password) VALUES
 ('Arnau','Guinart','guini','Male','guinartarnau@gmail.com','pass1'),
-('Jorge','Aleman','drako','Female','jale@gm.com','asda1@');
-
-INSERT INTO follow VALUES ('guini','drako');
-INSERT INTO follow VALUES ('drako','guini');
+('Jorge','Aleman','drako','Female','jale@gm.com','asda1@'),
+('Arnau2','Guinart2','guini2','Male','2guinartarnau@gmail.com','pass1'),
+('Jorge2','Aleman2','drako2','Female','2jale@gm.com','asda1@'),
+('Arnau3','Guinart3','guini3','Male','3guinartarnau@gmail.com','pass1'),
+('Jorge3','Aleman3','drako3','Female','3jale@gm.com','asda1@');
 
 INSERT INTO tweets(tweet_text, date,username) VALUES
 ('first tweet of drako by db','2017-06-08','drako'),
@@ -59,3 +60,8 @@ INSERT INTO tweets(tweet_text, date,username) VALUES
 ('second tweet of drako by db','2017-06-09','drako'),
 ('third tweet of guini by db','2017-06-10','guini'),
 ('first tweet of drako by db','2017-06-08','drako');
+
+#INSERT INTO follow VALUES ('guini','drako');
+#INSERT INTO follow VALUES ('drako','guini');
+
+

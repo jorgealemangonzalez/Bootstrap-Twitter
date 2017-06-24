@@ -8,6 +8,11 @@ import mysql.DAO;
 public class BeanLogin {
 
 	public BeanLogin(){
+		
+	}
+	
+	private static DAO dao;
+	static{
 		try {
 			dao = new DAO();
 		} catch (Exception e) {
@@ -15,8 +20,6 @@ public class BeanLogin {
 			e.printStackTrace();
 		}
 	}
-	
-	private static DAO dao;
 	private String username = "";
 	private String password = "";
 	public String error = "";
@@ -47,16 +50,23 @@ public class BeanLogin {
 	
 	
 	
-	public boolean isComplete() throws SQLException {
-		ResultSet rs = dao.getUserAndPass(this.username);
-		if (rs.next()) {//get first result
-			String pass = rs.getString("password");
-			if(pass.compareTo(password) == 0){
-				return true;
-			}
-        }
-    	return false;
-     
+	public boolean isComplete(){
+		boolean success = false;
+		try{
+			dao.connecToDB();
+			ResultSet rs = dao.getUserAndPass(this.username);
+			if (rs.next()) {//get first result
+				String pass = rs.getString("password");
+				if(pass.compareTo(password) == 0){
+					success = true;
+				}
+	        }
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
+			return success;
+		}
 		//return(hasValue(getUsername()));
 	}
 	

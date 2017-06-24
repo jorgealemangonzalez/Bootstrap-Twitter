@@ -53,8 +53,7 @@ public class TweetsController extends HttpServlet{
 					request.setAttribute("listTweets", tmp);
 				}else if(action.equals("getAllTweets")){
 					System.out.println("get All tweets");
-					BeanTweet tweet = new BeanTweet();
-					List<BeanTweet> tmp = tweet.loadAllTweetsFromDB();
+					List<BeanTweet> tmp = BeanTweet.loadAllTweetsFromDB();
 					request.setAttribute("listTweets", tmp);
 				}else if(action.equals("getMyFollowers")){
 					System.out.println("get Followers Tweets");

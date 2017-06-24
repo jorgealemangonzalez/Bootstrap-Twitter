@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,8 +8,17 @@ import java.util.List;
 
 import mysql.DAO;
 
-public class BeanTweet {
+public class BeanTweet implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public BeanTweet(){
+		
+	}
+	private static DAO dao;
+	static{
 		try {
 			dao = new DAO();	//Our interface to retrieve data fron DB
 		} catch (Exception e) {
@@ -20,7 +30,7 @@ public class BeanTweet {
 	private String tweet_text="";
 	private String date="";
 	private String username ="";
-	private static DAO dao;
+	
 	
 	public int getId() {
 		return id;
@@ -48,9 +58,10 @@ public class BeanTweet {
 	}
 	
 
-	public List<BeanTweet> loadAllTweetsFromDB(){
+	static public List<BeanTweet> loadAllTweetsFromDB(){
 		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 		try {
+			dao.connecToDB();
 			ResultSet rs = dao.getTweets();
 			while(rs.next()){
 				BeanTweet tmpT = new BeanTweet();
@@ -64,6 +75,8 @@ public class BeanTweet {
 			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
 		}
 		return tmp;
 	}
@@ -71,6 +84,7 @@ public class BeanTweet {
 	public boolean publish(){
 		//TODO Returns true if publish successful
 		try{
+			dao.connecToDB();
 			if(dao.publishTweet(this) != 0){
 				return true;
 			}else{
@@ -78,6 +92,8 @@ public class BeanTweet {
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
 			return false;
 		}
 	}

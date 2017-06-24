@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -31,16 +32,18 @@ public class BeanUser implements Serializable  {
 		userTweets = new ArrayList<BeanTweet>();
 		following = new ArrayList<String>();
 		followers = new ArrayList<String>();
-		try {
-			//System.out.println("new BEAN");
-			dao = new DAO();	//Our interface to retrieve data fron DB
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	private static final long serialVersionUID = 1L;
 
 	private static DAO dao;
+	static {
+		try {
+			dao = new DAO();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	private	String name = "";
 	private String surname = "";
 	private String username = "";
@@ -53,6 +56,14 @@ public class BeanUser implements Serializable  {
 	private String phonenumber = "";
 	private List<BeanTweet> userTweets = new ArrayList<BeanTweet>();
 	private List<String> following = new ArrayList<String>();
+	
+	public boolean isSameUser(BeanUser u){
+		return u.getUsername().equals(username);
+	}
+	
+	public Predicate<BeanUser> isSameUser() {
+	    return u -> this.isSameUser(u);
+	}
 	
 	public List<String> getFollowing() {
 		return following;
@@ -102,14 +113,7 @@ public class BeanUser implements Serializable  {
 		return username;
 	}
 
-	public void setUsername(String username) throws SQLException {
-		ResultSet rs = dao.getUserAndPass(this.username);
-		if (rs.next()) {//get first result
-			System.out.println("el username existe");
-			this.error[1]=1;
-        }else{
-        	this.error[1]=0;
-        }
+	public void setUsername(String username){
 		this.username = username;
 	}
 
@@ -126,15 +130,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setEmail(String email) throws SQLException {
-		ResultSet rs = dao.getUserAndPass(this.username);
-		if (rs.next()) {//get first result
-			System.out.println("el email existe");
-			this.error[0]=1;
-        }else{
-        	this.error[0]=0;
-        }
 		this.email = email;
-		//TODO check the content if it's empty or not
 	}
 
 	public String getPassword() {
@@ -193,7 +189,10 @@ public class BeanUser implements Serializable  {
 	
 	
 	public boolean loadFromDatabase(String username){
-		try {		
+		boolean success = true;
+		try {
+			
+			dao.connecToDB();
 			ResultSet rs = dao.getUserInfo(username);
 			if(rs.next()){
 				this.name = rs.getString("name");
@@ -210,20 +209,22 @@ public class BeanUser implements Serializable  {
 				this.loadUserFollowers();
 				this.loadUserFollowing();
 				this.loadUserTweetsFromDB();
-				return true;
 			}
 			//System.out.println("User "+username+" doesn't exists");
-			return false;
 		} catch (SQLException e) {
 			System.out.println("Error retrieving user "+username);
-			return false;
+			success=false;
 			//e.printStackTrace();
+		} finally {
+			dao.disconnectBD();
+			return success;
 		}
 	}
 	
 	public List<BeanTweet> loadFollowersTweets(){
 		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 		try {
+			dao.connecToDB();
 			ResultSet rs = dao.getTweetsFromFollowers(this.username);
 			while(rs.next()){
 				BeanTweet tmpB = new BeanTweet();
@@ -237,6 +238,8 @@ public class BeanUser implements Serializable  {
 			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
 		}
 		return tmp;
 		
@@ -246,6 +249,7 @@ public class BeanUser implements Serializable  {
 	public List<BeanTweet> loadUserTweetsFromDB(){
 		this.userTweets.clear();
 		try {
+			dao.connecToDB();
 			ResultSet rs = dao.getTweetsFromUser(this.username);
 			while(rs.next()){
 				BeanTweet tmpB = new BeanTweet();
@@ -259,6 +263,8 @@ public class BeanUser implements Serializable  {
 			System.out.println("Error retrieving tweet");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
 		}
 		return this.userTweets;
 		
@@ -267,6 +273,7 @@ public class BeanUser implements Serializable  {
 	public void loadUserFollowers(){
 		followers.clear();
 		try {
+			dao.connecToDB();
 			ResultSet rs = dao.getFollowersFromUser(this.username);
 			while(rs.next()){
 				String follower = rs.getString("follower");
@@ -277,12 +284,15 @@ public class BeanUser implements Serializable  {
 			System.out.println("Error retrieving followers");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
 		}
 	}
 	
 	public void loadUserFollowing(){
 		following.clear();
 		try {
+			dao.connecToDB();
 			ResultSet rs = dao.getFollowingFromUser(this.username);
 			while(rs.next()){
 				String followin = rs.getString("followed");
@@ -293,15 +303,26 @@ public class BeanUser implements Serializable  {
 			System.out.println("Error retrieving following");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
 		}
 	}
-	public List<BeanUser> getAllUsers() throws SQLException{
+	public List<BeanUser> getAllUsers(){
 		List<BeanUser> tmp = new ArrayList<BeanUser>();
-		ResultSet rs = dao.getAllUsersUsername();
-		while(rs.next()){
-			BeanUser b = new BeanUser();
-			b.loadFromDatabase(rs.getString("username"));
-			tmp.add(b);
+		
+		try {
+			dao.connecToDB();
+			ResultSet rs = dao.getAllUsersUsername();
+			while(rs.next()){
+				BeanUser b = new BeanUser();
+				b.loadFromDatabase(rs.getString("username"));
+				tmp.add(b);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
 		}
 		return tmp;
 	}
@@ -335,20 +356,113 @@ public class BeanUser implements Serializable  {
 	public void create(){
 		//Creates the user in the database
 		try {
+			dao.connecToDB();
 			dao.createUser(this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
 		}
 	}
 	
 	public void update(){
 		try {
 			System.out.println("Update "+username);
+			dao.connecToDB();
 			dao.updateUser(this);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
 		}
 	}
+	
+	static public List<BeanUser> loadAllUsersFromDatabase(){
+		List<BeanUser> tmp = new ArrayList<BeanUser>();
+		try {
+			dao.connecToDB();
+			ResultSet rs = dao.getUsers();
+			while(rs.next()){
+				try{
+					BeanUser tmpU = new BeanUser();
+					String name = rs.getString("name");
+					String surname = rs.getString("surname");
+					String username = rs.getString("username");
+					String gender = rs.getString("gender");
+					String email = rs.getString("email");
+					String password = rs.getString("password");
+					String nickname = rs.getString("nickname");
+					String dateofbirth = rs.getString("dateofbirth");
+					String address = rs.getString("address");
+					String phoneNumber = rs.getString("phonenumber");
+					
+					tmpU.setName(name);
+					tmpU.setSurname(surname);
+					tmpU.setUsername(username);
+					tmpU.setGender(gender);
+					tmpU.setEmail(email);
+					tmpU.setPassword(password);
+					tmpU.setNickname(nickname);
+					tmpU.setDateofbirth(dateofbirth);
+					tmpU.setAddress(address);
+					tmpU.setPhonenumber(phoneNumber);
+					tmpU.loadUserFollowers();
+					tmpU.loadUserFollowing();
+					tmpU.loadUserTweetsFromDB();
+					tmp.add(tmpU);
+				}catch(NullPointerException e){
+					//TODO ver porque pasa esto
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("Error retrieving users");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+		return tmp;
+	}
+	
+	public String getLastTweetText(){
+		if(userTweets.size()>0){
+			return userTweets.get(0).getTweet_text();
+		}else{
+			return "User has no tweets";
+		}
+	}
+	
+	public boolean followUser(String username){
+		try {
+			dao.connecToDB();
+			dao.postFollower(this.getUsername(), username);
+			this.following.add(username);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public boolean unFollowUser(String username){
+		try {
+			dao.connecToDB();
+			dao.deleteFollow(this.getUsername(), username);
+			this.following.remove(username);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
 }

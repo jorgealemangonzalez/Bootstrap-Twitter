@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
 		    	System.out.println("Login not complete and username set");
 		    	response.setStatus(401);
 		    }
-		} catch (IllegalAccessException | InvocationTargetException | SQLException e) {
+		} catch (IllegalAccessException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

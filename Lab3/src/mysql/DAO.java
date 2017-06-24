@@ -11,11 +11,7 @@ public class DAO {
 	private Statement statement;
 
 	public DAO() throws Exception {
-		String user = "mysql";
-		String password="prac";
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/login?user="+user+"&password="+password);
-		statement=connection.createStatement();
+		
 	}
 
 	// execute queries
@@ -93,6 +89,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet getUsers() throws SQLException{
+		String query = "SELECT * FROM login.users;"; 
+		return statement.executeQuery(query);
+	}
+	
 	public ResultSet getTweetsFromFollowers(String username) throws SQLException{
 		String query = "SELECT * FROM tweets JOIN follow ON username=followed WHERE follower='" + username + "' ORDER BY date DESC";
 		return statement.executeQuery(query);
@@ -133,10 +134,24 @@ public class DAO {
 		
 	}
 	
+	public void connecToDB(){
+		try{
+			String user = "mysql";
+			String password="prac";
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			connection=DriverManager.getConnection("jdbc:mysql://localhost/login?user="+user+"&password="+password);
+			statement=connection.createStatement();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
-	// TODO: code for updates for Assignments 2, 3 and 4.
-	public void disconnectBD() throws SQLException {
-		statement.close();
-		connection.close();
+	public void disconnectBD() {
+		try{
+			statement.close();
+			connection.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 }
