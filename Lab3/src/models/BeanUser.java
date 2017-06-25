@@ -54,8 +54,13 @@ public class BeanUser implements Serializable  {
 	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
+	private boolean isAdmin;
 	private List<BeanTweet> userTweets = new ArrayList<BeanTweet>();
 	private List<String> following = new ArrayList<String>();
+	
+	public boolean isAdmin(){
+		return this.isAdmin;
+	}
 	
 	public boolean isSameUser(BeanUser u){
 		return u.getUsername().equals(username);
@@ -205,6 +210,7 @@ public class BeanUser implements Serializable  {
 				this.dateofbirth = rs.getString("dateofbirth");
 				this.address = rs.getString("address");
 				this.phonenumber = rs.getString("phonenumber");
+				this.isAdmin = rs.getBoolean("isAdmin");
 				//System.out.println("User"+username+" loaded succesfully");
 				this.loadUserFollowers();
 				this.loadUserFollowing();
@@ -451,15 +457,30 @@ public class BeanUser implements Serializable  {
 	}
 	
 	public boolean unFollowUser(String username){
+		boolean success = true;
 		try {
 			dao.connecToDB();
 			dao.deleteFollow(this.getUsername(), username);
 			this.following.remove(username);
-			return true;
+			success= true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			success= false;
+		} finally{
+			dao.disconnectBD();
+			
+		}
+		return success;
+	}
+	
+	public void deleteUser(String username){
+		try {
+			dao.connecToDB();
+			dao.deleteUser(username);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally{
 			dao.disconnectBD();
 		}

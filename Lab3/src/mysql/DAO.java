@@ -124,6 +124,12 @@ public class DAO {
 		
 	}
 	
+	public int deleteUser(String username) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("DELETE FROM twitter.users WHERE username=? ;");
+		ps.setString(1, username);
+		return ps.executeUpdate();
+	}
+	
 	public void connecToDB(){
 		try{
 			String user = "mysql";

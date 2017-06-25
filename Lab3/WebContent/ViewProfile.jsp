@@ -49,6 +49,22 @@ $(document).ready(function() {
 		});		
    	});
 	
+	$(".delete").click(function(event){
+		var target = event.target;
+		var userN = $(target.parentElement).attr("username");
+		
+		var r = confirm("Are you sure you want to erase the user "+userN+" ?");
+		if (r == true) {
+			$.post("ProfileController",{profileDelete: userN},function(data,status){
+				if(status != 400){
+					$('#content').html(data);
+				}
+			});
+		}
+		
+		
+	});
+	
     $("#editProfile").click(function(event) {
     	console.log("click")
         $('#content').load('EditProfileController');
@@ -70,13 +86,17 @@ $(document).ready(function() {
 				<a id="editProfile" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card green"><i class="fa fa-pencil"></i></a>
 			<% }else{ %>
 			<% 
-           		List<String> following = user.getFollowing();
-           		System.out.println(following);%>
+           		List<String> following = user.getFollowing();%>
            		<% if(following.contains(userProfile.getUsername())) {%>
 	            	<a class="follow-button follow-user-card btn btn-danger btn-sm unfollow">UnFollow</a>
 	            <%}else{ %>
 	            	<a class="follow-button follow-user-card btn btn-success btn-sm follow">Follow</a>
-            <% } %>
+            	<% } %>
+            	
+            	<% if(user.isAdmin()){ %>
+            		<a class="follow-button delete-user-card btn btn-danger btn-sm delete">DELETE USER</a>
+            	<% } %>
+            
             <% } %>
 		<% } %>
 		<div class="card-block">

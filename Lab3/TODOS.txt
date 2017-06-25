@@ -2,29 +2,22 @@
 
 (TODO) Sessiones con cookiesSession para que se quede cuando cierras el navegador
 
-**(TODO) Inicio como anonimo
-
-**(TODO) Distintos tipos de usuario admin/anonimo/usuario (booleano en BD + string en Bean que tengamos los datos)
-
 (TODO) Pagina inicial con lista de tweets y informacion minima de tu usuario a la izquierda ( con el contador igual que twitter )
-
-**(TODO) Restringir lo que puede y no puede hacer/ver el anonimo
-
-**(TODO) Habilitar lo que puede hacer el admin
 
 (TODO) Tweets de un solo usuario dentro de su perfil publico
 
 **(TODO) Editar y/o borrar tweet
 
-**(TODO) Un admin puede editar y borrar: cuentas de usuario, tweets
+**(TODO) Un admin puede editar y borrar: tweets
 
 (TODO) quitar los new bean user de las views
+
 *** Mas de 7 ***
 (TODO) Comentar / Responder / Retweet tweets
 
 (TODO) Like/dislike a tweet and his comments
 
-(TODO) Username and mail can not be changed
+(TODO) Username and mail can not be changed en edit profile
 
 (TODO) Mejorar edit profile para que funcione bien
 

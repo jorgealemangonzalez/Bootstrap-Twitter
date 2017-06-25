@@ -42,14 +42,14 @@ public class ProfileController extends HttpServlet{
 		
 		if(userProfileUsername != null || user != null){
 			BeanUser userProfile = null;
-			if(user != null)
-				userProfile = user;
-			else{
+			if(userProfileUsername != null){
 				userProfile = new BeanUser();
 				if(!userProfile.loadFromDatabase(userProfileUsername)){
 					response.getWriter().print("User "+userProfileUsername+" doesn't exist in the database");
 					System.out.println("User "+userProfileUsername+" doesn't exist in the database");
 				}
+			}else{
+				userProfile = user;
 			}
 			
 			request.setAttribute("userProfile", userProfile);
@@ -70,7 +70,19 @@ public class ProfileController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		RequestDispatcher dispatcher = null;
+		String userProfileUsername = (String) request.getParameter("profileDelete");
+		HttpSession session = request.getSession();
+		BeanUser user = (BeanUser) session.getAttribute("user");
+		if(user != null && user.isAdmin()){
+			user.deleteUser(userProfileUsername);
+		}else{
+			System.out.println("The user is not allowed to delete other users");
+		}
+		
+		dispatcher = request.getRequestDispatcher("UserListController");
+		dispatcher.forward(request, response);
 	}
 
 }
