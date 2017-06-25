@@ -25,8 +25,18 @@ $(".like").click(function(event){
 
 
 <div class="container col-md-6 col-md-offset-3">
-	<% for(int i = 0 ; i < list.size() ; i++) { 
-		BeanTweet t = list.get(i);
+	<% if(list.size() == 0){ %>
+		<div class="card">
+		    <div class="card-header danger-color-dark white-text">
+		        Tweets not found
+		    </div>
+		    <div class="card-block">
+		        <h4 class="card-title">There are no tweets</h4>
+		        <p class="card-text">There are no tweets that match what you are looking for</p>
+		    </div>
+		</div>
+	<%} %>
+	<% for(BeanTweet t : list) { 
 	%>
 		<div class="card green tweet">
 			<div class="row card">
