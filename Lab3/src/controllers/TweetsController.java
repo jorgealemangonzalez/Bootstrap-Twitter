@@ -60,7 +60,7 @@ public class TweetsController extends HttpServlet{
 					List<BeanTweet> tmp = user.loadFollowersTweets();
 					request.setAttribute("listTweets", tmp);
 				}
-				dispatcher = request.getRequestDispatcher("TweetView.jsp");
+				dispatcher = request.getRequestDispatcher("ViewTweetList.jsp");
 			}else{
 				status = 401;
 				dispatcher = request.getRequestDispatcher("LoginController");

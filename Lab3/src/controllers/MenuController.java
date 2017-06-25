@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import models.BeanUser;
+
 /**
  * Servlet implementation class MenuController
  */
@@ -31,26 +33,21 @@ public class MenuController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		System.out.println("MenuController, loading: ViewMenu ");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenu.jsp");
 		
-		if (session.getAttribute("user")!=null) {
+		BeanUser user = (BeanUser) session.getAttribute("user");
+		if(user != null)
+			request.setAttribute("user",user);
 		
-			System.out.println("MenuController, loading: ViewMenuLogged ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenuLogged.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			
-			System.out.println("MenuController, loading: ViewMenuNotLogged ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("ViewMenuNotLogged.jsp");
-			dispatcher.forward(request, response);
-		}
+		
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

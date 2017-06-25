@@ -18,13 +18,11 @@
 
 **(TODO) Un admin puede editar y borrar: cuentas de usuario, tweets
 
-
+(TODO) quitar los new bean user de las views
 *** Mas de 7 ***
-(TODO) Reply tweet
+(TODO) Comentar / Responder / Retweet tweets
 
 (TODO) Like/dislike a tweet and his comments
-
-(TODO) Retweet
 
 (TODO) Username and mail can not be changed
 

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="models.BeanUser"%>
+<% 
+
+BeanUser user = null;
+if (request.getAttribute("user")!=null) {
+	user = (BeanUser)request.getAttribute("user");
+}
+
+%>
 
 <script type="text/javascript">
 
@@ -67,6 +75,13 @@ $(document).ready(function() {
     	});
 	});
 	
+	
+	$(document).ready(function() {
+	    $(".register-login").click(function(event) {
+	        $('#content').load($(this).attr('id'));
+	        });
+	});
+	
 });
 </script>
 <!--Navbar-->
@@ -81,10 +96,13 @@ $(document).ready(function() {
                 <a class="nav-link dropdown-toggle" id="dropdownMenuTweets" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tweets</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuTweets">
                     <a class="dropdown-item" id="TweetsController">All tweets</a>
+                    <%if(user != null){ %>
                     <a class="dropdown-item" id="followerTweets">Following users tweets</a>
                     <a class="dropdown-item " id="myTweets">My tweets</a>
+                    <% } %>
                 </div>
             </li>
+            <% if( user != null){ %>
             <li class="nav-item btn-group">
                 <a class="nav-link dropdown-toggle" id="dropdownMenuAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuAccount">
@@ -92,30 +110,46 @@ $(document).ready(function() {
                     <a class="dropdown-item" id="myProfile">My information</a>
                 </div>
             </li>
+            <% } %>
             <li class="nav-item btn-group">
-	            <a class="nav-link dropdown-toggle" id="dropdownMenuUsers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Userss</a>
+	            <a class="nav-link dropdown-toggle" id="dropdownMenuUsers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuUsers">
                     <a class="dropdown-item" id="allUsers">All users</a>
+                    <% if(user != null){ %>
                     <a class="dropdown-item" id="followingUsers">Following</a>
                     <a class="dropdown-item" id="followersUsers">Followers</a>
+                    <% } %>
                 </div>
             </li>
 	                
-            <li class="nav-item">
-                <a class="nav-link linkController" id="logout">Log out</a>
-            </li>
+            
         </ul>
+        
         <ul class="navbar-nav ml-auto nav-flex-icons">
+        
+        <% if(user == null){ %>
+	        <li class="nav-item active">
+	            <a class="nav-link" id="LoginController">Log in <span class="sr-only">(current)</span></a>
+	        </li>
+	        <li class="nav-item">
+	            <a class="nav-link" id="RegisterController">Register</a>
+	        </li>
+        <% }else{ %>
+	        <br>
         	<li class="nav-item">
-        		<a class="nav-link waves-effect waves-light">
+        		<a class="nav-link">
         			<i class="fa fa-edit" id="newTweet">Publish Tweet</i>
         		</a>
         	</li>
-        
-        </ul>
+	        
+	        <li class="nav-item">
+	            <a class="nav-link" id="logout">Log out</a>
+	        </li>
+        <% } %>
         <form class="form-inline waves-effect waves-light">
             <input class="form-control" type="text" placeholder="Search">
         </form>
+        </ul>
     </div>
 </nav>
 <!--/.Navbar-->

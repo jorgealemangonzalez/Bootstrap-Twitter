@@ -22,6 +22,10 @@ a:hover{
 	margin: 0px 0px 0px 0px;	/* No margins around the bar */
 }
 
+.ml-auto>li{
+	margin-right:10px;
+}
+
 .navbar, .dropdown-menu{		/* When the submenu is shown we eliminate all borders inherited and reset the color if bootstrap changed it*/
 	border: none;
 	background:#09ba32;
