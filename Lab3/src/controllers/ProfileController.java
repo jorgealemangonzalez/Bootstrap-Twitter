@@ -49,6 +49,11 @@ public class ProfileController extends HttpServlet{
 		}else{
 			System.out.println("Username param is mandatory");
 		}
+		
+		HttpSession session = request.getSession();
+		BeanUser user = (BeanUser) session.getAttribute("user");
+		if(user != null)
+			request.setAttribute("user",user);
 		dispatcher = request.getRequestDispatcher("ViewProfile.jsp");
 		dispatcher.forward(request, response);
 	}
