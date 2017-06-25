@@ -24,9 +24,6 @@ BeanUser user = null;
 if (request.getAttribute("user")!=null) {
 	user = (BeanUser)request.getAttribute("user");
 }
-else {
-	user = new BeanUser();
-}
 %> 
 <!--Form with header-->
 <div class="container col-md-6 col-md-offset-3">

@@ -24,8 +24,9 @@ public class DAO {
 	}
 	
 	public int createUser(BeanUser user) throws SQLException{
-		String query = "INSERT INTO twitter.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+		String query = "INSERT INTO twitter.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"', 0,'"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
 		System.out.println("Inserting into DB");
+		System.out.println(query);
 		return this.insertSQL(query);
 	}
 	

@@ -6,9 +6,6 @@ List<BeanUser> users = null;
 if (request.getAttribute("users")!=null) {
 	users = (List<BeanUser>)request.getAttribute("users");
 }
-else {
-	users = new ArrayList<BeanUser>();
-} 
 
 BeanUser user = null;
 if (request.getAttribute("user")!=null) {

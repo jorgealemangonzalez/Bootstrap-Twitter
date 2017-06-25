@@ -13,9 +13,6 @@ BeanUser user = null;
 if (request.getAttribute("user")!=null) {
 	user = (BeanUser)request.getAttribute("user");
 }
-else {
-	user = new BeanUser();
-}
 %>
 <script type="text/javascript">
 $(".like").click(function(event){

@@ -10,8 +10,9 @@
 
 **(TODO) Un admin puede editar y borrar: tweets
 
-(TODO) quitar los new bean user de las views
+(TODO) Al publicar un tweet que lo que ves se actualice , publicar a traves del usuario
 
+(TODO) Que el register se vea bien y quitar la fecha de nacimiento ( da problemas )
 *** Mas de 7 ***
 (TODO) Comentar / Responder / Retweet tweets
 

@@ -11,9 +11,6 @@ BeanUser userProfile = null;
 if (request.getAttribute("userProfile")!=null) {
 	userProfile = (BeanUser)request.getAttribute("userProfile");
 }
-else {
-	userProfile = new BeanUser();
-}
 %>
 
 <script>
@@ -103,15 +100,15 @@ $(document).ready(function() {
 			<h4 class="card-title statics-resume">
 				<div class="resume-statics">
 					<h3>Tweets</h3>
-					<span class="badge badge-primary badge-pill"><%= user.getUserTweets().size() %> </span>
+					<span class="badge badge-primary badge-pill"><%= userProfile.getUserTweets().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Following</h3>
-					<span class="badge badge-primary badge-pill"><%= user.getFollowing().size() %> </span>
+					<span class="badge badge-primary badge-pill"><%= userProfile.getFollowing().size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Followers</h3>
-					<span class="badge badge-primary badge-pill"><%= user.getFollowers().size() %> </span>
+					<span class="badge badge-primary badge-pill"><%= userProfile.getFollowers().size() %> </span>
 				</div>
 			</h4>
 			<hr>
