@@ -75,12 +75,14 @@ $(document).ready(function() {
     	});
 	});
 	
-	
-	$(document).ready(function() {
-	    $(".register-login").click(function(event) {
-	        $('#content').load($(this).attr('id'));
-	        });
-	});
+
+    $("#register").click(function(event) {
+        $('#content').load('RegisterController');
+    });
+    
+    $("#login").click(function(event) {
+        $('#content').load('LoginController');
+    });
 	
 });
 </script>
@@ -128,11 +130,11 @@ $(document).ready(function() {
         <ul class="navbar-nav ml-auto nav-flex-icons">
         
         <% if(user == null){ %>
-	        <li class="nav-item active">
-	            <a class="nav-link" id="LoginController">Log in <span class="sr-only">(current)</span></a>
+	        <li class="nav-item">
+	            <a class="nav-link" id="login">Log in</a>
 	        </li>
 	        <li class="nav-item">
-	            <a class="nav-link" id="RegisterController">Register</a>
+	            <a class="nav-link" id="register">Register</a>
 	        </li>
         <% }else{ %>
 	        <br>

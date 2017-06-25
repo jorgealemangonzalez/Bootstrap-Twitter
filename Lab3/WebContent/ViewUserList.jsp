@@ -24,6 +24,7 @@ if(request.getAttribute("lastAction") != null){
 <script type="text/javascript">
 $(document).ready(function() {  
 	$(".follow").click(function(event){
+		event.stopPropagation(); //Prevent go to user profile
 		var target = event.target;
 		var userN = $(target.parentElement.parentElement).attr("username");
     	$.post('FollowController',{action: "followUser", username: userN },function(data,status){
@@ -38,6 +39,7 @@ $(document).ready(function() {
    	});
 	
 	$(".unfollow").click(function(event){
+		event.stopPropagation(); //Prevent go to user profile
 		var target = event.target;
 		var userN = $(target.parentElement.parentElement).attr("username");
     	$.post('FollowController',{action: "unFollow", username: userN },function(data,status){
@@ -50,10 +52,15 @@ $(document).ready(function() {
  			}
 		});		
    	});
+	
+	$(".user-list-item").click(function(event){
+		var username = $(this).find(".media-body").attr("username");
+		$("#content").load("ProfileController?userProfileUsername="+username);
+	});
 });
 </script>
 
-<div class="container col-md-6 col-md-offset-3">
+<div class="container col-md-4 col-sm-4 col-lg-4  col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
 	<% if(users.size() == 0){ %>
 		<div class="card">
 		    <div class="card-header danger-color-dark white-text">
@@ -86,7 +93,7 @@ $(document).ready(function() {
 	                <li title="following"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getFollowing().size() %></span></li>
 	            </ul>
 	            <h6>Last tweet</h6>
-	            <p><%=userInList.getLastTweetText	() %></p>
+	            <p><%=userInList.getLastTweetText() %></p>
 	        </div>
 	    </div>
     <% } %>

@@ -28,6 +28,7 @@
 
 (TODO) Mejorar edit profile para que funcione bien
 
+(TODO) Imagen de perfil
 
 ** ideas **
 

@@ -45,8 +45,7 @@ public class TweetsController extends HttpServlet{
 			String printResponse = "";
 			BeanUser user = new BeanUser();
 			user = (BeanUser) session.getAttribute("user");
-			if(user.getUsername() != null ){	
-				user.loadFromDatabase(user.getUsername()); //load user info
+			if(user != null ){	
 				if(action.equals("getUserTweets")){
 					System.out.println("get User tweets");
 					List<BeanTweet> tmp = user.loadUserTweetsFromDB();
