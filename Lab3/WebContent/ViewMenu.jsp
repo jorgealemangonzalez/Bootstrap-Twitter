@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="models.BeanUser"%>
+    pageEncoding="UTF-8" import="models.BeanUser,models.BeanTweet" %>
 <% 
 
 BeanUser user = null;
@@ -7,11 +7,24 @@ if (request.getAttribute("user")!=null) {
 	user = (BeanUser)request.getAttribute("user");
 }
 
+BeanTweet bTweet = new BeanTweet();
+
 %>
 
 <script type="text/javascript">
-
 $(document).ready(function() {    
+	
+	$('#publishTweet').click(function(event){
+		var text = $('#tweet_text').val()
+		$.post('TweetsController',{tweet_text : text, action: "publishTweet"},function(data, status){
+			if(status == 401)
+	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
+			else{
+				$('#publish-tweet').modal('hide')
+			}
+		});
+	});
+	
     $("#myProfile").click(function(event){
     	$('#content').load('ProfileController');	//No profile means my profile
     });
@@ -50,9 +63,10 @@ $(document).ready(function() {
 	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
 	    });
     });
+	/*
 	$("#newTweet").click(function(event){
 	  	$('#content').load('PublishTweet.jsp');	
-	  });
+	  });*/
 	
 	$("#allUsers").click(function(event){
 		$("#content").load("UserListController");
@@ -137,7 +151,7 @@ $(document).ready(function() {
 	        <br>
         	<li class="nav-item">
         		<a class="nav-link">
-        			<i class="fa fa-edit" id="newTweet">Publish Tweet</i>
+        			<i class="fa fa-edit" id="newTweet" role="button" data-toggle="modal" data-target="#publish-tweet">Publish Tweet</i>
         		</a>
         	</li>
 	        
@@ -153,5 +167,31 @@ $(document).ready(function() {
 </nav>
 <!--/.Navbar-->
 
-
+<!-- POPUP publish tweet :: control del popup mediante bootstrap -->
+<div class="modal fade"  id="publish-tweet" tabindex="-1" aria-labelledby="myModalLabel" role="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="card">
+			    <div class="card-block">
+			        <div class="text-center">
+			            <h3><i class="fa fa-pencil"></i> Publish a Tweet:</h3>
+			            <hr class="mt-2 mb-2">
+			        </div>
+			
+			        <!--Body-->
+	
+			         <div class="md-form">
+			           	<input class="form-control" type="text" id="tweet_text"/>
+			            <label for="tweet_text">What are you thinking?</label>
+		  	        </div>
+			
+			
+			        <div class="text-center" id="publishTweet">
+			            <button class="btn btn-lg btn-success" >Publish</button>
+			        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
