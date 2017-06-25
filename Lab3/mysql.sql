@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS login ;
-CREATE DATABASE login;
-USE login;
+DROP DATABASE IF EXISTS twitter ;
+CREATE DATABASE twitter;
+USE twitter;
 CREATE TABLE IF NOT EXISTS users (
     name CHAR(24) NOT NULL,
     surname CHAR(24) NOT NULL,

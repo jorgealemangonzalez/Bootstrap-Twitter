@@ -13,7 +13,7 @@ if (request.getAttribute("user")!=null) {
 
 $(document).ready(function() {    
     $("#myProfile").click(function(event){
-    	$('#content').load('EditProfileController',{profile: ""});	//No profile means my profile
+    	$('#content').load('ProfileController');	//No profile means my profile
     });
     
     $("#myTweets").click(function(event){
@@ -23,6 +23,7 @@ $(document).ready(function() {
     		}
     	});
     });
+    
     $("#followerTweets").click(function(event){
     	$.get('TweetsController',{action: "getMyFollowers"},function(data,status){
     		if(status != 401){
@@ -106,11 +107,7 @@ $(document).ready(function() {
             </li>
             <% if( user != null){ %>
             <li class="nav-item btn-group">
-                <a class="nav-link dropdown-toggle" id="dropdownMenuAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuAccount">
-                    <a class="dropdown-item" id="myAccount">My account</a>
-                    <a class="dropdown-item" id="myProfile">My information</a>
-                </div>
+                <a class="nav-link" id="myProfile"aria-haspopup="true" aria-expanded="false">Profile</a>
             </li>
             <% } %>
             <li class="nav-item btn-group">

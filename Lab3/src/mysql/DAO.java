@@ -24,24 +24,14 @@ public class DAO {
 	}
 	
 	public int createUser(BeanUser user) throws SQLException{
-		String query = "INSERT INTO login.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+		String query = "INSERT INTO twitter.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"','"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
 		System.out.println("Inserting into DB");
 		return this.insertSQL(query);
 	}
 	
 	public int updateUser(BeanUser user) throws SQLException{	//TODO date of birth update
-		/*String query = "UPDATE login.users SET"
-				+ " name='"+user.getName()+"'"
-				+ " surname='"+user.getSurname()+"'"
-				+ " gender='"+user.getGender()+"'"
-				+ " password='"+user.getPassword()+"'"
-				+ " nickName='"+user.getNickname()+"'"
-				+ " dateOfBirth='"+user.getDateofbirth()+"'"
-				+ " address='"+user.getAddress()+"'"
-				+ " phoneNumber='"+user.getPhonenumber()+"' "
-						+ " WHERE username='"+user.getUsername()+"'";*/
 	    PreparedStatement ps = connection.prepareStatement(
-	    	      "UPDATE login.users SET name = ?, surname = ?,  gender = ?, "
+	    	      "UPDATE twitter.users SET name = ?, surname = ?,  gender = ?, "
 	    	      + "password = ?, nickName = ?, address = ?, phoneNumber = ?  WHERE username = ?");
 	    ps.setString(1,user.getName());
 	    ps.setString(2, user.getSurname());
@@ -90,7 +80,7 @@ public class DAO {
 	}
 	
 	public ResultSet getUsers() throws SQLException{
-		String query = "SELECT * FROM login.users;"; 
+		String query = "SELECT * FROM twitter.users;"; 
 		return statement.executeQuery(query);
 	}
 	
@@ -139,7 +129,7 @@ public class DAO {
 			String user = "mysql";
 			String password="prac";
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connection=DriverManager.getConnection("jdbc:mysql://localhost/login?user="+user+"&password="+password);
+			connection=DriverManager.getConnection("jdbc:mysql://localhost/twitter?user="+user+"&password="+password);
 			statement=connection.createStatement();
 		}catch(Exception e){
 			e.printStackTrace();

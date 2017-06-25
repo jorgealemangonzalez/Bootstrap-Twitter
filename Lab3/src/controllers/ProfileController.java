@@ -37,21 +37,28 @@ public class ProfileController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = null;
 		String userProfileUsername = (String) request.getParameter("userProfileUsername");
-		if(userProfileUsername != null){
-			BeanUser userProfile = new BeanUser();
-			if(userProfile.loadFromDatabase(userProfileUsername)){
-				request.setAttribute("userProfile", userProfile);
-				System.out.println("Correctly loaded user profile ");
-			}else{
-				response.getWriter().print("User "+userProfileUsername+" doesn't exist in the database");
-				System.out.println("User "+userProfileUsername+" doesn't exist in the database");
-			}
-		}else{
-			System.out.println("Username param is mandatory");
-		}
-		
 		HttpSession session = request.getSession();
 		BeanUser user = (BeanUser) session.getAttribute("user");
+		
+		if(userProfileUsername != null || user != null){
+			BeanUser userProfile = null;
+			if(user != null)
+				userProfile = user;
+			else{
+				userProfile = new BeanUser();
+				if(!userProfile.loadFromDatabase(userProfileUsername)){
+					response.getWriter().print("User "+userProfileUsername+" doesn't exist in the database");
+					System.out.println("User "+userProfileUsername+" doesn't exist in the database");
+				}
+			}
+			
+			request.setAttribute("userProfile", userProfile);
+			System.out.println("Correctly loaded user profile ");
+		}else{
+			System.out.println("Username param is mandatory if you arent loged in");
+		}
+		
+		
 		if(user != null)
 			request.setAttribute("user",user);
 		dispatcher = request.getRequestDispatcher("ViewProfile.jsp");
