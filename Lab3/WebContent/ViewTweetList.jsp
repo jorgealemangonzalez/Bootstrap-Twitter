@@ -57,7 +57,21 @@ $('.save').click(function(event){
 			});
 		}
 	} );
-})
+});
+
+$('.remove').click(function(event){
+	var target = event.target;
+	var tweetId = $(target.parentElement.parentElement.parentElement.parentElement).attr("tweetID");
+	$.post('TweetsController',{action: "deleteTweet", id: tweetId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	})
+});
 
 
 </script>
@@ -91,7 +105,7 @@ $('.save').click(function(event){
 		        		<% if(t.getUsername().compareTo(user.getUsername()) == 0) { %>
 			    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true" id="editTweet<%=t.getId()%>">Edit</i>
 			    		 	<i style="display:none;" class="save fa fa-save fa-pull rigth" id ="saveTweet<%=t.getId() %>" >Save</i>
-			    		 	<i class="remove fa fa-trash fa-pull right" >Delete</i>
+			    		 	<i class="remove fa fa-trash fa-pull right" id="deleteTwet<%=t.getId()%>">Delete</i>
 			    		 <% } %>
 		        	</div>
 		         	

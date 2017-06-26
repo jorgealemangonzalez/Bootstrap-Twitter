@@ -112,6 +112,15 @@ public class TweetsController extends HttpServlet{
 				}else{
 					System.out.println("An error has ocurred updating tweet");
 				}
+			}else if(action.equals("deleteTweet")){
+				System.out.println("deleting tweet");
+				BeanTweet tmp = new BeanTweet();
+				tmp.setId((int) Integer.parseInt(request.getParameter("id"))); 
+				if(tmp.removeTweet()){
+					System.out.println("tweet deleted!");
+				}else{
+					System.out.println("error deleting tweet");
+				}
 			}else{
 				status = 401;
 				dispatcher = request.getRequestDispatcher("LoginController");

@@ -97,7 +97,21 @@ public class BeanTweet implements Serializable {
 		}
 		return false;
 	}
-	
+	public boolean removeTweet(){
+		try{
+			dao.connecToDB();
+			if(dao.removeTweet(this.id) != 0){
+				return true;
+			}else{
+				return false;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
+		}
+		return false;
+	}
 	public boolean publish(){
 		//TODO Returns true if publish successful
 		try{

@@ -139,6 +139,12 @@ public class DAO {
 		return ps.executeUpdate();
 	}
 	
+	public int removeTweet(int id)throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("DELETE FROM tweets WHERE id=? ;");
+		ps.setInt(1, id);
+		return ps.executeUpdate();
+	}
+	
 	public void connecToDB(){
 		try{
 			String user = "mysql";
