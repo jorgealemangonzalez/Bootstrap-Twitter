@@ -27,34 +27,38 @@ $(".like").click(function(event){
 $('.edit').click(function(event){
 	var target = event.target;
 	var tweetId = $(target.parentElement.parentElement.parentElement.parentElement).attr("tweetID");
-	if(document.getElementById("newText") == null){
-		var ident = "editable"+tweetId;
-		var edit = document.getElementById(ident);
-		var oldText = document.getElementById("inputText"+tweetId);
-		var newText = document.createElement("input");
-		//var newText = document.createElement("textarea");
-		var oldTextAtt = $("#inputText"+tweetId).text();
-		console.log(oldTextAtt);
-		newText.setAttribute("id","newText");
-		newText.setAttribute("value",oldTextAtt);
-		newText.setAttribute("style","width: 350px");
-		edit.removeChild(oldText);
-		edit.appendChild(newText);
-	}else{
-		var text = document.getElementById("newText").value;	
-		$.post('TweetsController',{action: "editTweet", input: text, id: tweetId},function(data,status){
-			if(status != 401){
-				$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
-					if(status != 401){
-						$('#content').html(data);
-					}
-				});
-			}
-		} );
-	}
-	
+	var ident = "editable"+tweetId;
+	var edit = document.getElementById(ident);
+	var oldText = document.getElementById("inputText"+tweetId);
+	var oldSubmit = document.getElementById("editTweet"+tweetId);
+	var save = document.getElementById("saveTweet"+tweetId);
+	oldSubmit.setAttribute("style","display:none;");
+	save.setAttribute("style"," ");
+	var newText = document.createElement("input");
+	//var newText = document.createElement("textarea");
+	var oldTextAtt = $("#inputText"+tweetId).text();
+	newText.setAttribute("id","inputText"+tweetId);
+	newText.setAttribute("value",oldTextAtt);
+	newText.setAttribute("style","width: 400px");
+	edit.removeChild(oldText);
+	edit.insertBefore(newText,edit.firstChild);	
 });
-	
+
+$('.save').click(function(event){
+	var target = event.target;
+	var tweetId = $(target.parentElement.parentElement.parentElement.parentElement).attr("tweetID");
+	var text = document.getElementById("inputText"+tweetId).value;
+	$.post('TweetsController',{action: "editTweet", input: text, id: tweetId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
+})
+
 
 </script>
 
@@ -84,7 +88,11 @@ $('.edit').click(function(event){
 			        <!--Text-->
 		        	<div class="card-text " id="editable<%=t.getId()%>">
 		        		<p id="inputText<%=t.getId()%>"> <%=t.getTweet_text() %></p>
-		    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true">Submit</i>
+		        		<% if(t.getUsername().compareTo(user.getUsername()) == 0) { %>
+			    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true" id="editTweet<%=t.getId()%>">Edit</i>
+			    		 	<i style="display:none;" class="save fa fa-save fa-pull rigth" id ="saveTweet<%=t.getId() %>" >Save</i>
+			    		 	<i class="remove fa fa-trash fa-pull right" >Delete</i>
+			    		 <% } %>
 		        	</div>
 		         	
 				</div>
