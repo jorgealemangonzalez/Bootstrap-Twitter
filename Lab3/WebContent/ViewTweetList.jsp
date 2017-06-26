@@ -30,16 +30,20 @@ $('.edit').click(function(event){
 	if(document.getElementById("newText") == null){
 		var ident = "editable"+tweetId;
 		var edit = document.getElementById(ident);
-		edit.removeChild(document.getElementById("inputText"+tweetId));
+		var oldText = document.getElementById("inputText"+tweetId);
 		var newText = document.createElement("input");
+		//var newText = document.createElement("textarea");
+		var oldTextAtt = $("#inputText"+tweetId).text();
+		console.log(oldTextAtt);
 		newText.setAttribute("id","newText");
+		newText.setAttribute("value",oldTextAtt);
+		newText.setAttribute("style","width: 350px");
+		edit.removeChild(oldText);
 		edit.appendChild(newText);
 	}else{
 		var text = document.getElementById("newText").value;	
 		$.post('TweetsController',{action: "editTweet", input: text, id: tweetId},function(data,status){
 			if(status != 401){
-				console.log("AAA");
-				console.log("${lastAction}");
 				$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
 					if(status != 401){
 						$('#content').html(data);

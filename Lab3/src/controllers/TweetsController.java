@@ -110,7 +110,7 @@ public class TweetsController extends HttpServlet{
 				if(tmp.editTweet()){
 					System.out.println("tweet edited");
 				}else{
-					System.out.println("An error has ocurred");
+					System.out.println("An error has ocurred updating tweet");
 				}
 			}else{
 				status = 401;
