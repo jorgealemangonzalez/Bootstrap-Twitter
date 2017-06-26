@@ -95,6 +95,13 @@ public class TweetsController extends HttpServlet{
 					status = 401;
 				}
 				dispatcher = request.getRequestDispatcher("ContentController");
+			}else if(action.equals("editTweet")){
+				System.out.println("edit Tweet");
+		
+
+			}else{
+				status = 401;
+				dispatcher = request.getRequestDispatcher("LoginController");
 			}
 		}else{
 			status = 401;

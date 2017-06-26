@@ -70,7 +70,6 @@ public class UserListController extends HttpServlet{
 			System.out.println("La accion no coincide" + action);
 			status = 401;
 		}
-
 		request.setAttribute("users", users);
 		request.setAttribute("lastAction", lastAction);
 		request.setAttribute("user",user);

@@ -71,7 +71,8 @@ public class BeanUser implements Serializable  {
 	}
 	
 	public List<String> getFollowing() {
-		return following;
+		this.loadUserFollowing();
+		return this.following;
 	}
 
 

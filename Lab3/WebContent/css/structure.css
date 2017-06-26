@@ -3,6 +3,11 @@
 .btn{
 	cursor:pointer;	
 }
+.not-paid {
+  font-size: 24px;
+  padding:0 16px 0 0; /* whatever the dimensions the image needs */
+  background-image: url('/Public/images/remove.png') no-repeat right ; /* Position left/right/whatever */
+}
 
 a:hover{
 	cursor:pointer;
