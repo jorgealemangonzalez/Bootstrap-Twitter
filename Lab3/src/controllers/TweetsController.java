@@ -45,6 +45,8 @@ public class TweetsController extends HttpServlet{
 			String printResponse = "";
 			BeanUser user = new BeanUser();
 			user = (BeanUser) session.getAttribute("user");
+			dispatcher = request.getRequestDispatcher("ViewTweetList.jsp");
+
 			if(user != null ){	
 				if(action.equals("getUserTweets")){
 					System.out.println("get User tweets");
@@ -58,8 +60,11 @@ public class TweetsController extends HttpServlet{
 					System.out.println("get Followers Tweets");
 					List<BeanTweet> tmp = user.loadFollowersTweets();
 					request.setAttribute("listTweets", tmp);
+				}else{
+					System.out.println("need to specify action + - " + action);
+					status = 401;
+					dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 				}
-				dispatcher = request.getRequestDispatcher("ViewTweetList.jsp");
 				request.setAttribute("user", user);
 			}else{
 				System.out.println("get All tweets");
@@ -69,6 +74,8 @@ public class TweetsController extends HttpServlet{
 			}
 			if(printResponse != "")
 				response.getWriter().print(printResponse);
+			request.setAttribute("action", action);
+			request.setAttribute("lastAction", action);
 			response.setStatus(status);
 			dispatcher.forward(request, response);
 			
@@ -97,8 +104,14 @@ public class TweetsController extends HttpServlet{
 				dispatcher = request.getRequestDispatcher("ContentController");
 			}else if(action.equals("editTweet")){
 				System.out.println("edit Tweet");
-		
-
+				BeanTweet tmp = new BeanTweet();
+				tmp.setId((int) Integer.parseInt(request.getParameter("id"))); 
+				tmp.setTweet_text((String)request.getParameter("input"));
+				if(tmp.editTweet()){
+					System.out.println("tweet edited");
+				}else{
+					System.out.println("An error has ocurred");
+				}
 			}else{
 				status = 401;
 				dispatcher = request.getRequestDispatcher("LoginController");
@@ -107,8 +120,8 @@ public class TweetsController extends HttpServlet{
 			status = 401;
 			dispatcher = request.getRequestDispatcher("LoginController");
 		}
+		request.setAttribute("lastAction", action);
 		request.setAttribute("user", user);
-		dispatcher.forward(request, response);
 
 	}
 

@@ -14,11 +14,10 @@ if (request.getAttribute("user")!=null) {
 	user = (BeanUser)request.getAttribute("user");
 }
 
-String action = "getAllTweets";
-if(request.getAttribute("action") != null){
-	action = (String)request.getAttribute("action");
+String lastAction = "getAllTweets";
+if(request.getAttribute("lastAction") != null){
+	lastAction = (String)request.getAttribute("lastAction");
 }
-
 %>
 <script type="text/javascript">
 $(".like").click(function(event){
@@ -26,18 +25,22 @@ $(".like").click(function(event){
 });
 
 $('.edit').click(function(event){
+	var target = event.target;
+	var tweetId = $(target.parentElement.parentElement.parentElement.parentElement).attr("tweetID");
 	if(document.getElementById("newText") == null){
-		var edit = document.getElementById("editable");
+		var ident = "editable"+tweetId;
+		var edit = document.getElementById(ident);
+		edit.removeChild(document.getElementById("inputText"+tweetId));
 		var newText = document.createElement("input");
-		edit.removeChild(document.getElementById("inputText"));
 		newText.setAttribute("id","newText");
 		edit.appendChild(newText);
 	}else{
-		var text = document.getElementById("newText").value;
-		console.log(text);
-		$.post('TweetsController',{action: "editTweet", input: text},function(data,status){
+		var text = document.getElementById("newText").value;	
+		$.post('TweetsController',{action: "editTweet", input: text, id: tweetId},function(data,status){
 			if(status != 401){
-				$.get('TweetsController',{action: "${ction}"}, function(data,status){
+				console.log("AAA");
+				console.log("${lastAction}");
+				$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
 					if(status != 401){
 						$('#content').html(data);
 					}
@@ -66,8 +69,8 @@ $('.edit').click(function(event){
 	<%} %>
 	<% for(BeanTweet t : list) { 
 	%>
-		<div class="card green tweet" username="<%=t.getUsername()%>">
-			<div class="row card">
+		<div class="card green tweet" username="<%=t.getUsername()%>" tweetID="<%=t.getId()%>">
+			<div class="row card" >
 			    <div class="card-block" >
 			    	 <!--Title-->
 			    	<ul class="metrics inline-ul">
@@ -75,8 +78,8 @@ $('.edit').click(function(event){
 					</ul>
 			        <hr>
 			        <!--Text-->
-		        	<div class="card-text " id="editable">
-		        		<p id="inputText"> <%=t.getTweet_text() %></p>
+		        	<div class="card-text " id="editable<%=t.getId()%>">
+		        		<p id="inputText<%=t.getId()%>"> <%=t.getTweet_text() %></p>
 		    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true">Submit</i>
 		        	</div>
 		         	

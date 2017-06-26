@@ -81,6 +81,23 @@ public class BeanTweet implements Serializable {
 		return tmp;
 	}
 	
+	public boolean editTweet(){
+		try{
+			dao.connecToDB();
+			if(dao.editTweet(this.tweet_text,this.id) != 0){
+				System.out.println("tweet changed");
+				return true;
+			}else{
+				return false;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			dao.disconnectBD();
+		}
+		return false;
+	}
+	
 	public boolean publish(){
 		//TODO Returns true if publish successful
 		try{

@@ -47,6 +47,7 @@ public class DAO {
 		return ps.executeUpdate();
 	}
 	
+	
 	public ResultSet getFollowers(String username) throws SQLException {
 		String query = "SELECT followed FROM follow WHERE follower='"+username+"';";
 		return statement.executeQuery(query);
@@ -109,6 +110,13 @@ public class DAO {
 		return ps.executeUpdate();
 		
 	}
+	public int editTweet(String text, int id) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("UPDATE tweets SET tweet_text=? where id=? ;");
+		ps.setString(1, text);
+		ps.setInt(2, id);
+		return ps.executeUpdate();
+	}
+	
 	public int postFollower(String follower, String followed) throws SQLException{
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO follow VALUES (?,?)");
 		ps.setString(1, follower);
