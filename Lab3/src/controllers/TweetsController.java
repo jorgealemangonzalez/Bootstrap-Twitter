@@ -1,6 +1,7 @@
 package controllers;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,35 +47,33 @@ public class TweetsController extends HttpServlet{
 			BeanUser user = new BeanUser();
 			user = (BeanUser) session.getAttribute("user");
 			dispatcher = request.getRequestDispatcher("ViewTweetList.jsp");
-
+			List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 			if(user != null ){	
 				if(action.equals("getUserTweets")){
 					System.out.println("get User tweets");
-					List<BeanTweet> tmp = user.loadUserTweetsFromDB();
-					request.setAttribute("listTweets", tmp);
+					tmp = user.loadUserTweetsFromDB();
 				}else if(action.equals("getAllTweets")){
 					System.out.println("get All tweets");
-					List<BeanTweet> tmp = BeanTweet.loadAllTweetsFromDB();
-					request.setAttribute("listTweets", tmp);
+					tmp = BeanTweet.loadAllTweetsFromDB();
 				}else if(action.equals("getMyFollowers")){
 					System.out.println("get Followers Tweets");
-					List<BeanTweet> tmp = user.loadFollowersTweets();
-					request.setAttribute("listTweets", tmp);
+					tmp = user.loadFollowersTweets();
 				}else{
 					System.out.println("need to specify action + - " + action);
 					status = 401;
 					dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 				}
-				request.setAttribute("user", user);
 			}else{
-				System.out.println("get All tweets");
-				List<BeanTweet> tmp = BeanTweet.loadAllTweetsFromDB();
-				request.setAttribute("listTweets", tmp);
+				System.out.println("get All tweets not loged");
+				tmp = BeanTweet.loadAllTweetsFromDB();
+				user = new BeanUser();
 				dispatcher = request.getRequestDispatcher("ViewTweetList.jsp");
 			}
 			if(printResponse != "")
 				response.getWriter().print(printResponse);
+			request.setAttribute("user", user);
 			request.setAttribute("action", action);
+			request.setAttribute("listTweets", tmp);
 			request.setAttribute("lastAction", action);
 			response.setStatus(status);
 			dispatcher.forward(request, response);

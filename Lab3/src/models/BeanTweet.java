@@ -61,6 +61,7 @@ public class BeanTweet implements Serializable {
 	static public List<BeanTweet> loadAllTweetsFromDB(){
 		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
 		try {
+			System.out.println("getting tweets of db");
 			dao.connecToDB();
 			ResultSet rs = dao.getTweets();
 			while(rs.next()){
