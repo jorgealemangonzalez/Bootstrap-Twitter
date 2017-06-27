@@ -32,27 +32,11 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="css/MDB_Free/js/mdb.min.js"></script>
 
-<%
-BeanUser user = null;
-if (request.getAttribute("user")!=null) {
-	user = (BeanUser)request.getAttribute("user");
-}
-String username = null;
-Cookie[] cookies = request.getCookies();
-if(cookies != null){
-	for(Cookie tmpCookie : cookies){
-		if(tmpCookie.getName().equals("user")){
-			username = tmpCookie.getValue();
-		}
-	}
-}
-
-%>
 
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#content').load('ContentController',{userCookie : "${username}"});
+	$('#content').load('ContentController');
 	$('#navigation').load('MenuController');
 });
 </script>

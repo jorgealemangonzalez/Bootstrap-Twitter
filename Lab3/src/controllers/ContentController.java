@@ -37,9 +37,19 @@ public class ContentController extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		
 		BeanUser user = (BeanUser) session.getAttribute("user");
-		Cookie cookie =  (Cookie) session.getAttribute("cookie");
-		System.out.println("coookieee " +cookie);
-		if(user != null && cookie.getValue() != null){
+		
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for(Cookie tmpCookie : cookies){
+				if(tmpCookie.getName().equals("user")){
+					BeanUser tmp = new BeanUser();
+					tmp.loadFromDatabase(tmpCookie.getValue());
+					user= tmp;
+					System.out.println("user loaded from cookie");
+				}
+			}
+		}
+		if(user != null ){
 			System.out.println("Session user: "+user.getUsername());
 			request.setAttribute("user",user);
 			String params = "?userProfileUsername="+user.getUsername();
