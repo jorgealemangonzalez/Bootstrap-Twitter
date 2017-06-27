@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="models.BeanUser"%>
 
 <!DOCTYPE html>
 <html>
@@ -32,12 +32,32 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="css/MDB_Free/js/mdb.min.js"></script>
 
+<%
+BeanUser user = null;
+if (request.getAttribute("user")!=null) {
+	user = (BeanUser)request.getAttribute("user");
+}
+String username = null;
+Cookie[] cookies = request.getCookies();
+if(cookies != null){
+	for(Cookie tmpCookie : cookies){
+		if(tmpCookie.getName().equals("user")){
+			username = tmpCookie.getValue();
+		}
+	}
+}
+
+%>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#content').load('ContentController');
+	$('#content').load('ContentController',{userCookie : "${username}"});
 	$('#navigation').load('MenuController');
 });
 </script>
+
+
 
 <div id="navigation">
 	 			   

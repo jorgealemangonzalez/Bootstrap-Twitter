@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +52,10 @@ public class LoginController extends HttpServlet {
 		    	user.loadFromDatabase(login.getUsername());
 		    	session.setAttribute("user",user);
 		    	response.setStatus(200);
+		    	Cookie loginCookie = new Cookie("user",user.getUsername());
+		    	loginCookie.setMaxAge(30*60);
+		    	response.addCookie(loginCookie);
+		    	session.setAttribute("cookie", loginCookie);
 			    
 		    }	
 			else if(login.getUsername().length() == 0){

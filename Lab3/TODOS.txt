@@ -2,12 +2,6 @@
 
 (TODO) Sessiones con cookiesSession para que se quede cuando cierras el navegador
 
-(TODO) Pagina inicial con lista de tweets y informacion minima de tu usuario a la izquierda ( con el contador igual que twitter )
-
-(TODO) Tweets de un solo usuario dentro de su perfil publico
-
-**(TODO) Un admin puede editar y borrar: tweets
-
 (TODO) Que el register se vea bien y quitar la fecha de nacimiento ( da problemas )
 *** Mas de 7 ***
 (TODO) Comentar / Responder / Retweet tweets
