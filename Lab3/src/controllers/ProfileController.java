@@ -41,6 +41,7 @@ public class ProfileController extends HttpServlet{
 		BeanUser user = (BeanUser) session.getAttribute("user");
 		
 		if(userProfileUsername != null || user != null){
+			System.out.println("loading user");
 			BeanUser userProfile = null;
 			if(userProfileUsername != null){
 				userProfile = new BeanUser();
@@ -53,6 +54,7 @@ public class ProfileController extends HttpServlet{
 			}
 			
 			request.setAttribute("userProfile", userProfile);
+			request.setAttribute("listTweets", userProfile.getUserTweets());
 			System.out.println("Correctly loaded user profile ");
 		}else{
 			System.out.println("Username param is mandatory if you arent loged in");

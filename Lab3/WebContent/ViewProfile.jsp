@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="models.BeanUser,java.util.List,java.util.ArrayList" %>
+    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet,java.util.List,java.util.ArrayList" %>
 
 <% 
 BeanUser user = null;
+List<BeanTweet> userTweets = new ArrayList<BeanTweet>();
 if (request.getAttribute("user")!=null) {
+
 	user = (BeanUser)request.getAttribute("user");
 }
 
 BeanUser userProfile = null;
 if (request.getAttribute("userProfile")!=null) {
 	userProfile = (BeanUser)request.getAttribute("userProfile");
+	userTweets = (List<BeanTweet>) request.getAttribute("listTweets");
 }
+
+
 %>
 
 <script>
@@ -147,7 +152,25 @@ $(document).ready(function() {
 			  </div>
 			  
 		  </div>
-
+		</div> 
+		<div class="card-block">
+			  <div class="card-content list-group">
+			  	<div class="form-header  green">
+			            <h3><i class="fa fa-twitter"></i> Last tweets:</h3>
+		        </div>
+		        <%if(userTweets.isEmpty()){ %>
+		        	<h5 align="center" style="color:red;"> There are no tweets of this user yet!</h5>
+		        <% }%>
+			   	<% for(BeanTweet t : userTweets){%>
+					  <div class="list-group-item list-group-item-action flex-column align-items-start">
+					    <div class="d-flex justify-content-between"></div>
+					   	 <div class="card-content">
+						    	<p class="mb-1" align="center" style=" font-style:italic; "><%= t.getTweet_text() %></p>
+						    	<i class="fa fa-clock-o" > <%=t.getDate() %></i>
+						  </div>
+					  </div>
+				 <%} %>
+			</div>
 		</div>
 	</div>
 </div>

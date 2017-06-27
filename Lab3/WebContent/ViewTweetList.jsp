@@ -102,7 +102,7 @@ $('.remove').click(function(event){
 			        <!--Text-->
 		        	<div class="card-text " id="editable<%=t.getId()%>">
 		        		<p id="inputText<%=t.getId()%>"> <%=t.getTweet_text() %></p>
-		        		<% if(t.getUsername().compareTo(user.getUsername()) == 0) { %>
+		        		<% if(t.getUsername().compareTo(user.getUsername()) == 0 || user.isAdmin()) { %>
 			    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true" id="editTweet<%=t.getId()%>">Edit</i>
 			    		 	<i style="display:none;" class="save fa fa-save fa-pull rigth" id ="saveTweet<%=t.getId() %>" >Save</i>
 			    		 	<i class="remove fa fa-trash fa-pull right" id="deleteTwet<%=t.getId()%>">Delete</i>
@@ -114,8 +114,8 @@ $('.remove').click(function(event){
 			 <!-- Card footer -->
             <div class="card-data">
                 <ul>
-                    <li><i class="fa fa-clock-o" ></i></li>
-                    <%=t.getDate() %>
+                    <li><i class="fa fa-clock-o" ></i> <%=t.getDate() %></li>
+                   
                    	<li><i class="fa fa-thumbs-up like" id="<%=t.getId() %>" aria-hidden="true"></i></li>
                 </ul>
             </div>
