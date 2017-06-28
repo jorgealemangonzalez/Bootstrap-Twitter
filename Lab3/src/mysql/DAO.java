@@ -82,10 +82,9 @@ public class DAO {
 	}
 	
 	public ResultSet getUsers() throws SQLException{
-		String query = "SELECT * FROM twitter.users;"; 
+		String query = "SELECT DISTINCT users.* FROM twitter.users JOIN twitter.follow GROUP BY users.username ORDER BY( SELECT COUNT(follow.follower) FROM twitter.follow WHERE followed=users.username) DESC;"; 
 		return statement.executeQuery(query);
 	}
-	
 	public ResultSet getEmail(String email) throws SQLException{
 		String query = "SELECT name FROM twitter.users WHERE email='"+email+"';"; 
 		return statement.executeQuery(query);
