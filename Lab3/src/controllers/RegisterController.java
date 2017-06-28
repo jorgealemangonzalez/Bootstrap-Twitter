@@ -44,6 +44,9 @@ public class RegisterController extends HttpServlet {
 	
 		   BeanUser user = new BeanUser();
 		   BeanUtils.populate(user, request.getParameterMap());
+		   if(request.getParameter("dateofbirth")!=null){
+			   user.setDateofbirth(request.getParameter("dateofbirth"));
+		   }
 		
 		   if (user.isComplete()) {
 			   user.create();

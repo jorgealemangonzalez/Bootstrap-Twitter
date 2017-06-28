@@ -86,6 +86,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet getEmail(String email) throws SQLException{
+		String query = "SELECT name FROM twitter.users WHERE email='"+email+"';"; 
+		return statement.executeQuery(query);
+	}
+	
 	public ResultSet getTweetsFromFollowers(String username) throws SQLException{
 		String query = "SELECT * FROM tweets JOIN follow ON username=followed WHERE follower='" + username + "' ORDER BY date DESC";
 		return statement.executeQuery(query);
@@ -138,6 +143,8 @@ public class DAO {
 		ps.setString(1, username);
 		return ps.executeUpdate();
 	}
+	
+	
 	
 	public int removeTweet(int id)throws SQLException{
 		PreparedStatement ps = connection.prepareStatement("DELETE FROM tweets WHERE id=? ;");

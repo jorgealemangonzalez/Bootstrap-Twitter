@@ -6,17 +6,19 @@
 $(document).ready(function(){
     $("#registerForm").validate({
     	submitHandler: function(form) {
-    		if (confirm("You will be registered in our website!") == true) {
+    		if (confirm("You will be registered in our website!") == true && validateMyForm()) {
     			$('#content').load('RegisterController',$("#registerForm").serialize());
     	    }
     }
     });
 });
-$('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
+
   
+var input  = document.getElementById('email');
+input.oninvalid = function(event) {
+    event.target.setCustomValidity('Username should only contain lowercase letters. e.g. john');
+}
+
 </script>
 
 <% 
@@ -28,7 +30,7 @@ if (request.getAttribute("user")!=null) {
 <!--Form with header-->
 <div class="container col-md-6 col-md-offset-3">
 	<div class="card">
-		<form action="" method="post" id="registerForm" onsubmit="return validateMyForm();">
+		<form action=""   method="post" id="registerForm" > 
 		
 		    <div class="card-block">
 		
@@ -86,8 +88,8 @@ if (request.getAttribute("user")!=null) {
 		        
 	     
 		        
-		        <div class="md-form">
-		           	<input class="form-control" type="email" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required/>
+		        <div class="md-form" >
+		           	<input class="form-control" type="text" name="email" id="email" value="<%=user.getEmail() %>" onchange="email_validate(this.value);" required />
 					<span id="status" class="status"></span>
 	 				<label for="email">Your email</label>
 	 				<p class="error-block">(Required, valid e-mail address and unique) We will send you a login page</p> 
@@ -99,13 +101,15 @@ if (request.getAttribute("user")!=null) {
 		        </div>
 		        
 		        <div class="md-form">
-		           	<input type="date" class="datepicker" id="dateofbirth">
+		           	<input class="form-control" name="dateofbirth" type="text" id="dateofbirth" value="<%=user.getAddress() %>" onchange="date_validate(this.value);">
 		            <label for="dateofbirth">Your date</label>
+		            <p class="error-block">Format of data DD/MM/YYYY</p> 
 		        </div>
 		        
 	   	        <div class="md-form">
 		           	<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass();" required />
 					<label for="password">Your password</label>
+					<span id="confirmPassword" class="confirmMessage"></span>
 					<p class="help-bloc">(Required, 6 characters minimum, some letter , number and sing !@#$%^&*)</p> 
 		        </div>
 		        

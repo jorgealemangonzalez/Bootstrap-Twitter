@@ -119,8 +119,22 @@ public class BeanUser implements Serializable  {
 		return username;
 	}
 
-	public void setUsername(String username){
-		this.username = username;
+	public void setUsername(String username) throws SQLException{
+		try{
+			dao.connecToDB();
+			ResultSet rs = dao.getUserInfo(username);
+			if(rs.next()){
+				this.error[1]=1;
+			}else{
+				this.error[1]=0;
+			}
+			this.username = username;
+		} catch (SQLException e) {
+			System.out.println("Error retrieving user "+username);
+			//e.printStackTrace();
+		} finally {
+			dao.disconnectBD();
+		}
 	}
 
 	public String getGender() {
@@ -136,7 +150,22 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setEmail(String email) throws SQLException {
-		this.email = email;
+		try{
+			dao.connecToDB();
+			ResultSet rs = dao.getEmail(email);
+			if(rs.next()){
+				this.error[0]=1;
+			}else{
+				this.error[0]=0;
+			}
+			this.email = email;
+		} catch (SQLException e) {
+			System.out.println("Error retrieving user "+username);
+			//e.printStackTrace();
+		} finally {
+			dao.disconnectBD();
+		}
+		
 	}
 
 	public String getPassword() {
