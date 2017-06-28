@@ -19,3 +19,7 @@
 https://bootsnipp.com/snippets/featured/twitter-profile-card
 
 https://bootsnipp.com/snippets/z4P39
+
+Tweets:
+Poner en lista como https://bootsnipp.com/snippets/featured/list-group-with-hidden-sub-menu
+Pero con la organización de contenido ( texto e imagen ) de https://bootsnipp.com/snippets/featured/comments-list

@@ -58,15 +58,6 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setUsername(String username) throws SQLException {
-		String query = "SELECT name FROM login.taula where username='"+username+"'";
-		System.out.println(query);
-		ResultSet rs = dao.executeSQL(query);
-		if (rs.next()) {//get first result
-			System.out.println("el username existe");
-			this.error[1]=1;
-        }else{
-        	this.error[1]=0;
-        }
 		this.username = username;
 	}
 
@@ -83,17 +74,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public void setEmail(String email) throws SQLException {
-		String query = "SELECT email FROM login.taula where email='"+email+"'";
-		ResultSet rs = dao.executeSQL(query);
-		System.out.println(query);
-		if (rs.next()) {//get first result
-			System.out.println("el email existe");
-			this.error[0]=1;
-        }else{
-        	this.error[0]=0;
-        }
 		this.email = email;
-		//TODO check the content if it's empty or not
 	}
 
 	public String getPassword() {
