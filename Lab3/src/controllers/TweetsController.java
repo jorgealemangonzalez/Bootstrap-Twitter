@@ -93,8 +93,12 @@ public class TweetsController extends HttpServlet{
 		int status = 200; 
 		user = (BeanUser) session.getAttribute("user");
 		if(user.getUsername() != null){
-			if(action.equals("likeTweets")){
-				//BeanTweet
+			if(action.equals("commentTweet") && request.getParameter("id") != null && request.getParameter("comment") != null){
+				user.commentTweet(Integer.parseInt(request.getParameter("id")),request.getParameter("comment"));
+			}else if(action.equals("unlikeTweet") && request.getParameter("id") != null){
+				user.unlikeTweet(Integer.parseInt(request.getParameter("id")));
+			}else if(action.equals("likeTweet") && request.getParameter("id") != null){
+				user.likeTweet(Integer.parseInt(request.getParameter("id")));
 			}else if(action.equals("publishTweet")){
 				System.out.println("publish TweeT");
 				if(!user.publishTweet(request.getParameter("tweet_text"))){

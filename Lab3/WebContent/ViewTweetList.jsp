@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet,java.util.List,java.util.ArrayList" %>
+    pageEncoding="ISO-8859-1" import="models.BeanUser,models.BeanTweet,java.util.List,java.util.ArrayList,models.BeanCommentary" %>
     
 
 <% 
@@ -21,7 +21,33 @@ if(request.getAttribute("lastAction") != null){
 %>
 <script type="text/javascript">
 $(".like").click(function(event){
+	var target = event.target;
+	console.log(target);
+	var tweetId = $(target).attr("tweetID");
+	$.post('TweetsController',{action: "likeTweet", id: tweetId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
+});
 
+$(".unlike").click(function(event){
+	var target = event.target;
+	console.log(target);
+	var tweetId = $(target).attr("tweetID");
+	$.post('TweetsController',{action: "unlikeTweet", id: tweetId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
 });
 
 $('.edit').click(function(event){
@@ -73,6 +99,22 @@ $('.remove').click(function(event){
 	})
 });
 
+$('.comment').click(function(event){
+	var tweetId = $(event.target).attr("tweetID");
+	var commentary = $('#comment'+tweetId).val();
+	console.log("Comment: ");
+	console.log(tweetId);
+	console.log(commentary);
+	$.post('TweetsController',{action: "commentTweet", id: tweetId, comment: commentary },function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	})
+});
 
 </script>
 
@@ -115,9 +157,32 @@ $('.remove').click(function(event){
             <div class="card-data">
                 <ul>
                     <li><i class="fa fa-clock-o" ></i> <%=t.getDate() %></li>
-                   
-                   	<li><i class="fa fa-thumbs-up like" id="<%=t.getId() %>" aria-hidden="true"></i></li>
+                   	<% if(t.getLikes().contains(user.getUsername())){ %>
+                 		<li><a class="btn btn-warning btn-sm unlike" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-down" tweetID="<%=t.getId() %>" aria-hidden="true"></i><%=t.getLikes().size() %></a></li>
+                   	
+                   	<%}else{ %>
+                   		<li><a class="btn btn-success btn-sm like" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-up" tweetID="<%=t.getId() %>" aria-hidden="true"></i><%=t.getLikes().size() %></a></li>
+                	<%} %>
                 </ul>
+                <% if(t.getCommentarys().size() > 0){ %>
+                <ul style="text-align:left;">
+                	<div class="list-group">
+                		<a class="list-group-item active">
+                		Comments:
+                		</a>
+               		<% for(BeanCommentary comment : t.getCommentarys()){%>
+                
+					    <a class="list-group-item" style="color:black;">
+					        <h3><%= comment.getUser_username() %><br></h3>
+		                	<p> <%= comment.getCommentary() %><br></p>
+		                	<h4><%= comment.getDate() %></h4>
+					    </a>
+                
+                	<%} %>
+                	</div>
+                </ul>
+                <%} %>
+                <input type="text" id="comment<%=t.getId()%>"/><button class="comment" tweetID="<%=t.getId() %>">send</button>
             </div>
             <!-- Card footer -->
 		</div>

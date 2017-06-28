@@ -25,7 +25,6 @@ public class DAO {
 		
 	}
 
-	// TODO: code for updates for Assignments 2, 3 and 4.
 	public void disconnectBD() throws SQLException {
 		statement.close();
 		connection.close();

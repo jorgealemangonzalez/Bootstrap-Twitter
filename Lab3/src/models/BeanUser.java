@@ -248,6 +248,12 @@ public class BeanUser implements Serializable  {
 		} finally{
 			dao.disconnectBD();
 		}
+		
+		for(BeanTweet t: tmp){
+			t.loadLikes();
+			t.loadComments();
+		}
+		
 		return tmp;
 		
 	}
@@ -273,6 +279,12 @@ public class BeanUser implements Serializable  {
 		}finally{
 			dao.disconnectBD();
 		}
+		
+		for(BeanTweet t: this.userTweets){
+			t.loadLikes();
+			t.loadComments();
+		}
+		
 		return this.userTweets;
 		
 	}
@@ -479,6 +491,46 @@ public class BeanUser implements Serializable  {
 		try {
 			dao.connecToDB();
 			dao.deleteUser(username);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public void likeTweet(int id){
+		try{
+			System.out.println("Like tweet "+id);
+			dao.connecToDB();
+			dao.likeTweet(this.username,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public void unlikeTweet(int id){
+		try{
+			System.out.println("Unlike tweet "+id);
+			dao.connecToDB();
+			dao.unlikeTweet(this.username,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public void commentTweet(int id, String commentary){
+		try{
+			System.out.println("Comment tweet "+id);
+			System.out.println(commentary);
+			dao.connecToDB();
+			dao.commentTweet(this.username, id, commentary);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

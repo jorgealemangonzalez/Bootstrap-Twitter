@@ -4,18 +4,24 @@
 
 (TODO) Que el register se vea bien y quitar la fecha de nacimiento ( da problemas )
 *** Mas de 7 ***
-(TODO) Comentar / Responder / Retweet tweets
+(TODO) Responder / Retweet tweets	--> PRIORIZAR
 
-(TODO) Like/dislike a tweet and his comments
+(TODO) Like/dislike tweet comments  --> PRIORIZAR
 
-(TODO) Username and mail can not be changed en edit profile
+(TODO) **Username and mail can not be changed en edit profile
 
-(TODO) Mejorar edit profile para que funcione bien
+(TODO) **Mejorar edit profile para que funcione bien
 
-(TODO) Imagen de perfil
+(TODO) **Imagen de perfil
+
+(TODO) **Poner la lista de tweets en condiciones
 
 ** ideas **
 
 https://bootsnipp.com/snippets/featured/twitter-profile-card
 
 https://bootsnipp.com/snippets/z4P39
+
+Tweets:
+Poner en lista como https://bootsnipp.com/snippets/featured/list-group-with-hidden-sub-menu
+Pero con la organización de contenido ( texto e imagen ) de https://bootsnipp.com/snippets/featured/comments-list

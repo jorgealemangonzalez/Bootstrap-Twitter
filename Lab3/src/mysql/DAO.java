@@ -157,6 +157,41 @@ public class DAO {
 		}
 	}
 	
+	public ResultSet loadLikesFromTweet(int id) throws SQLException{
+		String query = "SELECT * FROM likeTweet WHERE tweet_id='"+id+"'";
+		return statement.executeQuery(query);
+	}
+	
+	public void likeTweet(String username , int tweetId) throws SQLException{
+		
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO likeTweet (tweet_id, user_username) VALUES (?, ?);");
+		ps.setInt(1, tweetId);
+		ps.setString(2, username);
+		ps.executeUpdate();
+	}
+	
+	public void unlikeTweet(String username , int tweetId) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("DELETE FROM likeTweet WHERE tweet_id=? and user_username=?");
+		ps.setInt(1, tweetId);
+		ps.setString(2, username);
+		ps.executeUpdate();
+	}
+	
+	public void commentTweet(String username, int tweetId, String comment) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO commentTweet (tweet_id, user_username, commentary, date) VALUES (?, ?, ?, ?);");
+		ps.setInt(1, tweetId);
+		ps.setString(2, username);
+		ps.setString(3, comment);
+		java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+		ps.setTimestamp(4, date);
+		ps.executeUpdate();
+	}
+	
+	public ResultSet getTweetComments(int tweetId) throws SQLException{
+		String query = "SELECT * FROM commentTweet WHERE tweet_id='"+tweetId+"' ORDER BY date DESC;"; 
+		return statement.executeQuery(query);
+	}
+	
 	public void disconnectBD() {
 		try{
 			statement.close();
