@@ -35,6 +35,18 @@ CREATE TABLE IF NOT EXISTS likeTweet(
     foreign key(user_username) references users(username) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS commentTweet(
+	id INT(10) unsigned NOT NULL AUTO_INCREMENT,
+    tweet_id INT(10) unsigned NOT NULL,
+    user_username CHAR(24) NOT NULL, #El usuario que le da like es diferente del que lo publica
+    commentary CHAR(24) NOT NULL,
+    date    DATETIME  NOT NULL,
+    PRIMARY KEY(id),
+    foreign key(tweet_id) references tweets(id) ON DELETE CASCADE,
+    foreign key(user_username) references users(username) ON DELETE CASCADE
+ 
+);
+
 CREATE TABLE IF NOT EXISTS follow(
     follower CHAR(24) NOT NULL,
     followed CHAR(24) NOT NULL,
@@ -62,5 +74,8 @@ INSERT INTO tweets(tweet_text, date,username) VALUES
 
 INSERT INTO follow VALUES ('guini','drako');
 INSERT INTO follow VALUES ('drako','guini');
+
+INSERT INTO `twitter`.`likeTweet` (`tweet_id`, `user_username`) VALUES ('2', 'drako3');
+
 
 
