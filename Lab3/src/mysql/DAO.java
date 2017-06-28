@@ -147,8 +147,8 @@ public class DAO {
 	
 	public void connecToDB(){
 		try{
-			String user = "mysql";
-			String password="prac";
+			String user = "root";
+			String password="";
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connection=DriverManager.getConnection("jdbc:mysql://localhost/twitter?user="+user+"&password="+password);
 			statement=connection.createStatement();
