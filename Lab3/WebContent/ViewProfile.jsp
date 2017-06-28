@@ -14,7 +14,8 @@ if (request.getAttribute("userProfile")!=null) {
 	userProfile = (BeanUser)request.getAttribute("userProfile");
 	userTweets = (List<BeanTweet>) request.getAttribute("listTweets");
 }
-int cont = 0;
+
+
 %>
 
 <script>
@@ -161,8 +162,6 @@ $(document).ready(function() {
 		        	<h5 align="center" style="color:red;"> There are no tweets of this user yet!</h5>
 		        <% }%>
 			   	<% for(BeanTweet t : userTweets){%>
-			   		<% if(cont < 4) { %>
-			   			<%cont = cont+1; %>
 					  <div class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex justify-content-between"></div>
 					   	 <div class="card-content">
@@ -170,7 +169,6 @@ $(document).ready(function() {
 						    	<i class="fa fa-clock-o" > <%=t.getDate() %></i>
 						  </div>
 					  </div>
-					 <%} %>
 				 <%} %>
 			</div>
 		</div>
