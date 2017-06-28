@@ -1,6 +1,9 @@
 ** = NECESARIO
 
 *** Mas de 7 ***
+** perfil ver unos pocos tweets y un boton para verlos todos de un usuario (easy de hacer)
+
+
 (TODO) Responder / Retweet tweets	--> PRIORIZAR
 
 (TODO) Like/dislike tweet comments  --> PRIORIZAR
