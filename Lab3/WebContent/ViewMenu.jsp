@@ -57,6 +57,7 @@ $(document).ready(function() {
 	$("#logout").click(function(event){
 		$.get("LogoutController", function(data, status){
 			if(data == "Logout done"){
+				console.log("LOGOUT DONE");
 				$('#content').load('ContentController');
 				$('#navigation').load('MenuController');
 			}else
