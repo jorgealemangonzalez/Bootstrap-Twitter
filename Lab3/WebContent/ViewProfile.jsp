@@ -77,7 +77,8 @@ jQuery(document).ready(function($){
 	 $("abbr.timeago").timeago()
 });
 </script>
-
+<% 
+           		List<String> following = user.getFollowing();%>
 <div class="container col-md-6 col-md-offset-3">
 	<div class="card testimonial-card" username="${userProfile.username}">
 
@@ -91,8 +92,7 @@ jQuery(document).ready(function($){
 			<% if(user.getUsername().equals(userProfile.getUsername())){ %>
 				<a id="editProfile" class="btn-floating btn-small waves-effect waves-light follow-button follow-user-card green"><i class="fa fa-pencil"></i></a>
 			<% }else{ %>
-			<% 
-           		List<String> following = user.getFollowing();%>
+			
            		<% if(following.contains(userProfile.getUsername())) {%>
 	            	<a class="follow-button follow-user-card btn btn-danger btn-sm unfollow">UnFollow</a>
 	            <%}else{ %>
@@ -113,7 +113,7 @@ jQuery(document).ready(function($){
 				</div>
 				<div class="resume-statics">
 					<h3>Following</h3>
-					<span class="badge badge-primary badge-pill"><%= userProfile.getFollowing().size() %> </span>
+					<span class="badge badge-primary badge-pill"><%= following.size() %> </span>
 				</div>
 				<div class="resume-statics">
 					<h3>Followers</h3>

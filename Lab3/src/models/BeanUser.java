@@ -67,6 +67,10 @@ public class BeanUser implements Serializable  {
 	    return u -> this.isSameUser(u);
 	}
 	
+	public int getFollowingSize(){
+		return this.following.size();
+	}
+	
 	public List<String> getFollowing() {
 		this.loadUserFollowing();//Consistency
 		return this.following;
@@ -75,6 +79,10 @@ public class BeanUser implements Serializable  {
 
 	public void setFollowing(List<String> following) {
 		this.following = following;
+	}
+	
+	public int getUserTweetsSize(){
+		return this.userTweets.size();
 	}
 	
 	public List<BeanTweet> getUserTweets() {
@@ -86,7 +94,11 @@ public class BeanUser implements Serializable  {
 	public void setUserTweets(List<BeanTweet> userTweets) {
 		this.userTweets = userTweets;
 	}
-
+	
+	public int getFollowersSize(){
+		return this.followers.size();
+	}
+	
 	public List<String> getFollowers() {
 		this.loadUserFollowers();
 		return followers;

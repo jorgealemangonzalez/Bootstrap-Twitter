@@ -87,9 +87,9 @@ $(document).ready(function() {
 			        <%} %>    
 	            </h4> 
 	            <ul class="metrics inline-ul">
-	                <li title="tweets"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getUserTweets().size() %></span></li>
-	                <li title="followers"><i class="fa fa-users fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getFollowers().size() %></span></li>
-	                <li title="following"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getFollowing().size() %></span></li>
+	                <li title="tweets"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getUserTweetsSize() %></span></li>
+	                <li title="followers"><i class="fa fa-users fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getFollowersSize() %></span></li>
+	                <li title="following"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i><span class="badge badge-primary badge-pill"><%=userInList.getFollowingSize() %></span></li>
 	            </ul>
 	            <h6>Last tweet</h6>
 	            <p><%=userInList.getLastTweetText() %></p>
