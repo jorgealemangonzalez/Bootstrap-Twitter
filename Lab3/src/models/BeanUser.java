@@ -437,8 +437,6 @@ public class BeanUser implements Serializable  {
 					String gender = rs.getString("gender");
 					String email = rs.getString("email");
 					String password = rs.getString("password");
-					String nickname = rs.getString("nickname");
-					String dateofbirth = rs.getString("dateofbirth");
 					String address = rs.getString("address");
 					String phoneNumber = rs.getString("phonenumber");
 					
