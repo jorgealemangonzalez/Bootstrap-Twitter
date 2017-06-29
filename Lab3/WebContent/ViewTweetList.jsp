@@ -102,7 +102,7 @@ $('.edit').click(function(event){
 	var oldSubmit = document.getElementById("editTweet"+tweetId);
 	var save = document.getElementById("saveTweet"+tweetId);
 	oldSubmit.setAttribute("style","display:none;");
-	save.setAttribute("style"," ");
+	save.setAttribute("style","cursor:pointer;");
 	var newText = document.createElement("input");
 	//var newText = document.createElement("textarea");
 	var oldTextAtt = $("#inputText"+tweetId).text();
@@ -142,12 +142,17 @@ $('.remove').click(function(event){
 	})
 });
 
-$('.comment').click(function(event){
-	var tweetId = $(event.target).attr("tweetID");
-	var commentary = $('#comment'+tweetId).val();
-	console.log("Comment: ");
-	console.log(tweetId);
-	console.log(commentary);
+$('.inputComment').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+    	console.log("HEY")
+    	var tweetId = $(this).attr("tweetID");
+		var commentary = $(this).val();
+        publishComment(tweetId, commentary);
+    }
+});
+
+var publishComment = function(tweetId, commentary){
 	$.post('TweetsController',{action: "commentTweet", id: tweetId, comment: commentary },function(data,status){
 		if(status != 401){
 			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
@@ -157,6 +162,15 @@ $('.comment').click(function(event){
 			});
 		}
 	})
+};
+
+$('.comment').click(function(event){
+	var tweetId = $(event.target).attr("tweetID");
+	var commentary = $('#comment'+tweetId).val();
+	console.log("Comment: ");
+	console.log(tweetId);
+	console.log(commentary);
+	publishComment(tweetId,commentary);
 });
 jQuery(document).ready(function($){
 	 $("abbr.timeago").timeago()
@@ -190,9 +204,9 @@ jQuery(document).ready(function($){
 		        	<div class="card-text " id="editable<%=t.getId()%>">
 		        		<p id="inputText<%=t.getId()%>"> <%=t.getTweet_text() %></p>
 		        		<% if(t.getUsername().compareTo(user.getUsername()) == 0 || user.isAdmin()) { %>
-			    		 	<i class="edit fa fa-pencil fa-pull-right " aria-hidden="true" id="editTweet<%=t.getId()%>">Edit</i>
+			    		 	<i style="cursor:pointer;" class="edit fa fa-pencil fa-pull-right " aria-hidden="true" id="editTweet<%=t.getId()%>">Edit</i>
 			    		 	<i style="display:none;" class="save fa fa-save fa-pull rigth" id ="saveTweet<%=t.getId() %>" >Save</i>
-			    		 	<i class="remove fa fa-trash fa-pull right" id="deleteTwet<%=t.getId()%>">Delete</i>
+			    		 	<i style="cursor:pointer;" class="remove fa fa-trash fa-pull right" id="deleteTwet<%=t.getId()%>">Delete</i>
 			    		 <% } %>
 		        	</div>
 		         	
@@ -201,7 +215,7 @@ jQuery(document).ready(function($){
 			 <!-- Card footer -->
             <div class="card-data">
                 <ul>
-                    <li><i class="fa fa-clock-o" ></i> <abbr style="width:100%; color:white;" class="timeago" title="<%=t.getDate() %>">k</abbr></li>
+                    <li><i class="fa fa-clock-o" ></i> <abbr style="width:100%; color:white;" class="timeago" title="<%=t.getDate() %>">time</abbr></li>
                    	<% if(t.getLikes().contains(user.getUsername())){ %>
                  		<li><a class="btn btn-warning btn-sm unlike" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-down" tweetID="<%=t.getId() %>" aria-hidden="true"></i>likes <%=t.getLikes().size() %></a></li>
                    	
@@ -223,7 +237,7 @@ jQuery(document).ready(function($){
 					    <a class="list-group-item" style="color:black;">
 					        <h4 style="width:100%;"><%= comment.getUser_username() %></h3><br>
 		                	<p style="width:100%;"> <%= comment.getCommentary() %></p><br>
-							<abbr style="width:100%;text-align:right; " class="timeago" title="<%=comment.getDate() %>">k</abbr>		
+							<abbr style="width:100%;text-align:right; " class="timeago" title="<%=comment.getDate() %>">time</abbr>		
 						
 							<% if(comment.getLikes().contains(user.getUsername())){ %>
 		                 		<div class="btn btn-warning btn-sm unlikeComment" commentID="<%=comment.getId() %>"><i class="fa fa-thumbs-down" commentID="<%=comment.getId() %>" aria-hidden="true"></i>likes <%=comment.getLikes().size() %></div>
@@ -238,7 +252,9 @@ jQuery(document).ready(function($){
                 </ul>
                 <%} %>
                 <br>
-                <input style="color:white;" type="text" placeholder="Comment" id="comment<%=t.getId()%>"/><button class="comment btn btn-success btn-sm" tweetID="<%=t.getId() %>">send</button>
+                <% if(user.getUsername().length() > 0){ %>
+                <input style="color:white;" type="text" class="inputComment" placeholder="Comment" tweetID="<%=t.getId() %>" id="comment<%=t.getId()%>"/><button class="comment btn btn-success btn-sm" tweetID="<%=t.getId() %>">send</button>
+           		<% } %>
             </div>
             <!-- Card footer -->
 		</div>

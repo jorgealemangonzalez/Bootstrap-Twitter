@@ -6,17 +6,9 @@
 
 (TODO) Responder / Retweet tweets(Falta que no puedas volver a retweetear varias veces el mismo?)	--> PRIORIZAR
 
-(TODO) Like/dislike tweet comments  --> PRIORIZAR
-
-(TODO) **Ni login ni logout funcionan bien
-
 (TODO) **Username and mail can not be changed en edit profile
 
-(TODO) **Mejorar edit profile para que funcione bien
-
 (TODO) **Imagen de perfil
-
-(TODO) **Poner la lista de tweets en condiciones
 
 ** ideas **
 

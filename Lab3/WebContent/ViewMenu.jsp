@@ -14,13 +14,29 @@ BeanTweet bTweet = new BeanTweet();
 <script type="text/javascript">
 $(document).ready(function() {    
 	
+	$('#tweet_text').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	    	console.log("HEY")
+	        $('#publishTweet').trigger("click");
+	    }
+	});
+	
 	$('#publishTweet').click(function(event){
 		var text = $('#tweet_text').val()
 		$.post('TweetsController',{tweet_text : text, action: "publishTweet"},function(data, status){
 			if(status == 401)
 	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
 			else{
-				$('#publish-tweet').modal('hide')
+				$('#publish-tweet').modal('hide');
+				document.getElementById('tweet_text').value = "";
+				$.get('TweetsController',{action:"getAllTweets"},function(data,status){
+		    		if(status != 401){ 
+						$('#content').html(data);
+					}
+			        	
+		    	});	
+				
 			}
 		});
 	});
@@ -64,10 +80,6 @@ $(document).ready(function() {
 	        	alert("Error while logout: Data: " + data + "\nStatus: " + status);
 	    });
     });
-	/*
-	$("#newTweet").click(function(event){
-	  	$('#content').load('PublishTweet.jsp');	
-	  });*/
 	
 	$("#allUsers").click(function(event){
 		$("#content").load("UserListController");
@@ -151,8 +163,8 @@ $(document).ready(function() {
         <% }else{ %>
 	        <br>
         	<li class="nav-item">
-        		<a class="nav-link">
-        			<i class="fa fa-edit" id="newTweet" role="button" data-toggle="modal" data-target="#publish-tweet">Publish Tweet</i>
+        		<a class="nav-link" id="newTweet" role="button" data-toggle="modal" data-target="#publish-tweet">
+        			<i class="fa fa-edit" >Publish Tweet</i>
         		</a>
         	</li>
 	        
@@ -160,9 +172,11 @@ $(document).ready(function() {
 	            <a class="nav-link" id="logout">Log out</a>
 	        </li>
         <% } %>
+        <!-- 
         <form class="form-inline waves-effect waves-light">
             <input class="form-control" type="text" placeholder="Search">
         </form>
+         -->
         </ul>
     </div>
 </nav>

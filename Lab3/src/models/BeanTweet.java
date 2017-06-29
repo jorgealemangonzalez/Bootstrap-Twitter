@@ -162,6 +162,7 @@ public class BeanTweet implements Serializable {
 		try{
 			dao.connecToDB();
 			if(dao.publishTweet(this) != 0){
+				dao.disconnectBD();
 				success = true;
 			}else{
 				success = false;

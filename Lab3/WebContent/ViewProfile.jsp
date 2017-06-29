@@ -72,6 +72,10 @@ $(document).ready(function() {
         $('#content').load('EditProfileController');
     });
 });
+
+jQuery(document).ready(function($){
+	 $("abbr.timeago").timeago()
+});
 </script>
 
 <div class="container col-md-6 col-md-offset-3">
@@ -165,8 +169,8 @@ $(document).ready(function() {
 					  <div class="list-group-item list-group-item-action flex-column align-items-start">
 					    <div class="d-flex justify-content-between"></div>
 					   	 <div class="card-content">
-						    	<p class="mb-1" align="center" style=" font-style:italic; "><%= t.getTweet_text() %></p>
-						    	<i class="fa fa-clock-o" > <%=t.getDate() %></i>
+						    	<p class="mb-1" style=" font-style:italic; "><%= t.getTweet_text() %></p>
+						    	<i class="fa fa-clock-o" > <abbr class="timeago" title="<%=t.getDate() %>">time</abbr> </i>
 						  </div>
 					  </div>
 				 <%} %>

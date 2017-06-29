@@ -67,11 +67,12 @@ public class BeanUser implements Serializable  {
 	}
 	
 	public Predicate<BeanUser> isSameUser() {
+		
 	    return u -> this.isSameUser(u);
 	}
 	
 	public List<String> getFollowing() {
-		this.loadUserFollowing();
+		this.loadUserFollowing();//Consistency
 		return this.following;
 	}
 
@@ -81,6 +82,7 @@ public class BeanUser implements Serializable  {
 	}
 	
 	public List<BeanTweet> getUserTweets() {
+		this.loadUserTweetsFromDB();
 		return userTweets;
 	}
 
@@ -90,6 +92,7 @@ public class BeanUser implements Serializable  {
 	}
 
 	public List<String> getFollowers() {
+		this.loadUserFollowers();
 		return followers;
 	}
 
@@ -230,6 +233,7 @@ public class BeanUser implements Serializable  {
 			dao.connecToDB();
 			ResultSet rs = dao.getUserInfo(username);
 			if(rs.next()){
+				rs.getString("name");
 				this.name = rs.getString("name");
 				this.surname = rs.getString("surname");
 				this.username = rs.getString("username");
@@ -250,11 +254,11 @@ public class BeanUser implements Serializable  {
 		} catch (SQLException e) {
 			System.out.println("Error retrieving user "+username);
 			success=false;
-			//e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			dao.disconnectBD();
-			return success;
 		}
+		return success;
 	}
 	
 	public List<BeanTweet> loadFollowersTweets(){
@@ -391,13 +395,15 @@ public class BeanUser implements Serializable  {
 		BeanTweet tweet = new BeanTweet();
 		tweet.setTweet_text(text);
 		tweet.setUsername(username);
+		//tweet.setDate((new java.sql.Timestamp(new java.util.Date().getTime())).toString());
 		if(tweet.publish()){
-			this.userTweets.add(tweet);
+			//System.out.println("Date"+tweet.getDate());
+			this.userTweets.add(0,tweet);
 			return true;
-		}else
+		}else{
+			System.out.println("Not published");
 			return false;
-		
-		
+		}
 		
 	}
 	
