@@ -24,7 +24,7 @@ public class DAO {
 	}
 	
 	public int createUser(BeanUser user) throws SQLException{
-		String query = "INSERT INTO twitter.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"', 0,'"+user.getNickname()+"','"+user.getDateofbirth() +"','"+user.getAddress()+"','"+user.getPhonenumber()+"')";
+		String query = "INSERT INTO twitter.users VALUES ('"+user.getName()+"','"+user.getSurname()+"','"+user.getUsername()+"','"+user.getGender()+"','"+user.getEmail()+"','"+user.getPassword()+"', 0,'"+user.getAddress()+"','"+user.getPhonenumber()+"')";
 		System.out.println("Inserting into DB");
 		System.out.println(query);
 		return this.insertSQL(query);
@@ -33,15 +33,14 @@ public class DAO {
 	public int updateUser(BeanUser user) throws SQLException{	//TODO date of birth update
 	    PreparedStatement ps = connection.prepareStatement(
 	    	      "UPDATE twitter.users SET name = ?, surname = ?,  gender = ?, "
-	    	      + "password = ?, nickName = ?, address = ?, phoneNumber = ?  WHERE username = ?");
+	    	      + "password = ?, address = ?, phoneNumber = ?  WHERE username = ?");
 	    ps.setString(1,user.getName());
 	    ps.setString(2, user.getSurname());
 	    ps.setString(3, user.getGender());
 	    ps.setString(4, user.getPassword());
-	    ps.setString(5, user.getNickname());
-	    ps.setString(6, user.getAddress());
-	    ps.setString(7, user.getPhonenumber());
-	    ps.setString(8, user.getUsername());
+	    ps.setString(5, user.getAddress());
+	    ps.setString(6, user.getPhonenumber());
+	    ps.setString(7, user.getUsername());
 	    
 		System.out.println("Updating user");
 		return ps.executeUpdate();

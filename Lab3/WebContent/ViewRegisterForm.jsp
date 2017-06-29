@@ -62,12 +62,6 @@ if (request.getAttribute("user")!=null) {
 						}
 					%>
 		        </div>
-	
-		        <div class="md-form">
-		           	<input class="form-control" type="text" name="nickname" id="nickname" value="<%=user.getNickname() %>" required maxlength="20"/>
-		            <label for="nickname">Your nickname</label>
-		            <p class="help-block"> Some funny nick (20 characters maximum)</p>
-	  	        </div>
 	  	        
 	  	        
 	  	        <div class="form-group">
@@ -100,11 +94,6 @@ if (request.getAttribute("user")!=null) {
 					%>
 		        </div>
 		        
-		        <div class="md-form">
-		           	<input class="form-control" name="dateofbirth" type="text" id="dateofbirth" value="<%=user.getAddress() %>" onchange="date_validate(this.value);">
-		            <label for="dateofbirth">Your date</label>
-		            <p class="error-block">Format of data DD/MM/YYYY</p> 
-		        </div>
 		        
 	   	        <div class="md-form">
 		           	<input class="form-control" type="password" name="password" id="password"  value="<%=user.getPassword() %>" onkeyup="checkValidPass();" required />

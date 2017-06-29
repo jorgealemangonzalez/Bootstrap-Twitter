@@ -25,8 +25,6 @@ public class BeanUser implements Serializable  {
 		gender = "";
 		email = "";
 		password = "";
-		nickname = "";
-		dateofbirth = "";
 		address = "";
 		phonenumber = "";
 		userTweets = new ArrayList<BeanTweet>();
@@ -50,8 +48,6 @@ public class BeanUser implements Serializable  {
 	private String gender = "";
 	private String email = "";
 	private String password = "";
-	private String nickname = "";
-	private String dateofbirth = "";
 	private String address = "";
 	private String phonenumber = "";
 	private boolean isAdmin;
@@ -179,22 +175,6 @@ public class BeanUser implements Serializable  {
 		this.password = password;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickName) {
-		this.nickname = nickName;
-	}
-
-	public String getDateofbirth() {
-		return dateofbirth;
-	}
-
-	public void setDateofbirth(String dateofbirth) {
-		this.dateofbirth = dateofbirth; 
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -240,8 +220,6 @@ public class BeanUser implements Serializable  {
 				this.gender = rs.getString("gender");
 				this.email = rs.getString("email");
 				this.password = rs.getString("password");
-				this.nickname = rs.getString("nickname");
-				this.dateofbirth = rs.getString("dateofbirth");
 				this.address = rs.getString("address");
 				this.phonenumber = rs.getString("phonenumber");
 				this.isAdmin = rs.getBoolean("isAdmin");
@@ -458,8 +436,6 @@ public class BeanUser implements Serializable  {
 					tmpU.setGender(gender);
 					tmpU.setEmail(email);
 					tmpU.setPassword(password);
-					tmpU.setNickname(nickname);
-					tmpU.setDateofbirth(dateofbirth);
 					tmpU.setAddress(address);
 					tmpU.setPhonenumber(phoneNumber);
 					tmpU.loadUserFollowers();

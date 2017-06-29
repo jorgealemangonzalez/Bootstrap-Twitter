@@ -12,7 +12,7 @@ if (request.getAttribute("user")!=null) {
 $(document).ready(function(){
     $("#editForm").validate({
     	submitHandler: function(form) {
-    		console.log("GO EDIT FORM");
+    		console.log("GO POST")
    			$.post('EditProfileController',$("#editForm").serialize()).done(function(data){
    				alert("Your changes has been saved!");
    			});
@@ -48,37 +48,39 @@ $(document).ready(function(){
 			<hr>
 			<form action="" method="post" id="editForm" onsubmit="return validateMyEditForm();">
 			        
+			    Name:
 				<div class="md-form">
-				          <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="<%=user.getName() %>">
-				      </div>
+				    <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="<%=user.getName() %>">
+				</div>
+				Username:
 				<div class="md-form">
-		            <input type="text" id="username" name="username" placeholder="Username" class="form-control" value="<%=user.getUsername() %>">
+		            <input type="text" id="username" name="username" placeholder="Username" class="form-control" value="<%=user.getUsername() %>" disabled>
 		        </div>
+		        Gender:
 			    <div class="md-form">
-			        <input type="text" id="gender" name="gender" placeholder="Gender" class="form-control" value="<%=user.getGender() %>">
+			        <input type="text" id="gender" name="gender" placeholder="Gender" class="form-control" value="<%=user.getGender() %>" disabled>
 			    </div>
+			    Email:
 			    <div class="md-form">
 			        <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<%=user.getEmail() %>">
 			    </div>
+			    Password
 			    <div class="md-form">
 			        <input type="text" id="password" name="password" name="password" placeholder="Password" class="form-control" value="<%=user.getPassword() %>">
 			    </div>
+			    Confirm password:
 			    <div class="md-form">
-			        <input type="text" name="confirm_password" id="confirm_password" onkeyup="checkPass();" placeholder="Password" class="form-control" value="<%=user.getPassword() %>">
+			        <input type="text" name="confirm_password" id="confirm_password" onkeyup="checkPass();" placeholder="Password" class="form-control" value="<%=(user.getPassword() == null ? "" : user.getPassword()) %>">
 			    </div>
 			    <span id="confirmMessage" class="confirmMessage"></span>
-			    
+			    <br>
+			    Address:
 			    <div class="md-form">
-			        <input type="text" id="nickname" name="nickname" placeholder="Nickname" class="form-control" value="<%=user.getNickname() %>">
+			        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%=(user.getAddress() == null ? "" :  user.getAddress()) %>">
 			    </div>
+			    Phonenumber:
 			    <div class="md-form">
-			        <input type="text" id="dateofbirth" name="dateofbirth" placeholder="Date of birth" class="form-control" value="<%=user.getDateofbirth() %>">
-			    </div>
-			    <div class="md-form">
-			        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%=user.getAddress() %>">
-			    </div>
-			    <div class="md-form">
-			        <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number" class="form-control" value="<%=user.getPhonenumber() %>">
+			        <input type="text" id="phonenumber" name="phonenumber" maxlength="9" placeholder="Phone Number" class="form-control" value="<%=user.getPhonenumber() %>">
 			    </div>	
 			    <div class="text-center">
 			        <button class="btn btn-success waves-effect waves-light" type="submit" value="Enviar">Save</button>

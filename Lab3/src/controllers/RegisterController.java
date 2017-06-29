@@ -37,16 +37,11 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	   System.out.println("RegisterController.");
 		
 	   try {
 	
 		   BeanUser user = new BeanUser();
 		   BeanUtils.populate(user, request.getParameterMap());
-		   if(request.getParameter("dateofbirth")!=null){
-			   user.setDateofbirth(request.getParameter("dateofbirth"));
-		   }
 		
 		   if (user.isComplete()) {
 			   user.create();

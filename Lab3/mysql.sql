@@ -9,8 +9,6 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(244) NOT NULL,
     password CHAR(24) NOT NULL,
     isAdmin boolean NOT NULL,
-    nickName CHAR(24),
-    dateOfBirth CHAR(24),
     address VARCHAR(24),
     phoneNumber varchar(9),
     PRIMARY KEY (username),

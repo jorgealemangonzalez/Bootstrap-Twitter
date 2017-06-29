@@ -141,12 +141,6 @@ jQuery(document).ready(function($){
 			    </div>
 			    <p class="mb-1">${userProfile.email}</p>
 			  </div>
-			  <div class="list-group-item list-group-item-action flex-column align-items-start">
-			    <div class="d-flex justify-content-between">
-			      <h5 class="mb-1">Birth</h5>
-			    </div>
-			    <p class="mb-1">${userProfile.dateofbirth}</p>
-			  </div>
 			  
 			  <div class="list-group-item list-group-item-action flex-column align-items-start">
 			    <div class="d-flex justify-content-between">
