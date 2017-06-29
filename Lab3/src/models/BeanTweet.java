@@ -72,6 +72,24 @@ public class BeanTweet implements Serializable {
 		this.username = username;
 	}
 	
+	public void loadFromDatabase(int id){
+		try{
+			System.out.println("Like tweet "+id);
+			dao.connecToDB();
+			ResultSet rs = dao.getTweet(id);
+			if(rs.next()){
+				this.setDate(rs.getString("date"));
+				this.setId(rs.getInt("id"));
+				this.setTweet_text(rs.getString("tweet_text"));
+				this.setUsername(rs.getString("username"));
+			}else System.out.println("TWEET NOT FOUND");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
 
 	static public List<BeanTweet> loadAllTweetsFromDB(){
 		List<BeanTweet> tmp = new ArrayList<BeanTweet>();
@@ -177,9 +195,11 @@ public class BeanTweet implements Serializable {
 			ResultSet rs = dao.getTweetComments(this.id);
 			while(rs.next()){
 				BeanCommentary bc = new BeanCommentary();
+				bc.setId(rs.getInt("id"));
 				bc.setCommentary(rs.getString("commentary"));
 				bc.setUser_username(rs.getString("user_username"));
 				bc.setDate(rs.getString("date"));
+				bc.loadLikesFromComment();
 				this.commentarys.add(bc);
 			}
 		}catch(SQLException e){

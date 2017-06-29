@@ -99,6 +99,13 @@ public class TweetsController extends HttpServlet{
 				user.unlikeTweet(Integer.parseInt(request.getParameter("id")));
 			}else if(action.equals("likeTweet") && request.getParameter("id") != null){
 				user.likeTweet(Integer.parseInt(request.getParameter("id")));
+			}else if(action.equals("unlikeComment") && request.getParameter("id") != null){
+				user.unlikeComment(Integer.parseInt(request.getParameter("id")));
+			}else if(action.equals("likeComment") && request.getParameter("id") != null){
+				user.likeComment(Integer.parseInt(request.getParameter("id")));
+			}else if(action.equals("retweetTweet") && request.getParameter("id") != null){
+				user.retweetTweet(Integer.parseInt(request.getParameter("id")));
+
 			}else if(action.equals("publishTweet")){
 				System.out.println("publish TweeT");
 				if(!user.publishTweet(request.getParameter("tweet_text"))){

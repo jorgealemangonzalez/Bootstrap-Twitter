@@ -29,22 +29,32 @@ CREATE TABLE IF NOT EXISTS tweets(
 
 CREATE TABLE IF NOT EXISTS likeTweet(
     tweet_id INT(10) unsigned NOT NULL,
-    user_username CHAR(24) NOT NULL, #El usuario que le da like es diferente del que lo publica
+    user_username CHAR(24) NOT NULL, 
     PRIMARY KEY(tweet_id,user_username),
     foreign key(tweet_id) references tweets(id) ON DELETE CASCADE,
     foreign key(user_username) references users(username) ON DELETE CASCADE
 );
 
+
+
 CREATE TABLE IF NOT EXISTS commentTweet(
 	id INT(10) unsigned NOT NULL AUTO_INCREMENT,
     tweet_id INT(10) unsigned NOT NULL,
-    user_username CHAR(24) NOT NULL, #El usuario que le da like es diferente del que lo publica
+    user_username CHAR(24) NOT NULL, 
     commentary CHAR(24) NOT NULL,
     date    DATETIME  NOT NULL,
     PRIMARY KEY(id),
     foreign key(tweet_id) references tweets(id) ON DELETE CASCADE,
     foreign key(user_username) references users(username) ON DELETE CASCADE
  
+);
+
+CREATE TABLE IF NOT EXISTS likeComment(
+    comment_id INT(10) unsigned NOT NULL,
+    user_username CHAR(24) NOT NULL, 
+    PRIMARY KEY(comment_id,user_username),
+    foreign key(comment_id) references commentTweet(id) ON DELETE CASCADE,
+    foreign key(user_username) references users(username) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS follow(

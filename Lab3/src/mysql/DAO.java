@@ -66,6 +66,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet getTweet(int id) throws SQLException{
+		String query = "SELECT * FROM tweets WHERE id='"+id+"';"; 
+		return statement.executeQuery(query);
+	}
+	
 	public ResultSet getFollowersFromUser(String username) throws SQLException{
 		String query = "SELECT * FROM follow WHERE followed = '"+username+"';";
 		return statement.executeQuery(query);
@@ -168,6 +173,11 @@ public class DAO {
 		return statement.executeQuery(query);
 	}
 	
+	public ResultSet loadLikesFromComment(int id) throws SQLException{
+		String query = "SELECT * FROM likeComment WHERE comment_id='"+id+"'";
+		return statement.executeQuery(query);
+	}
+	
 	public void likeTweet(String username , int tweetId) throws SQLException{
 		
 		PreparedStatement ps = connection.prepareStatement("INSERT INTO likeTweet (tweet_id, user_username) VALUES (?, ?);");
@@ -179,6 +189,21 @@ public class DAO {
 	public void unlikeTweet(String username , int tweetId) throws SQLException{
 		PreparedStatement ps = connection.prepareStatement("DELETE FROM likeTweet WHERE tweet_id=? and user_username=?");
 		ps.setInt(1, tweetId);
+		ps.setString(2, username);
+		ps.executeUpdate();
+	}
+	
+	public void likeComment(String username , int comentId) throws SQLException{
+		
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO likeComment (comment_id, user_username) VALUES (?, ?);");
+		ps.setInt(1, comentId);
+		ps.setString(2, username);
+		ps.executeUpdate();
+	}
+	
+	public void unlikeComment(String username , int comentId) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement("DELETE FROM likeComment WHERE comment_id=? and user_username=?");
+		ps.setInt(1, comentId);
 		ps.setString(2, username);
 		ps.executeUpdate();
 	}

@@ -22,7 +22,6 @@ if(request.getAttribute("lastAction") != null){
 <script type="text/javascript">
 $(".like").click(function(event){
 	var target = event.target;
-	console.log(target);
 	var tweetId = $(target).attr("tweetID");
 	$.post('TweetsController',{action: "likeTweet", id: tweetId},function(data,status){
 		if(status != 401){
@@ -40,6 +39,50 @@ $(".unlike").click(function(event){
 	console.log(target);
 	var tweetId = $(target).attr("tweetID");
 	$.post('TweetsController',{action: "unlikeTweet", id: tweetId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
+});
+
+$(".likeComment").click(function(event){
+	var target = event.target;
+	var commentId = $(target).attr("commentID");
+	
+	$.post('TweetsController',{action: "likeComment", id: commentId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
+});
+
+$(".unlikeComment").click(function(event){
+	var target = event.target;
+	console.log(commentId);
+	var commentId = $(target).attr("commentID");
+	$.post('TweetsController',{action: "unlikeComment", id: commentId},function(data,status){
+		if(status != 401){
+			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
+				if(status != 401){
+					$('#content').html(data);
+				}
+			});
+		}
+	} );
+});
+
+$(".retweet").click(function(event){
+	var target = event.target;
+	var tweetId = $(target).attr("tweetID");
+	$.post('TweetsController',{action: "retweetTweet", id: tweetId},function(data,status){
 		if(status != 401){
 			$.get('TweetsController',{action: "${lastAction}"}, function(data,status){
 				if(status != 401){
@@ -158,12 +201,15 @@ jQuery(document).ready(function($){
 			 <!-- Card footer -->
             <div class="card-data">
                 <ul>
-                    <li><i class="fa fa-clock-o" ></i> <abbr style="width:100%; color:white;" class="timeago" title="<%=t.getDate() %>"></abbr></li>
+                    <li><i class="fa fa-clock-o" ></i> <abbr style="width:100%; color:white;" class="timeago" title="<%=t.getDate() %>">k</abbr></li>
                    	<% if(t.getLikes().contains(user.getUsername())){ %>
-                 		<li><a class="btn btn-warning btn-sm unlike" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-down" tweetID="<%=t.getId() %>" aria-hidden="true"></i><%=t.getLikes().size() %></a></li>
+                 		<li><a class="btn btn-warning btn-sm unlike" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-down" tweetID="<%=t.getId() %>" aria-hidden="true"></i>likes <%=t.getLikes().size() %></a></li>
                    	
                    	<%}else{ %>
-                   		<li><a class="btn btn-success btn-sm like" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-up" tweetID="<%=t.getId() %>" aria-hidden="true"></i><%=t.getLikes().size() %></a></li>
+                   		<li><a class="btn btn-success btn-sm like" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-up" tweetID="<%=t.getId() %>" aria-hidden="true"></i>likes <%=t.getLikes().size() %></a></li>
+                	<%} %>
+                	<% if(!t.getUsername().equals(user.getUsername())){ %>
+                	<li><a class="btn btn-success btn-sm retweet" tweetID="<%=t.getId() %>"><i class="fa fa-retweet" tweetID="<%=t.getId() %>" aria-hidden="true"></i>retweet</a></li>
                 	<%} %>
                 </ul>
                 <% if(t.getCommentarys().size() > 0){ %>
@@ -177,7 +223,14 @@ jQuery(document).ready(function($){
 					    <a class="list-group-item" style="color:black;">
 					        <h4 style="width:100%;"><%= comment.getUser_username() %></h3><br>
 		                	<p style="width:100%;"> <%= comment.getCommentary() %></p><br>
-							<abbr style="width:100%;text-align:right; " class="timeago" title="<%=comment.getDate() %>"></abbr>		
+							<abbr style="width:100%;text-align:right; " class="timeago" title="<%=comment.getDate() %>">k</abbr>		
+						
+							<% if(comment.getLikes().contains(user.getUsername())){ %>
+		                 		<div class="btn btn-warning btn-sm unlikeComment" commentID="<%=comment.getId() %>"><i class="fa fa-thumbs-down" commentID="<%=comment.getId() %>" aria-hidden="true"></i>likes <%=comment.getLikes().size() %></div>
+		                   	
+		                   	<%}else{ %>
+		                   		<div class="btn btn-success btn-sm likeComment" commentID="<%=comment.getId() %>"><i class="fa fa-thumbs-up" commentID="<%=comment.getId() %>" aria-hidden="true"></i>likes <%=comment.getLikes().size() %></div>
+		                	<%} %>
 						</a>
                 
                 	<%} %>

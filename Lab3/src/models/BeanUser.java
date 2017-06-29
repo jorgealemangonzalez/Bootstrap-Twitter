@@ -541,6 +541,39 @@ public class BeanUser implements Serializable  {
 		}
 	}
 	
+	public void likeComment(int id){
+		try{
+			System.out.println("Like comment "+id);
+			dao.connecToDB();
+			dao.likeComment(this.username,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public void unlikeComment(int id){
+		try{
+			System.out.println("Unlike comment "+id);
+			dao.connecToDB();
+			dao.unlikeComment(this.username,id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			dao.disconnectBD();
+		}
+	}
+	
+	public void retweetTweet(int id){
+		BeanTweet t = new BeanTweet();
+		t.loadFromDatabase(id);
+		t.setUsername(this.username);
+		t.publish();
+	}
+	
 	public void unlikeTweet(int id){
 		try{
 			System.out.println("Unlike tweet "+id);
