@@ -115,7 +115,9 @@ $('.comment').click(function(event){
 		}
 	})
 });
-
+jQuery(document).ready(function($){
+	 $("abbr.timeago").timeago()
+});
 </script>
 
 
@@ -156,7 +158,7 @@ $('.comment').click(function(event){
 			 <!-- Card footer -->
             <div class="card-data">
                 <ul>
-                    <li><i class="fa fa-clock-o" ></i> <%=t.getDate() %></li>
+                    <li><i class="fa fa-clock-o" ></i> <abbr style="width:100%; color:white;" class="timeago" title="<%=t.getDate() %>"></abbr></li>
                    	<% if(t.getLikes().contains(user.getUsername())){ %>
                  		<li><a class="btn btn-warning btn-sm unlike" tweetID="<%=t.getId() %>"><i class="fa fa-thumbs-down" tweetID="<%=t.getId() %>" aria-hidden="true"></i><%=t.getLikes().size() %></a></li>
                    	
@@ -173,16 +175,17 @@ $('.comment').click(function(event){
                		<% for(BeanCommentary comment : t.getCommentarys()){%>
                 
 					    <a class="list-group-item" style="color:black;">
-					        <h3><%= comment.getUser_username() %><br></h3>
-		                	<p> <%= comment.getCommentary() %><br></p>
-		                	<h4><%= comment.getDate() %></h4>
-					    </a>
+					        <h4 style="width:100%;"><%= comment.getUser_username() %></h3><br>
+		                	<p style="width:100%;"> <%= comment.getCommentary() %></p><br>
+							<abbr style="width:100%;text-align:right; " class="timeago" title="<%=comment.getDate() %>"></abbr>		
+						</a>
                 
                 	<%} %>
                 	</div>
                 </ul>
                 <%} %>
-                <input type="text" id="comment<%=t.getId()%>"/><button class="comment" tweetID="<%=t.getId() %>">send</button>
+                <br>
+                <input style="color:white;" type="text" placeholder="Comment" id="comment<%=t.getId()%>"/><button class="comment btn btn-success btn-sm" tweetID="<%=t.getId() %>">send</button>
             </div>
             <!-- Card footer -->
 		</div>

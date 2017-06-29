@@ -25,6 +25,7 @@
 <!--  jQuery for bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.5.4/jquery.timeago.js" type="text/javascript"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="css/MDB_Free/js/tether.min.js"></script>
 <!-- Bootstrap core JavaScript -->
@@ -40,8 +41,7 @@ $(document).ready(function() {
 	$('#navigation').load('MenuController');
 });
 </script>
-
-
+    
 
 <div id="navigation">
 	 			   

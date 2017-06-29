@@ -229,4 +229,8 @@ img:hover {
 }
 
 
-
+/*------------------*/
+.timeago{
+	 text-decoration:none!important;
+	 color:blue;
+}
